@@ -4,5 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :followings
+  has_many :posts
+  has_many :stories
   has_one :request, class_name: "following", foreign_key: "follower_id"
 end

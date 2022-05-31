@@ -8,5 +8,6 @@ class User < ApplicationRecord
   has_many :stories
   has_many :comments
   has_many :attachments
+  has_many :likes
   has_one :request, class_name: "following", foreign_key: "follower_id"
 end

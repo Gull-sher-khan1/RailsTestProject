@@ -1,3 +1,20 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$user-pic-width: 50px;
+$user-pic-height: 50px;
+$user-pic-radius: 25px;
+$div-width: 100%;
+$div-display: flex;
+$flex-direction-row: row;
+.user-pic{
+  height: $user-pic-height;
+  width: $user-pic-width;
+  border-radius: $user-pic-radius;
+}
+.user-image{
+  width: 20%;
+  height: 100%;
+  display: $div-display;
+  flex-direction: $flex-direction-row;
+}

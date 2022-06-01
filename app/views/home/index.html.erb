@@ -1,3 +1,13 @@
-
+<div class="home-page-contents">
+  <div class="home-page-content-users">
+    <%=render partial: 'user', collection: @users%>
+  </div>
+  <div class="home-page-content-posts-and-stories">
+    <div class="home-page-content-stories">
+      <div class="home-page-content-stories-container">
+      </div>
+    </div>
+  </div>
+</div>
 <%= button_to "Cancel my account", registration_path(@user), data: { confirm: "Are you sure?" }, method: :delete %></p>
 <%= button_to "Edit", edit_registration_path(@user), method: :get %></p>

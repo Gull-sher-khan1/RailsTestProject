@@ -1,4 +1,25 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
+@import 'variable';
+.home-page-contents{
+  width: 100%;
+  height: calc(100% - 50px);
+  display: $div-display;
+  flex-direction: $flex-direction-row;
+}
+.home-page-content-users{
+  width: 20%;
+  height: calc(100% - 50px);
+}
+.home-page-content-posts-and-stories{
+  width: 60%;
+  height: calc(100% - 50px);
+  display: $div-display;
+  justify-content: $justify-content-center;
+}
+.home-page-content-stories{
+  width: 70%;
+  height: 250px;
+  background-color: blue;
+}

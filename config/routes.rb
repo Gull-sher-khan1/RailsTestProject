@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'user/registrations' }
-  resources :users, shallow: true, only: [:edit, :update, :show] do
+  resources :users, shallow: true, only: [:index, :edit, :update, :show] do
     resources :posts
     resources :comments
     resources :stories

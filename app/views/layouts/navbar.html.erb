@@ -12,8 +12,7 @@
   <body>
     <div class="nav-bar">
   <div class="user-image">
-    <%= image_tag("https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8bWFufGVufDB8fDB8fA%3D%3D&w=1000&q=80", class: "user-pic")%>
-    <p class="user-name"><%= @user.first_name + ' ' + @user.last_name%></p>
+    <%= render partial: 'home/userinfo', locals: {user: @user}%>
   </div>
   <div class="insta-search">
     <%=text_field_tag 'search', nil, placeholder: 'Enter search term...' %>

@@ -17,9 +17,131 @@
   height: calc(100% - 50px);
   display: $div-display;
   justify-content: $justify-content-center;
+  flex-direction: column;
+}
+.stories-div{
+  width: 100%;
+  height: fit-content;
+  display: $div-display;
+  justify-content: $justify-content-center;
+  margin-bottom: 20px;
+}
+.new-post-div{
+  width: 100%;
+  height: fit-content;
+  display: $div-display;
+  justify-content: $justify-content-center;
+  margin-bottom: 20px;
 }
 .home-page-content-stories{
   width: 70%;
+  height: 290px;
+  background-color: rgba(0,0,0,0.2);
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+.stories{
   height: 250px;
-  background-color: blue;
+  width: 150px;
+  background-color: white;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.home-page-content-stories-container{
+  width:fit-content;
+  height: 290px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.post-text{
+  width: 100%;
+  max-width: 100%;
+  height: 150px;
+  margin-bottom: 20px;
+  resize: none;
+}
+.home-page-content-new-post{
+  background-color: rgba(0,0,0,0.2);
+  width: 60%;
+  height: fit-content;
+}
+.home-page-content-new-post-text{
+  width: 100%;
+  height: fit-content;
+  display: $div-display;
+  justify-content: $justify-content-center;
+}
+.new_post{
+  width: 90%;
+}
+.files-button{
+  display: none;
+}
+.user-image-post{
+  height: 100%;
+  display: $div-display;
+  flex-direction: $flex-direction-row;
+  min-width: 185px;
+  padding-left: 5%;
+  width: 100%;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+.home-page-content-new-post-button{
+  margin-bottom: 20px;
+  padding-left: 5%;
+  width: 100%;
+}
+.home-page-content-posts-div{
+  width: 100%;
+  height: fit-content;
+  display: $div-display;
+  justify-content: $justify-content-center;
+}
+.home-page-content-posts{
+  background-color: rgba(0,0,0,0.2);
+  width: 60%;
+  height: fit-content;
+}
+.post-body{
+  width: 90%;
+  height: 150px;
+  margin-bottom: 20px;
+  background-color: white;
+  border: 1px solid rgba(0,0,0,0.4);
+}
+.home-page-content-post-text{
+  width: 100%;
+  height: fit-content;
+  display: $div-display;
+  justify-content: $justify-content-center;
+}
+.home-page-content-post-button{
+  margin-bottom: 20px;
+  padding-left: 5%;
+  width: 100%;
+  display: $div-display;
+  flex-direction: $flex-direction-row;
+}
+.home-page-content-comments-div{
+  width: 100%;
+  height: fit-content;
+  display: $div-display;
+  flex-direction: column;
+}
+.comment-text{
+  width: 90%;
+  height: 80px;
+  margin-bottom: 20px;
+  resize: none;
+}
+.home-page-content-new-comment{
+  display: $div-display;
+  justify-content: center;
+}
+.new-comment{
+  width: 100%;
+  display: $div-display;
+  justify-content: center;
 }

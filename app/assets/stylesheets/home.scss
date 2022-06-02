@@ -98,11 +98,14 @@
   height: fit-content;
   display: $div-display;
   justify-content: $justify-content-center;
+  flex-direction: $flex-direction-column;
 }
 .home-page-content-posts{
   background-color: rgba(0,0,0,0.2);
   width: 60%;
   height: fit-content;
+  align-self: center;
+  margin-bottom: 20px;
 }
 .post-body{
   width: 90%;

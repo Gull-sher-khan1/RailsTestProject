@@ -11,7 +11,7 @@
   </div>
   <div class="home-page-content-post-button home-page-content-post-button-border-removed">
     <%= button_tag "Like"%>
-    <%= button_tag "comments", onclick: 'show_comments()'%>
+    <%= button_tag "comments", onclick: "show_comments(#{post_iteration.index})"%>
   </div>
   <div class="home-page-content-comments-div display-none">
     <div class="home-page-content-new-comment ">

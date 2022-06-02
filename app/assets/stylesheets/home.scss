@@ -119,10 +119,13 @@
 }
 .home-page-content-post-button{
   margin-bottom: 20px;
+  padding-bottom: 20px;
   padding-left: 5%;
   width: 100%;
+  box-sizing: border-box;
   display: $div-display;
   flex-direction: $flex-direction-row;
+  border-bottom: 1px solid rgba(0,0,0,0.4);
 }
 .home-page-content-comments-div{
   width: 100%;
@@ -131,7 +134,7 @@
   flex-direction: column;
 }
 .comment-text{
-  width: 90%;
+  width: 100%;
   height: 80px;
   margin-bottom: 20px;
   resize: none;
@@ -141,7 +144,44 @@
   justify-content: center;
 }
 .new-comment{
-  width: 100%;
-  display: $div-display;
+  width: 90%;
   justify-content: center;
+  margin-bottom: 20px;
+}
+.user-image-comment{
+  height: 100%;
+  display: $div-display;
+  flex-direction: $flex-direction-row;
+  min-width: 185px;
+  padding-left: 5%;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.home-page-content-comment-text{
+  width: 100%;
+  height: fit-content;
+  display: $div-display;
+  justify-content: $justify-content-center;
+}
+.comment-body{
+  width: 90%;
+  height: fit-content;
+  margin-bottom: 20px;
+  background-color: white;
+  border: 1px solid rgba(0,0,0,0.4);
+}
+.home-page-content-comment-button{
+  margin-bottom: 20px;
+  padding-left: 5%;
+  width: 100%;
+  box-sizing: border-box;
+  display: $div-display;
+  flex-direction: $flex-direction-row;
+}
+.display-none{
+  display: none;
+}
+.home-page-content-post-button-border-removed{
+  padding-bottom: 0px;
+  border-bottom: 0px solid rgba(0,0,0,0.4);
 }

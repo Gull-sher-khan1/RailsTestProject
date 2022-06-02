@@ -1,18 +1,11 @@
 @import 'variable';
-.user-pic{
-  height: $user-pic-height;
-  width: $user-pic-width;
-  border-radius: $user-pic-radius;
-}
+
 .user-image{
   width: 20%;
   height: 100%;
   display: $div-display;
   flex-direction: $flex-direction-row;
   min-width: 185px;
-}
-.user-name{
-  margin-left: 10px;
 }
 .nav-bar{
   height: 50px;

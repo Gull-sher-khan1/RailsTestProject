@@ -10,7 +10,11 @@
     </div>
   </div>
   <div class="home-page-content-post-button home-page-content-post-button-border-removed">
-    <%= button_tag "Like"%>
+    <%= form_with url: {controller: :likes, action: :create, user_id: signed_user.id}, id: "like_ajax_#{post.id}" do |form| %>
+    <%= form.hidden_field :likeable_id, value: post.id, autocomplete: 'off' %>
+    <%= form.hidden_field :from, value: :post, autocomplete: 'off' %>
+    <% end %>
+    <%= button_tag "Like", type: 'submit', form: "like_ajax_#{post.id}"%>
     <%= form_with url: get_comments_path, id: "comments_ajax_#{post.id}" do |form| %>
     <%= form.hidden_field :commentable_id, value: post.id, autocomplete: 'off' %>
     <% end %>

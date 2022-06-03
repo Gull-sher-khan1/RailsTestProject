@@ -51,7 +51,7 @@
     </div>
     </div>
     <div class="home-page-content-posts-div">
-      <%= render partial: 'post', collection:@posts, locals:{users: @users, user_ids: @user_ids}%>
+      <%= render partial: 'post', collection:@posts, locals:{users: @users, user_ids: @user_ids, signed_user: @user}%>
     </div>
   </div>
 </div>

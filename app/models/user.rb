@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :followings
-  has_many :posts
+  has_many :posts,  inverse_of: :user
   has_many :stories
   has_many :comments,  inverse_of: :user
   has_many :attachments

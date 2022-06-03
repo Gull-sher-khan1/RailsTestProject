@@ -1,6 +1,6 @@
 <div class="home-page-contents">
   <div class="home-page-content-users">
-    <%=render partial: 'user', collection: @users%>
+    <%=render partial: 'user', collection: @followers%>
   </div>
   <div class="home-page-content-posts-and-stories">
   <div class="stories-div">
@@ -51,7 +51,7 @@
     </div>
     </div>
     <div class="home-page-content-posts-div">
-      <%= render partial: 'post', collection:@posts, locals:{user: @user}%>
+      <%= render partial: 'post', collection:@posts, locals:{users: @users, user_ids: @user_ids}%>
     </div>
   </div>
 </div>

@@ -3,8 +3,11 @@ class HomeController < ApplicationController
   layout 'navbar'
   def index
     @user = current_user
-    @users = User.all
-    @posts = Post.all
+    @followers = User.all
+    @posts = Post.includes(:user)
+    p @posts
+    @user_ids = @posts.distinct.pluck("user_id")
+    @users = User.find(@user_ids)
     @comments = Comment.none
     render 'index'
   end

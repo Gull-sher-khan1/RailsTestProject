@@ -1,7 +1,7 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 // You can use CoffeeScript in this file: http://coffeescript.org/
-function show_comments(num)
+function show_post_comments(num)
 {
   let div=[];
   div.push(document.getElementsByClassName("home-page-content-comments-div")[num]);

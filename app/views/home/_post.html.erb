@@ -1,7 +1,7 @@
 <div class="home-page-content-posts">
   <div class="home-page-content-new-post-user">
     <div class="user-image-post">
-      <%= render partial: 'userinfo', locals: {user: user}%>
+      <%= render partial: 'userinfo', locals: {user: user, partial:true}%>
     </div>
   </div>
   <div class="home-page-content-post-text">
@@ -11,28 +11,21 @@
   </div>
   <div class="home-page-content-post-button home-page-content-post-button-border-removed">
     <%= button_tag "Like"%>
-    <%= button_tag "comments", onclick: "show_comments(#{post_iteration.index})"%>
+    <%= form_with url: get_comments_path, id: "comments_ajax_#{post.id}" do |form| %>
+    <%= form.hidden_field :commentable_id, value: post.id, autocomplete: 'off' %>
+    <% end %>
+    <%= button_tag "comments", onclick: "show_post_comments(#{post_iteration.index})", type: 'submit', form: "comments_ajax_#{post.id}"%>
   </div>
   <div class="home-page-content-comments-div display-none">
     <div class="home-page-content-new-comment ">
-      <%= form_with model: Comment.new(user_id: @user.id) ,url: {action: :create, controller: :comments, user_id: @user.id}, method: :post, class: 'new-comment' do |post_form| %>
+      <%= form_with model: Comment.new ,url: {action: :create, controller: :comments, user_id: @user.id}, method: :post, class: 'new-comment' do |f| %>
       <!--must copy new_post from scss file before transferring-->
-      <%= post_form.text_area :text, class: 'comment-text' %>
-      <%= post_form.submit 'comment'%>
+      <%= f.hidden_field :commentable_id, value: post.id %>
+      <%= f.text_area :text, class: 'comment-text' %>
+      <%= f.submit 'comment'%>
       <% end%>
     </div>
-    <div class="home-page-content-comment-user">
-      <div class="user-image-comment">
-        <%= render partial: 'userinfo', locals: {user: @user}%>
-      </div>
-    </div>
-    <div class="home-page-content-comment-text">
-      <div class="comment-body">
-        <p>asdasdasdasd</p>
-      </div>
-    </div>
-    <div class="home-page-content-comment-button">
-      <%= button_tag "Like"%>
+    <div id="home_post_comments_<%= post.id%>">
     </div>
   </div>
 </div>

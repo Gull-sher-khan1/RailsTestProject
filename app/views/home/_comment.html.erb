@@ -1,7 +1,7 @@
 <div>
   <div class="home-page-content-comment-user">
     <div class="user-image-comment">
-      <%= render partial: 'userinfo', locals: {user: user, partial: true}%>
+      <%= render partial: 'userinfo', locals: {user: users[user_ids.find_index(comment.user_id)], partial: true}%>
     </div>
   </div>
   <div class="home-page-content-comment-text">

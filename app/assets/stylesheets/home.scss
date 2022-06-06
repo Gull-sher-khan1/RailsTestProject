@@ -202,3 +202,23 @@
   display: flex;
   flex-direction: row;
 }
+.display-none{
+  display: none;
+}
+.post-body-color-removed{
+  background-color: rgba(black, 0);
+  border: 0px;
+}
+.form-edit{
+  width: 100%;
+  height: 150px;
+}
+.post-text-edit{
+  width: 100%;
+  max-width: 100%;
+  height: 150px;
+  resize: none;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  border: 1px solid rgba(0,0,0,0.4);
+}

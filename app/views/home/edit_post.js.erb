@@ -1,0 +1,18 @@
+{
+  let ele=[];
+ele.push(document.getElementById("edit_post_<%=post.id%>"));
+ele.push(document.getElementById("post-body-text-<%= post.id%>"));
+ele.push(document.getElementsByClassName("post-body-<%= post.id%>")[0]);
+if (ele[0].classList.contains("display-none"))
+{
+  ele[0].classList.remove("display-none");
+  ele[1].classList.add("display-none");
+  ele[2].classList.add("post-body-color-removed");
+}
+else
+{
+  ele[0].classList.add("display-none");
+  ele[1].classList.remove("display-none");
+  ele[2].classList.remove("post-body-color-removed");
+}
+}

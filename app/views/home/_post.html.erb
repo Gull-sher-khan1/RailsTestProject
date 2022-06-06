@@ -5,14 +5,24 @@
         <%= render partial: 'userinfo', locals: {user: users[user_ids.find_index(post.user_id)], partial:true}%>
       </div>
       <div class="post_update_delete">
-        <%= button_to "edit"%>
+        <div class="post-edit-<%=post.id%>">
+          <%= button_to "edit", {controller: :posts, action: :edit, id: post.id}, method: :get, remote: :true%>
+        </div>
         <%= button_to "delete", {controller: :posts, action: :destroy, id: post.id}, method: :delete, remote: :true%>
       </div>
     </div>
 
-    <div class="home-page-content-post-text">
-      <div class="post-body">
-        <p><%= post.text%></p>
+    <div id="post-body-<%=post.id%>">
+      <div class="home-page-content-post-text">
+        <div class="post-body-<%= post.id%> post-body">
+          <p id="post-body-text-<%= post.id%>"><%= post.text%></p>
+        <%= form_for Post.new ,url: {action: :update, controller: :posts, id: post.id }, method: :patch,html:{ id: "edit_post_#{post.id}", class: "form-edit display-none"}, remote: true do |post_form| %>
+        <!--must copy new_post from scss file before transferring-->
+        <%= post_form.text_area :text, class: "post-text-edit", value: post.text %>
+        <%= post_form.file_field :attachment, multiple: :true, class: "files-button"%>
+        <%= button_tag "Attachments", type: :button%>
+        <% end%>
+        </div>
       </div>
     </div>
 

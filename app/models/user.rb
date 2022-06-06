@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :stories
   has_many :comments,  inverse_of: :user
   has_many :attachments
-  has_many :likes
+  has_many :likes, inverse_of: :user
   has_one :request, class_name: "following", foreign_key: "follower_id"
 
 end

@@ -6,6 +6,17 @@ class LikesController < ApplicationController
     @like=@obj.likes.new
     @like.user_id=strong_params[:user_id]
     @like.save
+    respond_to do |format|
+      format.js {render 'home/change_like.js.erb', layout: false, locals: {like_id: [@like.id], post: @obj, from: :create}}
+    end
+  end
+  def destroy
+    like = Like.find(params[:id])
+    @obj = Post.find(like.likeable_id)
+    like.destroy
+    respond_to do |format|
+      format.js {render 'home/change_like.js.erb', layout: false, locals: {post: @obj, from: :destroy}}
+    end
   end
   private
   def strong_params

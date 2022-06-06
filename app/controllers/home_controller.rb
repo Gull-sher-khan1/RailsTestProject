@@ -8,7 +8,7 @@ class HomeController < ApplicationController
     @user_ids = @posts.distinct.pluck("user_id")
     @users = User.find(@user_ids)
     @comments = Comment.none
-    render 'index'
+    @likes_posts = Like.includes(:user).where(likeable_type: "Post")
   end
   def get_comments
     post=Post.find_by_id(params[:commentable_id])

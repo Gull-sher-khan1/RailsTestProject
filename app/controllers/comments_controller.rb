@@ -5,7 +5,6 @@ class CommentsController < ApplicationController
     @comment.user_id=strong_params[:user_id]
     @comment.save
   end
-
   private
   def strong_params
     params.permit!

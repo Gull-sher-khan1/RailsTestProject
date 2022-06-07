@@ -251,3 +251,10 @@
   background-color: rgba(black, 0);
   border: 0px solid ;
 }
+.user-profile-button{
+  width: fit-content;
+  height: fit-content;
+  display: $div-display;
+  flex-direction: $flex-direction-row;
+  min-width: 185px;
+}

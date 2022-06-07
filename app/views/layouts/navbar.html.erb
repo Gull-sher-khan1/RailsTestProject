@@ -12,7 +12,11 @@
   <body>
     <div class="nav-bar">
   <div class="user-image">
+  <a class="user-show-link" href=<%=user_path(current_user.id)%>>
+  <button class="user-profile-button">
     <%= render partial: 'home/userinfo', locals: {user: @user, partial: false}%>
+  </button>
+  </a>
   </div>
   <div class="insta-search">
     <%=text_field_tag 'search', nil, placeholder: 'Enter search term...' %>

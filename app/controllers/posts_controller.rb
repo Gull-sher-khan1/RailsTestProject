@@ -24,7 +24,11 @@ class PostsController < ApplicationController
   end
 
   def update
-
+    post = Post.find(params[:id])
+    post.update(text: params[:post][:text])
+    respond_to do |format|
+      format.js {render 'home/edit_post.js.erb', layout: false, locals: {post: post}}
+    end
   end
   private
   def strong_params

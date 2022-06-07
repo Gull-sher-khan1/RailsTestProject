@@ -109,7 +109,8 @@
 }
 .post-body{
   width: 90%;
-  height: 150px;
+  min-height: 150px;
+  height: fit-content;
   margin-bottom: 20px;
   background-color: white;
   border: 1px solid rgba(0,0,0,0.4);
@@ -211,7 +212,8 @@
 }
 .form-edit{
   width: 100%;
-  height: 150px;
+  min-height: 150px;
+  height: fit-content;
 }
 .post-text-edit{
   width: 100%;
@@ -221,4 +223,11 @@
   box-sizing: border-box;
   margin-bottom: 20px;
   border: 1px solid rgba(0,0,0,0.4);
+}
+.posts-body{
+  height: fit-content;
+}
+.edit-buttons-posts{
+  display: flex;
+  flex-direction: row;
 }

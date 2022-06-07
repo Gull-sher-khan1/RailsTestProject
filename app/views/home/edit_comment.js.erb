@@ -1,0 +1,20 @@
+{
+  let ele = []
+ele.push(document.getElementsByClassName("comment-body-<%=comment.id%>")[0]);
+ele.push(document.getElementById("edit_button_comment_<%=comment.id%>"));
+ele.push(document.getElementById("edit_done_button_comment_<%=comment.id%>"));
+if (ele[0].classList.contains("comment-body-border-removed"))
+{
+  ele[0].classList.remove("comment-body-border-removed");
+  ele[0].innerHTML = "<p><%=comment.text%></p>";
+  ele[1].classList.remove("display-none");
+  ele[2].classList.add("display-none");
+}
+else
+{
+  ele[0].innerHTML = "<%= escape_javascript render(partial: 'home/edit_comment_form', locals:{comment: comment}) %>";
+  ele[0].classList.add("comment-body-border-removed");
+  ele[1].classList.add("display-none");
+  ele[2].classList.remove("display-none");
+}
+}

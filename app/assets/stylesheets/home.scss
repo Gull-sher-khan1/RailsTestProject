@@ -216,6 +216,11 @@
   min-height: 150px;
   height: fit-content;
 }
+.form-edit-comment{
+  width: 100%;
+  height: fit-content;
+  max-height: 150px;
+}
 .post-text-edit{
   width: 100%;
   max-width: 100%;
@@ -235,4 +240,14 @@
 .home-page-content-comment-user{
   display: flex;
   flex-direction: row;
+}
+.comment-text-edit{
+  width: 100%;
+  height: fit-content;
+  resize: none;
+  box-sizing: border-box;
+}
+.comment-body-border-removed{
+  background-color: rgba(black, 0);
+  border: 0px solid ;
 }

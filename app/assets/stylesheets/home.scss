@@ -158,7 +158,8 @@
   flex-direction: $flex-direction-row;
   min-width: 185px;
   padding-left: 5%;
-  width: 100%;
+  width: fit-content;
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 .home-page-content-comment-text{
@@ -196,7 +197,7 @@
 }
 .post_update_delete{
   width: fit-content;
-  height: fit-content;
+  height: 100%;
   align-self: center;
   margin-left: auto;
   margin-right: 20px;
@@ -228,6 +229,10 @@
   height: fit-content;
 }
 .edit-buttons-posts{
+  display: flex;
+  flex-direction: row;
+}
+.home-page-content-comment-user{
   display: flex;
   flex-direction: row;
 }

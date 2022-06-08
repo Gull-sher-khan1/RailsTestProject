@@ -15,5 +15,6 @@
     </div>
   </div>
   <div class="user-posts">
+    <%= render partial: 'home/post', collection:@posts, locals:{users: [@user], user_ids: [@user.id], signed_user: @user, likes: @likes_posts}%>
   </div>
 </div>

@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
   layout 'navbar'
   def show
-    @user=User.find(params[:id])
-    if @user.id == current_user.id || (@user.id != current_user.id && @user.private_account!=true)
-      @posts = Post.where(user_id: @user.id)
+    @user=User.find(current_user.id)
+    @profile_user=User.find(params[:id])
+    if @profile_user.id == current_user.id || (@profile_user.id != current_user.id && @profile_user.private_account!=true)
+      @posts = Post.where(user_id: @profile_user.id)
     else
       @posts = nil
     end

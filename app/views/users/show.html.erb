@@ -6,17 +6,17 @@
     <div class="user-profile-options">
       <div class="user-profile-name">
       <div class="user-profile-name-edit name">
-      <p><%=@user.first_name + ' ' + @user.last_name%></p>
+      <p><%=@profile_user.first_name + ' ' + @profile_user.last_name%></p>
       </div>
       <div class="user-name-edit-button">
-      <%if current_user.id == @user.id%>
+      <%if current_user.id == @profile_user.id%>
       <%=button_to 'edit', {controller: :users, action: :edit, id: current_user.id, from: :edit}, method: :get, remote: true, class: "user-name-edit"%>
       <%end%>
       </div>
       </div>
       <div class="user-profile-types">
-      <%if current_user.id == @user.id%>
-      <%=button_to (@user.private_account!=true ? 'Public Account': 'Private Account'), {controller: :users, action: :update, id: current_user.id, from: :private}, method: :patch, remote: :true, id:"user-private-account"%>
+      <%if current_user.id == @profile_user.id%>
+      <%=button_to (@profile_user.private_account!=true ? 'Public Account': 'Private Account'), {controller: :users, action: :update, id: current_user.id, from: :private}, method: :patch, remote: :true, id:"user-private-account"%>
       <%=button_to 'Edit Password or Email', edit_user_registration_path, class: "user-show-pass-edit", method: :get%>
       <%else%>
       <%=button_tag 'Follow'%>
@@ -25,6 +25,6 @@
     </div>
   </div>
   <div class="user-posts">
-    <%= render partial: 'home/post', collection:@posts, locals:{users: [@user], user_ids: [@user.id], signed_user: @user, likes: @likes_posts}%>
+    <%= render partial: 'home/post', collection:@posts, locals:{users: [@profile_user], user_ids: [@profile_user.id], signed_user: @profile_user, likes: @likes_posts}%>
   </div>
 </div>

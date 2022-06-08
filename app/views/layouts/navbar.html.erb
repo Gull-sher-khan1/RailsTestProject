@@ -28,7 +28,10 @@
     <div class="notify">
     <svg height="30" width="30" class="notify-icon">
       <circle cx="15" cy="15" r="10" stroke-width="0" fill="red" />
-      <text x="8" y="19" style="fill:white;">9+</text>
+      <% requests = Following.where(user_id: @user.id).count%>
+      <text x="<%=requests < 10 ? '11' : '8'%>" y="19" style="fill:white;">
+      <%= requests>9 ? '9+' : requests%>
+      </text>
     </svg>
     </div>
   </button>

@@ -2,6 +2,9 @@ class FollowingsController < ApplicationController
   layout 'navbar'
   def index
     @user=User.find(current_user.id)
+    @following_requests= Following.includes(:user).where(user_id: current_user.id).all
+    @user_ids=@following_requests.pluck(:follower_id)
+    @users = User.includes(:followings).find(@user_ids)
   end
   def create
     following_request = Following.new

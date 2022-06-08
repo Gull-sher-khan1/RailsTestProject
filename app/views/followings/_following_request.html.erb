@@ -1,0 +1,11 @@
+<div class="request-container">
+  <div class="request">
+  <div class="user-info">
+    <%= render partial: 'home/userinfo', locals: {user: users[user_ids.find_index(following_request.follower_id)], partial:true}%>
+  </div>
+  <div class="request-options">
+    <button class="request-option">accept</button>
+    <button class="request-option">reject</button>
+  </div>
+  </div>
+</div>

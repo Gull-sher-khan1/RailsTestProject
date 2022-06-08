@@ -1,0 +1,12 @@
+<%p option%>
+<%if option== :edit%>
+<%= form_for User.new ,url: {action: :update, controller: :users, id: user.id, from: :edit }, method: :patch,html:{ id: "edit_name", class: "edit_name"}, remote: true do |post_form| %>
+  <!--must copy new_post from scss file before transferring-->
+  <%= post_form.label :first_name, "First Name:" %>
+  <%= post_form.text_field :first_name, class: "form-name-edit", value: user.first_name %>
+  <%= post_form.label :last_name, "Last Name:" %>
+  <%= post_form.text_field :last_name, class: "form-name-edit", value: user.last_name %>
+<%end%>
+<%else%>
+  <p><%=user.first_name + ' ' + user.last_name%></p>
+<%end%>

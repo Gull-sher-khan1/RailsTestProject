@@ -5,12 +5,12 @@
     </div>
     <div class="user-profile-options">
       <div class="user-profile-name">
-      <div class="user-profile-name-edit">
+      <div class="user-profile-name-edit name">
       <p><%=@user.first_name + ' ' + @user.last_name%></p>
       </div>
       <div class="user-name-edit-button">
       <%if current_user.id == @user.id%>
-      <%=button_tag 'edit', class: "user-show-edit"%>
+      <%=button_to 'edit', {controller: :users, action: :edit, id: current_user.id, from: :edit}, method: :get, remote: true, class: "user-name-edit"%>
       <%end%>
       </div>
       </div>

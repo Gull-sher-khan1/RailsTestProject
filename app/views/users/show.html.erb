@@ -5,12 +5,22 @@
     </div>
     <div class="user-profile-options">
       <div class="user-profile-name">
+      <div class="user-profile-name-edit">
       <p><%=@user.first_name + ' ' + @user.last_name%></p>
+      </div>
+      <div class="user-name-edit-button">
+      <%if current_user.id == @user.id%>
       <%=button_tag 'edit', class: "user-show-edit"%>
+      <%end%>
+      </div>
       </div>
       <div class="user-profile-types">
-      <%=button_tag 'Public Account'%>
-      <%=button_tag 'Edit Password or Email', class: "user-show-pass-edit"%>
+      <%if current_user.id == @user.id%>
+      <%=button_to (@user.private_account!=true ? 'Public Account': 'Private Account'), {controller: :users, action: :update, id: current_user.id, from: :private}, method: :patch, remote: :true, id:"user-private-account"%>
+      <%=button_to 'Edit Password or Email', edit_user_registration_path, class: "user-show-pass-edit", method: :get%>
+      <%else%>
+      <%=button_tag 'Follow'%>
+      <%end%>
       </div>
     </div>
   </div>

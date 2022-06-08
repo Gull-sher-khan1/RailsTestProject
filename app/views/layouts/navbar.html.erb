@@ -17,6 +17,11 @@
     <%= render partial: 'home/userinfo', locals: {user: @user, partial: false}%>
   </button>
   </a>
+  <a href="/">
+  <button class="user-home-button">
+    <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+  </button>
+  </a>
   </div>
   <div class="insta-search">
     <%=text_field_tag 'search', nil, placeholder: 'Enter search term...' %>

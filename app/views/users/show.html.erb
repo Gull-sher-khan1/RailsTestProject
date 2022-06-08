@@ -19,7 +19,14 @@
       <%=button_to (@profile_user.private_account!=true ? 'Public Account': 'Private Account'), {controller: :users, action: :update, id: current_user.id, from: :private}, method: :patch, remote: :true, id:"user-private-account"%>
       <%=button_to 'Edit Password or Email', edit_user_registration_path, class: "user-show-pass-edit", method: :get%>
       <%else%>
-      <%=button_tag 'Follow'%>
+        <div class="follow-button">
+        <%request = Following.where(user_id: @profile_user.id, follower_id: @user.id).pluck%>
+        <%if request.count == 0%>
+        <%=button_to 'Follow', user_followings_path(@profile_user.id), class: "user-follow", method: :post, remote: true%>
+        <%else%>
+        <%=button_to request[0][1]=="pending" ? 'Follow request pending' : 'Following', following_path(request[0][0]), class: "user-follow", method: :delete, remote: true%>
+        <%end%>
+        </div>
       <%end%>
       </div>
     </div>

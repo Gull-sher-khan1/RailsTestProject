@@ -17,6 +17,10 @@
   flex-direction: row;
 }
 .notify{
-  position: absolute;
+  position:absolute;
   top: 0%;
+}
+.notify-icon{
+  position: relative;
+  left: 30px;
 }

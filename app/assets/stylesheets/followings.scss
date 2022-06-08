@@ -1,3 +1,9 @@
 // Place all the styles related to the followings controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.following-content{
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+}

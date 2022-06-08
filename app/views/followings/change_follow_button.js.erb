@@ -1,0 +1,5 @@
+<%if from==:destroy%>
+document.getElementsByClassName("follow-button")[0].innerHTML = '<%=button_to 'Follow', user_followings_path(request.follower_id), class: "user-follow", method: :post, remote: true%>';
+<%else%>
+document.getElementsByClassName("follow-button")[0].innerHTML = '<%=button_to request.request_accepted=="pending" ? 'Follow request pending' : 'Following', following_path(request.id), class: "user-follow", method: :delete, remote: true%>';
+<%end%>

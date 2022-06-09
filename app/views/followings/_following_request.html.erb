@@ -1,11 +1,11 @@
-<div class="request-container">
+<div class="request-container-<%= following_request.id%> request-container">
   <div class="request">
   <div class="user-info">
     <%= render partial: 'home/userinfo', locals: {user: users[user_ids.find_index(following_request.follower_id)], partial:true}%>
   </div>
   <div class="request-options">
-    <button class="request-option">accept</button>
-    <button class="request-option">reject</button>
+    <%=button_to 'Accept', {controller: :followings, action: :update, id: following_request.id, from: "accept"}, method: :patch, remote: true, class: 'request_option'%>
+    <%=button_to 'Reject', {controller: :followings, action: :destroy, id: following_request.id, from: "delete"}, method: :delete, remote: true, class: 'request_option'%>
   </div>
   </div>
 </div>

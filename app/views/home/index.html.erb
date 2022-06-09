@@ -42,8 +42,10 @@
         <!--must copy new_post from scss file before transferring-->
         <%= post_form.text_area :text, class: 'post-text' %>
       </div>
+      <div class="index-images">
+      </div>
       <div class="home-page-content-new-post-button">
-        <%= post_form.file_field :attachment, multiple: :true, class: 'files-button', id:'files-button'%>
+        <%= post_form.file_field :attachment, class: 'files-button', multiple: true, id:'files-button', onchange:"getFiles()"%>
         <%= button_tag 'Attachments', type: :button, onClick:"files_upload()"%>
         <%= post_form.submit 'send'%>
         <% end%>

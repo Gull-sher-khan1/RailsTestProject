@@ -17,4 +17,30 @@ function show_post_comments(num)
     div[1].classList.add("home-page-content-post-button-border-removed");
   }
 }
+function getFiles()
+{
+  var ele=document.getElementsByClassName("files-button")[0];
+  var fileList = ele.files;
+  function readAndPreview(file) {
+
+
+      var reader = new FileReader();
+
+      reader.addEventListener("load", function () {
+        var image = new Image();
+        image.height = 100;
+        image.title = file.name;
+        image.src = this.result;
+        document.getElementsByClassName("index-images")[0].appendChild( image );
+      }, false);
+
+      reader.readAsDataURL(file);
+
+  }
+
+  if (fileList.length) {
+    [].forEach.call(fileList, readAndPreview);
+  }
+
+}
 

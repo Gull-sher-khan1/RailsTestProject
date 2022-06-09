@@ -14,3 +14,8 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+//= require activestorage
+function files_upload()
+{
+  document.getElementById('files-button').click();
+}

@@ -43,8 +43,8 @@
         <%= post_form.text_area :text, class: 'post-text' %>
       </div>
       <div class="home-page-content-new-post-button">
-        <%= post_form.file_field :attachment, multiple: :true, class: 'files-button'%>
-        <%= button_tag 'Attachments', type: :button%>
+        <%= post_form.file_field :attachment, multiple: :true, class: 'files-button', id:'files-button'%>
+        <%= button_tag 'Attachments', type: :button, onClick:"files_upload()"%>
         <%= post_form.submit 'send'%>
         <% end%>
       </div>

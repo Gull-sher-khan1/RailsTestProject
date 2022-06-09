@@ -3,9 +3,14 @@ class PostsController < ApplicationController
   # updation
   # ajax edit button
   def create
-    @post=Post.new(strong_params[:post])
-    @post.user_id=strong_params[:user_id]
-    @post.save
+    @attachments=strong_params[:post][:attachment]
+    params[:post].delete(:attachment)
+    #@attachments.each do |file|
+    #  Cloudinary::Uploader.upload(file.tempfile,:folder => "rails_test_project/",)
+    #end
+    #@post=Post.new(strong_params[:post])
+    #@post.user_id=strong_params[:user_id]
+    #@post.save
   end
 
   def destroy

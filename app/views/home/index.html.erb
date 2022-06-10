@@ -38,16 +38,22 @@
         </div>
       </div>
       <div class="home-page-content-new-post-text">
-        <%= form_for Post.new(user_id: @user.id) ,url: {action: :create, controller: :posts, user_id: @user.id}, method: :post, remote: true do |post_form| %>
+        <%= form_for Post.new(user_id: @user.id) ,url: {action: :create, controller: :posts, user_id: @user.id}, html:{class: "post-new-text new_post"}, method: :post, remote: true do |post_form| %>
         <!--must copy new_post from scss file before transferring-->
         <%= post_form.text_area :text, class: 'post-text' %>
+        <%= post_form.submit "text", class:"text-form-submit"%>
+        <%end%>
       </div>
-      <div class="index-images">
+      <div class="index-images-div">
+        <div class="index-images">
+        </div>
       </div>
       <div class="home-page-content-new-post-button">
-        <%= post_form.file_field :attachment, class: 'files-button', multiple: true, id:'files-button', onchange:"getFiles()"%>
+        <%= form_for Post.new.attachments.new(user_id: @user.id) ,url: {action: :create, controller: :attachments, user_id: @user.id},  html:{class: "post-new-attachments new_post"}, method: :post, remote: true do |post_form| %>
+        <%= post_form.file_field :attachment, class: 'files-button', multiple: true, id:'files-button', accept: "image/*", onchange:"getFiles()"%>
         <%= button_tag 'Attachments', type: :button, onClick:"files_upload()"%>
-        <%= post_form.submit 'send'%>
+        <%= hidden_field_tag :authenticity_token, value: form_authenticity_token %>
+        <%# post_form.submit "attachments", class:"attachment-form-submit", type: :hidden%>
         <% end%>
       </div>
     </div>

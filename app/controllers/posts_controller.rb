@@ -5,6 +5,9 @@ class PostsController < ApplicationController
   def create
     @attachments=strong_params[:post][:attachment]
     params[:post].delete(:attachment)
+    respond_to do |format|
+      format.js {render 'posts/send_attachments.js.erb', layout: false, locals: {attachments: @attachments, user_id: params[:user_id]}}
+    end
     #@attachments.each do |file|
     #  Cloudinary::Uploader.upload(file.tempfile,:folder => "rails_test_project/",)
     #end

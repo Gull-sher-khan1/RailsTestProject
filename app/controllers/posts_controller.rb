@@ -3,13 +3,14 @@ class PostsController < ApplicationController
   # updation
   # ajax edit button
   def create
-    @attachments=strong_params[:post][:attachment]
     params[:post].delete(:attachment)
     @post=Post.new(strong_params[:post])
     @post.user_id=strong_params[:user_id]
     @post.save
+    @user = current_user
+    @like_post = Like.includes(:user).where(likeable_id: @post.id)
     respond_to do |format|
-      format.js {render 'posts/send_attachments.js.erb', layout: false, locals: {post_id: @post.id}}
+      format.js {render 'posts/send_attachments.js.erb', layout: false, locals: {post: @post, users: [@user], user_ids: [@user.id], signed_user: @user, likes: [@like_post]}}
     end
   end
 

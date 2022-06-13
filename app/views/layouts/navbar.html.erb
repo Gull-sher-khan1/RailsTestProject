@@ -14,7 +14,8 @@
   <div class="user-image">
   <a class="user-show-link" href=<%=user_path(current_user.id)%>>
   <button class="user-profile-button">
-    <%= render partial: 'home/userinfo', locals: {user: @user, partial: false}%>
+  <%attch = Attachment.where(attachable_id: current_user.id, attachable_type: 'User')%>
+    <%= render partial: 'home/userinfo', locals: {user: @user, partial: false, attachment: attch.size==0 ? nil : attch.first}%>
   </button>
   </a>
   <a href="/">

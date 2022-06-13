@@ -262,7 +262,6 @@
 .index-images{
   width: 90%;
   height: fit-content;
-  background-color: blue;
   max-height: 150px;
   overflow-x: scroll;
   display: flex;
@@ -277,4 +276,20 @@
 }
 .input-files{
   margin-right: 10px;
+  border-radius: 5px;
+}
+.post-images{
+  width: 90%;
+  height: fit-content;
+  max-height: 150px;
+  overflow-x: scroll;
+  display: flex;
+  flex-direction: row;
+}
+.post-images-div{
+  width: 100%;
+  height: fit-content;
+  display: $div-display;
+  justify-content: $justify-content-center;
+  margin-bottom: 20px;
 }

@@ -1,0 +1,1 @@
+document.getElementsByClassName("post-images-<%= post.id%>")[0].innerHTML = "<%= escape_javascript render partial: 'home/post_attachments', collection: @attachments, as: :attachment %>"

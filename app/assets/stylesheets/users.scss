@@ -29,6 +29,7 @@
   height: 200px;
   width: 200px;
   border-radius: 100px;
+
 }
 .user-profile-name{
   display: flex;
@@ -63,4 +64,8 @@
 }
 .form-name-edit{
   margin-bottom: 20px;
+}
+.change-image{
+  display: flex;
+  justify-content: center;
 }

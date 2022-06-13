@@ -2,7 +2,8 @@
   <div id="home-page-content-post-<%= post.id %>" class="home-page-content-post">
     <div class="home-page-content-post-user">
       <div class="user-image-post">
-        <%= render partial: 'home/userinfo', locals: {user: users[user_ids.find_index(post.user_id)], partial:true}%>
+        <%post_user=users[user_ids.find_index(post.user_id)]%>
+        <%= render partial: 'home/userinfo', locals: {user: post_user, partial:true, attachment: attachments.find_by_attachable_id(post_user.id)}%>
       </div>
       <%if signed_user.id == post.user_id%>
       <div class="post_update_delete">
@@ -29,6 +30,13 @@
         <% end%>
         </div>
       </div>
+    </div>
+
+    <div class="post-images-div post-images-div-<%= post.id%>">
+        <div class="post-images post-images-<%= post.id%>">
+          <% specific_post_attachments = posts_attachments.where(attachable_id: post.id)%>
+          <%= render partial: 'home/post_attachments', collection: specific_post_attachments, as: :attachment%>
+        </div>
     </div>
 
     <div class="home-page-content-post-button home-page-content-post-button-border-removed home-page-content-post-button-<%=post.id%>">

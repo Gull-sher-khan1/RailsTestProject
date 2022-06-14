@@ -3,6 +3,15 @@
     <%=render partial: 'user', collection: @followers%>
   </div>
   <div class="home-page-content-posts-and-stories">
+  <div class="story-add-div">
+    <div class="story-add-button">
+        <%= form_for Attachment.new ,url: {action: :create, controller: :attachments, user_id: current_user.id, from: :story}, html:{id: 'story_form_submit'} ,method: :post, remote: true do |form| %>
+        <%= form.file_field :attachment, class: 'story-files-button', accept: "image/*", onchange: "story_form_submit()"%>
+        <%= button_tag 'Add Story', type: :button, onClick:"story_upload()"%>
+        <%= hidden_field_tag :authenticity_token, value: form_authenticity_token %>
+        <% end%>
+    </div>
+  </div>
   <div class="stories-div">
     <div class="home-page-content-stories">
       <div class="home-page-content-stories-container">

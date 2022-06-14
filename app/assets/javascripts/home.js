@@ -62,3 +62,12 @@ function getFiles()
 
 }
 
+function story_upload()
+{
+  document.getElementsByClassName("story-files-button")[0].click();
+}
+
+function story_form_submit()
+{
+  document.getElementById("story_form_submit").submit();
+}

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :users, shallow: true, only: [:index, :edit, :update, :show] do
     resources :posts
     resources :comments
-    resources :stories
+    resources :stories, only: [:create, :destroy]
     resources :attachments, except:[:edit]
     resources :followings, only: [:destroy, :create, :index, :update]
     resources :likes, only: [:destroy, :create]

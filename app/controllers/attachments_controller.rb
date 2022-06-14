@@ -13,6 +13,15 @@ class AttachmentsController < ApplicationController
           attachment.uri= res["url"]
           attachment.save
         end
+      elsif params[:from] == 'story'
+        @story = Story.new
+        @story.user_id= current_user.id
+        @story.save
+        @attachment = @story.build_attachment
+        attachment = params[:attachment][:attachment]
+        res=Cloudinary::Uploader.upload(attachment.tempfile,:folder => "rails_test_project/")
+        @attachment.uri = res["url"]
+        @attachment.save
       else
           user = User.find(params[:user_id])
           attachment = params[:attachment][:attachment]

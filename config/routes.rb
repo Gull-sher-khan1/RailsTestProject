@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     resources :posts
     resources :comments
     resources :stories
-    resources :attachments, except:[:edit, :update]
+    resources :attachments, except:[:edit]
     resources :followings, only: [:destroy, :create, :index, :update]
     resources :likes, only: [:destroy, :create]
   end

@@ -23,21 +23,20 @@
         <%= form_for Post.new ,url: {action: :update, controller: :posts, id: post.id }, method: :patch,html:{ id: "edit_post_#{post.id}", class: "form-edit display-none"}, remote: true do |post_form| %>
         <!--must copy new_post from scss file before transferring-->
         <%= post_form.text_area :text, class: "post-text-edit", value: post.text %>
-        <%= post_form.file_field :attachment, multiple: :true, class: "files-button"%>
+        <% end%>
         <div class="post-attachments-button">
-        <%= form_for post.attachments.new ,url: {action: :update, controller: :attachments, id: post.id, from: :edit},  html:{class: "post-edit-attachments edit_post"}, method: :post, remote: true do |post_form| %>
-        <%= post_form.file_field :attachment, class: 'files-button', multiple: true, id:'files-button', accept: "image/*", onchange:"getFiles()"%>
-        <%= button_tag 'Attachments', type: :button, onClick:"edit_files_upload()"%>
+        <%= form_for post.attachments.new ,url: {action: :update, controller: :attachments, id: post.id, from: :edit},  html:{class: "post-edit-attachments-#{post.id} edit_post display-none"}, method: :patch, remote: true do |post_form| %>
+        <%= post_form.file_field :attachment, class: "files-button-edit-#{post.id} files-button-edit", multiple: true, id:'files-button', accept: "image/*", onchange:"getFilesEdit(#{post.id})"%>
+        <%= button_tag 'Attachments', type: :button, onClick:"edit_images_upload(#{post.id})"%>
         <%= hidden_field_tag :authenticity_token, value: form_authenticity_token %>
         <% end%>
         </div>
-        <% end%>
         </div>
       </div>
     </div>
 
-    <div class="post-images-div post-images-div-<%= post.id%>">
-        <div class="post-images post-images-<%= post.id%>">
+    <div class="post-images-div index-images-div post-images-div-<%= post.id%>">
+        <div class="post-images index-images post-images-<%= post.id%>">
           <% specific_post_attachments = posts_attachments.where(attachable_id: post.id)%>
           <%= render partial: 'home/post_attachments', collection: specific_post_attachments, as: :attachment%>
         </div>

@@ -277,6 +277,7 @@
 .input-files{
   margin-right: 10px;
   border-radius: 5px;
+  max-width: 150px;
 }
 .post-images{
   width: 90%;
@@ -292,4 +293,7 @@
   display: $div-display;
   justify-content: $justify-content-center;
   margin-bottom: 20px;
+}
+.files-button-edit{
+  display: none;
 }

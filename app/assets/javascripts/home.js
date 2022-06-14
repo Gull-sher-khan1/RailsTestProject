@@ -71,3 +71,7 @@ function story_form_submit()
 {
   document.getElementById("story_form_submit").submit();
 }
+function close_window()
+{
+  document.getElementsByClassName("story-show-container")[0].classList.add("display-none")
+}

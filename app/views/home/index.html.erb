@@ -1,3 +1,15 @@
+<div class="story-show-container display-none">
+<div class="story-show">
+<div class="story-show-buttons">
+  <button class="story-show-button">delete
+  </button>
+  <button class="story-show-button" onClick="close_window()">close
+  </button>
+</div>
+<div class="story-show-image">
+</div>
+</div>
+</div>
 <div class="home-page-contents">
   <div class="home-page-content-users">
     <%=render partial: 'user', collection: @followers%>
@@ -15,27 +27,7 @@
   <div class="stories-div">
     <div class="home-page-content-stories">
       <div class="home-page-content-stories-container">
-        <div class="stories">
-      a
-        </div>
-        <div class="stories">
-      b
-        </div>
-        <div class="stories">
-      c
-        </div>
-        <div class="stories">
-      d
-        </div>
-        <div class="stories">
-      e
-        </div>
-        <div class="stories">
-      f
-        </div>
-        <div class="stories">
-      g
-        </div>
+        <%= render partial: 'story', collection:@stories %>
       </div>
     </div>
     </div>

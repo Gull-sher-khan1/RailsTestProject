@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :likes, only: [:destroy, :create]
   end
   post '/get_comments', to: 'home#get_comments'
+  post '/show_story/:id', to: 'home#show_story'
   post '/attachments/:id', to: 'attachments#update'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: "home#index"

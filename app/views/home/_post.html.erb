@@ -64,7 +64,7 @@
       <div class="home-page-content-new-comment ">
         <%= form_with model: Comment.new ,url: {action: :create, controller: :comments, user_id: @user.id}, method: :post, class: 'new-comment' do |f| %>
         <!--must copy new_post from scss file before transferring-->
-        <%= f.hidden_field :commentable_id, value: post.id %>
+        <%= f.hidden_field :commentable_id, value: post.id, autocomplete: 'off' %>
         <%= f.text_area :text, class: 'comment-text' %>
         <%= f.submit 'comment'%>
         <% end%>

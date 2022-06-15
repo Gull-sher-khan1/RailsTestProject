@@ -1,7 +1,8 @@
 <div class="request-container-<%= following_request.id%> request-container">
   <div class="request">
   <div class="user-info">
-    <%= render partial: 'home/userinfo', locals: {user: users[user_ids.find_index(following_request.follower_id)], partial:true}%>
+    <%user = users[user_ids.find_index(following_request.follower_id)]%>
+    <%= render partial: 'home/userinfo', locals: {user: user ,attachment: user.attachment ,partial:true}%>
   </div>
   <div class="request-options">
     <%=button_to 'Accept', {controller: :followings, action: :update, id: following_request.id, from: "accept"}, method: :patch, remote: true, class: 'request_option'%>

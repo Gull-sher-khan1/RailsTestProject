@@ -1,4 +1,4 @@
 <button class="stories">
-  <img src="<%=story.uri%>">
+  <img src="<%=story.uri%>" class="story-img">
   <%= button_to '', "/show_story/#{story.id}" ,remote: :true, class: 'fade',form_class: 'fade-form'%>
 </button>

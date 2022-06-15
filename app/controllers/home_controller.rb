@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   before_action :authenticate_user!
   layout 'navbar'
   def index
+    @q = User.ransack(params[:q])
     @user = current_user
     @followers = User.all
     @posts = Post.includes(:user)
@@ -30,6 +31,13 @@ class HomeController < ApplicationController
     @story=Attachment.find(params[:id])
     respond_to do |format|
       format.js {render 'home/render_story.js.erb', layout: false}
+    end
+  end
+  def search
+    @q = User.ransack(params[:q])
+    @found_users = @q.result(distinct: true)
+    respond_to do |format|
+      format.js {render 'home/send_users.js.erb', layout: false, locals: {found_users: @found_users}}
     end
   end
 end

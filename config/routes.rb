@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   post '/show_story/:id', to: 'home#show_story'
   post '/attachments/:id', to: 'attachments#update'
   post '/posts/:id', to: 'posts#update'
+  get '/search', to: 'home#search'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: "home#index"
 end

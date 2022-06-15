@@ -31,6 +31,7 @@ gem 'activestorage-cloudinary-service'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 gem 'repost'
+gem 'ransack'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'remotipart', '~> 1.2'

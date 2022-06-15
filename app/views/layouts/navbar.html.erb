@@ -9,7 +9,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="body">
     <div class="nav-bar">
   <div class="user-image">
   <a class="user-show-link" href=<%=user_path(current_user.id)%>>
@@ -41,7 +41,12 @@
   </a>
   </div>
   <div class="insta-search">
-    <%=text_field_tag 'search', nil, placeholder: 'Enter search term...' %>
+    <%= search_form_for @q, url: '/search', remote: true do |f| %>
+    <%= f.search_field :first_name_or_last_name_cont %>
+    <%= f.submit %>
+    <% end %>
+    <div class="found-users">
+    </div>
   </div>
   <div class="insta-options">
     <%= button_to "Sign out", destroy_session_path(@user), method: :delete %></p>

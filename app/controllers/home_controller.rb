@@ -37,7 +37,7 @@ class HomeController < ApplicationController
     @q = User.ransack(params[:q])
     @found_users = @q.result(distinct: true)
     respond_to do |format|
-      format.js {render 'home/send_users.js.erb', layout: false, locals: {found_users: @found_users}}
+      format.js {render 'home/send_users.js.erb', layout: false}
     end
   end
 end

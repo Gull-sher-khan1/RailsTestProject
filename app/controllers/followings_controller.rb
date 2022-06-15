@@ -1,6 +1,7 @@
 class FollowingsController < ApplicationController
   layout 'navbar'
   def index
+    @q = User.ransack(params[:q])
     @user=User.find(current_user.id)
     @following_requests= Following.includes(:user).where(user_id: current_user.id, request_accepted: false).all
     @user_ids=@following_requests.pluck(:follower_id)

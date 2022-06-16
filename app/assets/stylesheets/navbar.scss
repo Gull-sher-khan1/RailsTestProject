@@ -64,6 +64,7 @@
   z-index: 2;
   display: flex;
   flex-direction: column;
+  top: 68px;
 }
 .user-links{
   width: fit-content;
@@ -112,4 +113,12 @@
 .gear-options-container{
   height: 0.1px;
   width: 0.1px;
+}
+.search-field{
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid gray;
+}
+.search-form{
+  width: 30%;
 }

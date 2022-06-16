@@ -45,7 +45,7 @@
         <%if request.count == 0%>
         <%=button_to 'Follow', user_followings_path(@profile_user.id), class: "user-follow", method: :post, remote: true%>
         <%else%>
-        <%=button_to request[0][1]=="pending" ? 'Follow request pending' : 'Following', following_path(request[0][0]), class: "user-follow", method: :delete, remote: true%>
+        <%=button_to request[0][1]==false ? 'Follow request pending' : 'Following', following_path(request[0][0]), class: "user-follow", method: :delete, remote: true%>
         <%end%>
         </div>
       <%end%>

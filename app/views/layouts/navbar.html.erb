@@ -13,18 +13,18 @@
     <div class="nav-bar">
   <div class="user-image">
   <a class="user-show-link" href=<%=user_path(current_user.id)%>>
-  <button class="user-profile-button">
+  <button class="user-profile-button navbar-button">
   <%attch = Attachment.where(attachable_id: current_user.id, attachable_type: 'User')%>
     <%= render partial: 'home/userinfo', locals: {user: @user, partial: false, attachment: attch.size==0 ? nil : attch.first}%>
   </button>
   </a>
   <a href="/">
-  <button class="user-home-button">
+  <button class="user-home-button navbar-button">
     <i class="fa fa-home fa-2x" aria-hidden="true"></i>
   </button>
   </a>
   <a href="<%=user_followings_path(@user.id)%>">
-  <button class="user-home-button">
+  <button class="user-home-button navbar-button">
     <i class="fa fa-user-plus fa-2x" aria-hidden="true"></i>
     <div class="notify">
     <% requests = Following.where(user_id: @user.id, request_accepted: false).count%>
@@ -49,7 +49,7 @@
     </div>
   </div>
   <div class="insta-options">
-  <button class="user-gear-button" onClick="show_options()">
+  <button class="user-gear-button navbar-button" onClick="show_options()">
     <i class="fa fa-gear fa-2x" aria-hidden="true"></i>
   </button>
   <div class="gear-options-container display-none">

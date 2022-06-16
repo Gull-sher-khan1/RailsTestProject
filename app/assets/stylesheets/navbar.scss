@@ -122,3 +122,16 @@
 .search-form{
   width: 30%;
 }
+.navbar-button{
+  background-color: white;
+  border: 1px solid blueviolet;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid blueviolet;
+  box-shadow: 0px 0px 1px;
+  cursor: pointer;
+}
+.navbar-button:hover{
+  background-color: rgba($color: blueviolet, $alpha: 1.0);
+  color: white;
+}

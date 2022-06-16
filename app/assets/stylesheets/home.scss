@@ -5,6 +5,7 @@
 .body{
   font-family: sans-serif;
   min-height: 100vh;
+  font-size: 16px;
 }
 .home-page-contents{
   width: 100%;
@@ -68,7 +69,6 @@
 }
 .post-text{
   width: 100%;
-  max-width: 100%;
   height: 150px;
   margin-bottom: 20px;
   resize: none;
@@ -86,6 +86,8 @@
 }
 .new_post{
   width: 90%;
+  display: flex;
+  flex-direction: column;
 }
 .files-button{
   display: none;
@@ -276,7 +278,7 @@
   min-width: 185px;
 }
 .index-images{
-  width: 90%;
+  width: 100%;
   height: fit-content;
   max-height: 150px;
   overflow-x: scroll;
@@ -388,4 +390,43 @@
 .add-story-button:hover{
   background-color: rgba($color: blueviolet, $alpha: 1);
   color: white;
+}
+.home-page-content-new-post{
+  background-color: white;
+  box-shadow: 0px 0px 3px gray;
+  border-radius: 5px;
+}
+.text-form-submit{
+  width: 120px;
+  height: 40px;
+  background-color: blueviolet;
+  color: white;
+  border-radius: 5px;
+  border: 1px solid blueviolet;
+  box-shadow: 0px 0px 1px;
+  align-self:flex-end;
+}
+.text-form-submit:hover{
+  background-color: rgba($color: blueviolet, $alpha: 0.8);
+  border: 1px solid rgba($color: blueviolet, $alpha: 0.8);
+}
+.post-icon{
+  margin-right: 10px;
+}
+.attachments-button{
+  background-color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  color: blueviolet;
+  cursor: pointer;
+  border: 1px solid blueviolet;
+  box-shadow: 0px 0px 2px;
+}
+.attachments-button:hover{
+  background-color: blueviolet;
+  color: white;
+}
+.image-hundred{
+  width: inherit;
 }

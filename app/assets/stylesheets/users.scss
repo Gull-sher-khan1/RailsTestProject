@@ -29,7 +29,7 @@
   height: 200px;
   width: 200px;
   border-radius: 100px;
-
+  box-shadow: 0px 0px 5px;
 }
 .user-profile-name{
   display: flex;
@@ -68,4 +68,55 @@
 .change-image{
   display: flex;
   justify-content: center;
+}
+.indirect-submit{
+  width: 120px;
+  height: 40px;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid blueviolet;
+  box-shadow: 0px 0px 1px;
+}
+.indirect-submit:hover{
+  background-color: rgba($color: blueviolet, $alpha: 1);
+  color: white;
+}
+.user-name-edit{
+  width: 70px;
+  height: 30px;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid blueviolet;
+  box-shadow: 0px 0px 1px;
+  margin-left: 20px;
+}
+.user-name-edit:hover{
+  background-color: rgba($color: blueviolet, $alpha: 1);
+  color: white;
+}
+.user-done-edit{
+  width: 70px;
+  height: 30px;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid blueviolet;
+  box-shadow: 0px 0px 1px;
+  margin-left: 20px;
+}
+.user-done-edit:hover{
+  background-color: rgba($color: blueviolet, $alpha: 1);
+  color: white;
+}
+.show-button{
+  width: 120px;
+  height: 40px;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid blueviolet;
+  box-shadow: 0px 0px 1px;
+  margin-left: 20px;
+}
+.show-button:hover{
+  background-color: rgba($color: blueviolet, $alpha: 1);
+  color: white;
 }

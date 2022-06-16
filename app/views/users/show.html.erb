@@ -37,8 +37,7 @@
       </div>
       <div class="user-profile-types">
       <%if current_user.id == @profile_user.id%>
-      <%=button_to (@profile_user.private_account!=true ? 'Public Account': 'Private Account'), {controller: :users, action: :update, id: current_user.id, from: :private}, method: :patch, remote: :true, id:"user-private-account"%>
-      <%=button_to 'Edit Password or Email', edit_user_registration_path, class: "user-show-pass-edit", method: :get%>
+      <%=button_to (@profile_user.private_account!=true ? 'Public Account': 'Private Account'), {controller: :users, action: :update, id: current_user.id, from: :private}, method: :patch, remote: :true, id:"user-private-account", class: 'show-button'%>
       <%else%>
         <div class="follow-button">
         <%request = Following.where(user_id: @profile_user.id, follower_id: @user.id).pluck%>

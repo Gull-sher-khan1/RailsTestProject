@@ -75,3 +75,27 @@ function close_window()
 {
   document.getElementsByClassName("story-show-container")[0].classList.add("display-none")
 }
+function remove_content()
+{
+ let ele =  document.getElementsByClassName("found-users")[0];
+ if (ele.innerHTML)
+ {
+   ele.innerHTML="";
+ }
+ ele = document.getElementsByClassName("gear-options-container")[0]
+ if (!ele.classList.contains("check"))
+ {
+   ele.classList.add("check")
+ }
+ else
+ {
+   ele.classList.remove("check")
+   ele.classList.add("display-none")
+ }
+}
+function submit_search(){
+  document.getElementsByClassName("submit_search")[0].click();
+}
+function show_options(){
+  document.getElementsByClassName("gear-options-container")[0].classList.remove("display-none");
+}

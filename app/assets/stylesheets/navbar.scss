@@ -34,7 +34,6 @@
   text-decoration: none;
 }
 .user-home-button{
-  margin-left: 20px;
   width: 56px;
   height: 56px;
 }
@@ -134,4 +133,7 @@
 .navbar-button:hover{
   background-color: rgba($color: blueviolet, $alpha: 1.0);
   color: white;
+}
+.navbar-option-link{
+  margin-left: 20px;
 }

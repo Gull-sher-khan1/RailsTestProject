@@ -18,12 +18,12 @@
     <%= render partial: 'home/userinfo', locals: {user: @user, partial: false, attachment: attch.size==0 ? nil : attch.first}%>
   </button>
   </a>
-  <a href="/">
+  <a href="/" class="navbar-option-link">
   <button class="user-home-button navbar-button">
     <i class="fa fa-home fa-2x" aria-hidden="true"></i>
   </button>
   </a>
-  <a href="<%=user_followings_path(@user.id)%>">
+  <a href="<%=user_followings_path(@user.id)%>" class="navbar-option-link">
   <button class="user-home-button navbar-button">
     <i class="fa fa-user-plus fa-2x" aria-hidden="true"></i>
     <div class="notify">

@@ -41,7 +41,9 @@
         <div class="post-attachments-button">
         <%= form_for post.attachments.new ,url: {action: :update, controller: :attachments, id: post.id, from: :edit},  html:{class: "post-edit-attachments-#{post.id} edit_post display-none"}, method: :patch, remote: true do |post_form| %>
         <%= post_form.file_field :attachment, class: "files-button-edit-#{post.id} files-button-edit", multiple: true, id:'files-button', accept: "image/*", onchange:"getFilesEdit(#{post.id})"%>
-        <%= button_tag 'Attachments', type: :button, onClick:"edit_images_upload(#{post.id})"%>
+        <%= button_tag type: :button, onClick:"edit_images_upload(#{post.id})", class: 'attachments-button' do%>
+        <i class="fa fa-paperclip fa-2x"></i>
+        <%end%>
         <%= hidden_field_tag :authenticity_token, value: form_authenticity_token %>
         <% end%>
         </div>

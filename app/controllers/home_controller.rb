@@ -28,7 +28,8 @@ class HomeController < ApplicationController
     end
   end
   def show_story
-    @story=Attachment.find(params[:id])
+    @attachment=Attachment.find(params[:id])
+    @story=Story.find(@attachment.attachable_id)
     respond_to do |format|
       format.js {render 'home/render_story.js.erb', layout: false}
     end

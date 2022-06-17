@@ -24,6 +24,7 @@
 .user-posts{
   width: 70%;
   height: 100%;
+  box-sizing: border-box;
 }
 .user-show-pic{
   height: 200px;
@@ -54,6 +55,7 @@
 .user-posts{
   padding-left: 40px;
   overflow-y: scroll;
+  padding-top: 5px;
 }
 .user-profile-name-edit{
   margin-bottom: 10px;

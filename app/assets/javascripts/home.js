@@ -73,7 +73,8 @@ function story_form_submit()
 }
 function close_window()
 {
-  document.getElementsByClassName("story-show-container")[0].classList.add("display-none")
+  document.getElementsByClassName("story-show-container")[0].classList.add("display-none");
+  document.getElementsByClassName("body")[0].classList.remove("overflow-hidden");
 }
 function remove_content()
 {
@@ -98,4 +99,11 @@ function submit_search(){
 }
 function show_options(){
   document.getElementsByClassName("gear-options-container")[0].classList.remove("display-none");
+}
+function bodyoverflow(){
+  document.getElementsByClassName("body")[0].classList.add("overflow-hidden");
+}
+function bodyoverflow_removed()
+{
+  document.getElementsByClassName("body")[0].classList.remove("overflow-hidden");
 }

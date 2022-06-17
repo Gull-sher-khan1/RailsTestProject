@@ -507,3 +507,18 @@
   background-color: white;
   color: blueviolet;
 }
+.post-comments-button{
+  background-color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  color: green;
+  cursor: pointer;
+  border: 1px solid green;
+  box-shadow: 0px 0px 2px;
+  margin-right: 10px;
+}
+.post-comments-button:hover{
+  background-color: green;
+  color: white;
+}

@@ -9,7 +9,7 @@
 </div>
 <div class="home-page-contents">
   <div class="home-page-content-users">
-    <%=render partial: 'user', collection: @followers%>
+    <%=render partial: 'home/userinfo', collection: @followers, as: :user, locals:{partial: 'index', attachment: nil, attachments: @following_attachments}%>
   </div>
   <div class="home-page-content-posts-and-stories">
   <div class="story-add-div">

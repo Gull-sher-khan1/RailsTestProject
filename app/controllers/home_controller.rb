@@ -4,7 +4,9 @@ class HomeController < ApplicationController
   def index
     @q = User.ransack(params[:q])
     @user = current_user
-    @followers = User.all
+    following_ids= Following.where(follower_id: current_user.id,request_accepted: true).pluck(:user_id)
+    @followers = User.where(id: following_ids)
+    @following_attachments = Attachment.where(attachable_id: following_ids, attachable_type: 'User')
     @posts = Post.includes(:user)
     @user_ids = @posts.distinct.pluck("user_id")
     @users = User.find(@user_ids)
@@ -15,7 +17,6 @@ class HomeController < ApplicationController
     if @user_ids.index(current_user.id) == nil
       @user_ids<<current_user.id
     end
-    p @user_ids
     @user_attachments = Attachment.where(attachable_id: @user_ids, attachable_type: 'User')
   end
   def get_comments

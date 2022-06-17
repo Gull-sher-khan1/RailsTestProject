@@ -8,13 +8,21 @@
       <%if signed_user.id == post.user_id%>
       <div class="post_update_delete">
         <div class="post-edit-<%=post.id%> edit-buttons-posts">
-          <%= button_to "edit", {controller: :posts, action: :edit, id: post.id}, method: :get, remote: :true, id:"edit_button_post_#{post.id}"%>
-          <%= button_tag "done", type: 'submit', form: "edit_post_#{post.id}", id:"edit_done_button_post_#{post.id}", class: "display-none"%>
+          <%= button_to edit_post_path(post.id), method: :get, remote: :true, id:"edit_button_post_#{post.id}", class: 'post-edit-button' do%>
+            <i class='fa fa-edit fa-lg'></i>
+          <%end%>
+          <%= button_tag type: 'submit', form: "edit_post_#{post.id}", id:"edit_done_button_post_#{post.id}", class: "display-none post-done-button" do%>
+          <i class='fa fa-check fa-lg'></i>
+          <%end%>
         </div>
-        <%= button_to "delete", {controller: :posts, action: :destroy, id: post.id}, method: :delete, remote: :true%>
+        <%= button_to post_path(post.id), method: :delete, remote: :true, class: 'post-delete-button' do%>
+          <i class='fa fa-trash fa-lg'></i>
+        <%end%>
       </div>
       <%end%>
     </div>
+
+
 
     <div id="post-body-<%=post.id%>" class="posts-body">
       <div class="home-page-content-post-text">
@@ -24,6 +32,12 @@
         <!--must copy new_post from scss file before transferring-->
         <%= post_form.text_area :text, class: "post-text-edit", value: post.text %>
         <% end%>
+        <div class="post-images-div index-images-div post-images-div-<%= post.id%>">
+        <div class="post-images index-images post-images-<%= post.id%>">
+          <% specific_post_attachments = posts_attachments.where(attachable_id: post.id)%>
+          <%= render partial: 'home/post_attachments', collection: specific_post_attachments, as: :attachment%>
+        </div>
+        </div>
         <div class="post-attachments-button">
         <%= form_for post.attachments.new ,url: {action: :update, controller: :attachments, id: post.id, from: :edit},  html:{class: "post-edit-attachments-#{post.id} edit_post display-none"}, method: :patch, remote: true do |post_form| %>
         <%= post_form.file_field :attachment, class: "files-button-edit-#{post.id} files-button-edit", multiple: true, id:'files-button', accept: "image/*", onchange:"getFilesEdit(#{post.id})"%>
@@ -35,12 +49,7 @@
       </div>
     </div>
 
-    <div class="post-images-div index-images-div post-images-div-<%= post.id%>">
-        <div class="post-images index-images post-images-<%= post.id%>">
-          <% specific_post_attachments = posts_attachments.where(attachable_id: post.id)%>
-          <%= render partial: 'home/post_attachments', collection: specific_post_attachments, as: :attachment%>
-        </div>
-    </div>
+
 
     <div class="home-page-content-post-button home-page-content-post-button-border-removed home-page-content-post-button-<%=post.id%>">
       <%like_id=Like.where(likeable_id: post.id, user_id: signed_user.id).pluck(:id)%>
@@ -50,9 +59,13 @@
       <% end %>
       <div id="like_buttons_<%=post.id%>">
       <%if like_id.size == 0%>
-        <%= button_tag "Like", type: 'submit', form: "like_ajax_#{post.id}", id:"like_post_#{post.id}"%>
+        <%= button_tag type: 'submit', form: "like_ajax_#{post.id}", id:"like_post_#{post.id}", class:"thumbs-up-like" do%>
+        <i class='fa fa-thumbs-up fa-lg'></i>
+        <%end%>
       <%else%>
-        <%= button_to "Liked",{controller: :likes, action: :destroy, id: like_id[0]}, method: :delete, remote: :true, id:"like_post_#{post.id}"%>
+        <%= button_to like_path(like_id[0]), method: :delete, remote: :true, id:"like_post_#{post.id}", class:"thumbs-up-liked" do%>
+        <i class='fa fa-thumbs-up fa-lg'></i>
+        <%end%>
       <%end%>
       </div>
       <%= form_with url: get_comments_path, id: "comments_ajax_#{post.id}" do |form| %>

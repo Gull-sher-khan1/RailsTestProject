@@ -71,6 +71,8 @@
   width: 100%;
   height: 150px;
   margin-bottom: 20px;
+  border: 1px solid gray;
+  border-radius: 5px;
   resize: none;
 }
 .home-page-content-new-post{
@@ -119,7 +121,8 @@
   flex-direction: $flex-direction-column;
 }
 .home-page-content-posts{
-  background-color: rgba(0,0,0,0.2);
+  border-radius: 5px;
+  box-shadow: 0px 0px 3px gray;
   width: 60%;
   height: fit-content;
   align-self: center;
@@ -128,11 +131,9 @@
 }
 .post-body{
   width: 90%;
-  min-height: 150px;
   height: fit-content;
   margin-bottom: 20px;
   background-color: white;
-  border: 1px solid rgba(0,0,0,0.4);
 }
 .home-page-content-post-text{
   width: 100%;
@@ -297,7 +298,7 @@
   border-radius: 5px;
 }
 .post-images{
-  width: 90%;
+  width: 100%;
   height: fit-content;
   max-height: 150px;
   overflow-x: scroll;
@@ -429,4 +430,80 @@
 }
 .image-hundred{
   width: inherit;
+}
+.post-edit-button{
+  background-color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  color: blueviolet;
+  cursor: pointer;
+  border: 1px solid blueviolet;
+  box-shadow: 0px 0px 2px;
+  margin-right: 10px;
+}
+.post-edit-button:hover{
+  background-color: blueviolet;
+  color: white;
+}
+.post-delete-button{
+  background-color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  color: red;
+  cursor: pointer;
+  border: 1px solid red;
+  box-shadow: 0px 0px 2px;
+  margin-right: 10px;
+}
+.post-delete-button:hover{
+  background-color: red;
+  color: white;
+}
+.post-done-button{
+  background-color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  color: green;
+  cursor: pointer;
+  border: 1px solid green;
+  box-shadow: 0px 0px 2px;
+  margin-right: 10px;
+}
+.post-done-button:hover{
+  background-color: green;
+  color: white;
+}
+.thumbs-up-like{
+  background-color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  color: blueviolet;
+  cursor: pointer;
+  border: 1px solid blueviolet;
+  box-shadow: 0px 0px 2px;
+  margin-right: 10px;
+}
+.thumbs-up-like:hover{
+  background-color: blueviolet;
+  color: white;
+}
+
+.thumbs-up-liked{
+  background-color: blueviolet;
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  color: white;
+  cursor: pointer;
+  border: 1px solid blueviolet;
+  box-shadow: 0px 0px 2px;
+  margin-right: 10px;
+}
+.thumbs-up-like:hover{
+  background-color: white;
+  color: blueviolet;
 }

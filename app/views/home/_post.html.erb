@@ -81,10 +81,12 @@
         <!--must copy new_post from scss file before transferring-->
         <%= f.hidden_field :commentable_id, value: post.id, autocomplete: 'off' %>
         <%= f.text_area :text, class: 'comment-text' %>
-        <%= f.submit 'comment'%>
+        <%= f.button "Post", class:"comment-form-submit" do%>
+          <span><i class="fa fa-comment post-icon"></i>  Comment</span>
+        <%end%>
         <% end%>
       </div>
-      <div id="home_post_comments_<%= post.id%>">
+      <div id="home_post_comments_<%= post.id%>" class=" comment-container">
       </div>
     </div>
   </div>

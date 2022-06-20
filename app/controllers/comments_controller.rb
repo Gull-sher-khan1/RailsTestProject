@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!
 
   def create
     post=Post.find_by_id(strong_params[:comment][:commentable_id])

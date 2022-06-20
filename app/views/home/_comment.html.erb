@@ -1,7 +1,8 @@
 <div class="post-comment-delete-id-<%= comment.id%>">
   <div class="home-page-content-comment-user">
     <div class="user-image-comment">
-      <%= render partial: 'userinfo', locals: {user: users[user_ids.find_index(comment.user_id)], partial: true}%>
+      <%user = users[user_ids.find_index(comment.user_id)]%>
+      <%= render partial: 'userinfo', locals: {user: user, partial: true, attachment: user.attachment}%>
     </div>
     <%if current_user.id == comment.user_id || current_user.id == post.user_id%>
     <div class="post_update_delete">

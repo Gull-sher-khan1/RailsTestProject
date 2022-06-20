@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   layout 'navbar'
   def show
+    @q = User.ransack(params[:q])
     @user=current_user
     @profile_user=User.find(params[:id])
     if @profile_user.id == current_user.id || (@profile_user.id != current_user.id && @profile_user.private_account!=true)

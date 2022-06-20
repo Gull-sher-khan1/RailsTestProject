@@ -13,7 +13,6 @@ class UsersController < ApplicationController
     @attachments = Attachment.where(attachable_id: @posts.pluck(:id), attachable_type: 'Post')
     @user_attachments = Attachment.where(attachable_id: @profile_user.id, attachable_type: 'User')
     @user_pic = Attachment.where(attachable_id: @profile_user.id, attachable_type: 'User')
-    p @user_pic
   end
   def edit
     @user=User.find(params[:id])

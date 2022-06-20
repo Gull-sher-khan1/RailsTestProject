@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   layout 'navbar'
   def show
-    @user=User.find(current_user.id)
+    @user=current_user
     @profile_user=User.find(params[:id])
     if @profile_user.id == current_user.id || (@profile_user.id != current_user.id && @profile_user.private_account!=true)
       @posts = Post.where(user_id: @profile_user.id)
@@ -9,6 +9,10 @@ class UsersController < ApplicationController
       @posts = nil
     end
     @likes_posts = Like.includes(:user).where(likeable_type: "Post")
+    @attachments = Attachment.where(attachable_id: @posts.pluck(:id))
+    @user_attachments = Attachment.where(attachable_id: @profile_user.id, attachable_type: 'User')
+    @user_pic = Attachment.where(attachable_id: @profile_user.id, attachable_type: 'User')
+    p @user_pic
   end
   def edit
     @user=User.find(params[:id])

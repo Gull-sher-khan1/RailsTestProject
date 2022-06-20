@@ -78,6 +78,10 @@
 .files-button{
   display: none;
 }
+.story-files-button
+{
+  display: none;
+}
 .user-image-post{
   height: 100%;
   display: $div-display;
@@ -258,4 +262,49 @@
   display: $div-display;
   flex-direction: $flex-direction-row;
   min-width: 185px;
+}
+.index-images{
+  width: 90%;
+  height: fit-content;
+  max-height: 150px;
+  overflow-x: scroll;
+  display: flex;
+  flex-direction: row;
+}
+.index-images-div{
+  width: 100%;
+  height: fit-content;
+  display: $div-display;
+  justify-content: $justify-content-center;
+  margin-bottom: 20px;
+}
+.input-files{
+  margin-right: 10px;
+  border-radius: 5px;
+}
+.post-images{
+  width: 90%;
+  height: fit-content;
+  max-height: 150px;
+  overflow-x: scroll;
+  display: flex;
+  flex-direction: row;
+}
+.post-images-div{
+  width: 100%;
+  height: fit-content;
+  display: $div-display;
+  justify-content: $justify-content-center;
+  margin-bottom: 20px;
+}
+.files-button-edit{
+  display: none;
+}
+.story-add-div{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.story-add-button{
+  width: 70%;
 }

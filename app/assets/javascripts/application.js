@@ -13,4 +13,8 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
-//= require_tree .
+//= require_tree
+function files_upload()
+{
+  document.getElementById('files-button').click();
+}

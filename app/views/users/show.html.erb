@@ -1,8 +1,29 @@
 <div class="user-show-container">
   <div class="user-profile">
     <div class="user-profile-pic">
-    <%= image_tag("https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8bWFufGVufDB8fDB8fA%3D%3D&w=1000&q=80", class: "user-show-pic")%>
+    <%default_pic = 'user.jpg'%>
+    <%= image_tag("#{ @user_pic.size==0 ? default_pic : @user_pic[0].uri}", class: "user-show-pic")%>
     </div>
+    <%if current_user.id == @profile_user.id%>
+    <div class="change-image">
+      <% profile_attachment = @profile_user.attachment%>
+      <%if profile_attachment == nil%>
+        <%= form_for Attachment.new ,url: {action: :create, controller: :attachments, user_id: @user.id, from: :user},  html:{class: "change-image"}, method: :post, remote: true do |form| %>
+        <%= form.file_field :attachment, class: 'files-button', id:'files-button', accept: "image/*", onchange:'submit_user_form()'%>
+        <%= button_tag 'Change Picture', type: :button, onClick:"file_upload()", class: 'indirect-submit'%>
+        <%= form.submit 'done', class: 'display-none user-pic-form-submit'%>
+        <%= hidden_field_tag :authenticity_token, value: form_authenticity_token %>
+        <% end%>
+      <%else%>
+        <%= form_for Attachment.new ,url: {action: :update, controller: :attachments, id: profile_attachment.id, from: :user},  html:{class: "change-image"}, method: :patch, remote: true do |form| %>
+        <%= form.file_field :attachment, class: 'files-button', id:'files-button', accept: "image/*", onchange:'submit_user_form()'%>
+        <%= button_tag 'Change Picture', type: :button, onClick:"file_upload()", class: 'indirect-submit'%>
+        <%= form.submit 'done', class: 'display-none user-pic-form-submit'%>
+        <%= hidden_field_tag :authenticity_token, value: form_authenticity_token %>
+        <% end%>
+      <%end%>
+    </div>
+    <%end%>
     <div class="user-profile-options">
       <div class="user-profile-name">
       <div class="user-profile-name-edit name">
@@ -32,6 +53,6 @@
     </div>
   </div>
   <div class="user-posts">
-    <%= render partial: 'home/post', collection:@posts, locals:{users: [@profile_user], user_ids: [@profile_user.id], signed_user: @profile_user, likes: @likes_posts}%>
+    <%= render partial: 'home/post', collection:@posts, locals:{users: [@profile_user], user_ids: [@profile_user.id], signed_user: current_user, likes: @likes_posts,  posts_attachments: @attachments, attachments: @user_pic}%>
   </div>
 </div>

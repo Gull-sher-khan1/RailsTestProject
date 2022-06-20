@@ -3,13 +3,26 @@ class PostsController < ApplicationController
   # updation
   # ajax edit button
   def create
+    params[:post].delete(:attachment)
     @post=Post.new(strong_params[:post])
     @post.user_id=strong_params[:user_id]
     @post.save
+    @user = current_user
+    @like_post = Like.includes(:user).where(likeable_id: @post.id)
+    respond_to do |format|
+      format.js {render 'posts/send_attachments.js.erb', layout: false, locals: {post: @post, users: [@user], user_ids: [@user.id], signed_user: @user, likes: [@like_post]}}
+    end
   end
 
   def destroy
     @post=Post.find(params[:id])
+    @attachments = @post.attachments
+    p @attachments
+    @attachments.each do |file|
+      uri = file.uri.split('/',-1)
+      Cloudinary::Uploader.destroy('rails_test_project/' + uri[uri.size-1].split('.',-1)[0])
+      file.destroy
+    end
     @post.destroy
     respond_to do |format|
       format.js {render 'home/remove_post.js.erb', layout: false, locals: {post_id: params[:id]}}

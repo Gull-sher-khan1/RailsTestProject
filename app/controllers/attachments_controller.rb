@@ -1,13 +1,13 @@
 class AttachmentsController < ApplicationController
   def index
-
   end
+
   def create
     if params.key?('attachment')
-
+      #Attachments upload when post is created
       if params[:from]=='post'
         CloudinaryService.batch_upload(Post.find_by_id(params[:post_id]),params[:attachment][:attachment])
-
+      #Attachments upload when story is created
       elsif params[:from] == 'story'
         @story = Story.new
         @story.user_id= current_user.id
@@ -18,7 +18,7 @@ class AttachmentsController < ApplicationController
             StoryCleanupJob.set(wait: 60*60*24).perform_later(@attachment,@story)
           end
         end
-
+      #Attachments upload when user profile pic is added for first time
       else
           user = User.find_by_id(params[:user_id])
           uri = CloudinaryService.upload(params[:attachment][:attachment])
@@ -31,7 +31,9 @@ class AttachmentsController < ApplicationController
 
     end
   end
+
   def update
+    #Condition runs when the Uer profile pic is updated such as a new pic is added when a pic is already added in profile of user
     if params[:from] == 'user'
       @attachment = Attachment.find_by_id(params[:id])
       if CloudinaryService.destroy(@attachment);
@@ -42,7 +44,7 @@ class AttachmentsController < ApplicationController
           end
         end
       end
-
+    #it runs when post is edited first it destroys the attachments from cloudinary then uploads it
     else
       @attachments = Attachment.where(attachable_id: params[:id], attachable_type: 'Post')
       CloudinaryService.batch_destroy(@attachments)

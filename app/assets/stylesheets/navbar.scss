@@ -1,0 +1,33 @@
+@import 'variable';
+
+.user-image{
+  width: 20%;
+  height: 100%;
+  display: $div-display;
+  flex-direction: $flex-direction-row;
+  min-width: 185px;
+}
+.nav-bar{
+  height: 50px;
+  display: $div-display;
+  flex-direction: $flex-direction-row;
+  justify-content: $justify-content-center;
+  margin-bottom: $margin-bottom-20;
+}
+.insta-search{
+  width: 60%;
+  height: 100%;
+  display: $div-display;
+  justify-content: $justify-content-center;
+  align-items: $align-items;
+}
+.insta-options{
+  width: 20%;
+  height: 100%;
+  display: $div-display;
+  justify-content: $justify-content-right;
+  align-items: $align-items;
+}
+.user-show-link{
+  text-decoration: none;
+}

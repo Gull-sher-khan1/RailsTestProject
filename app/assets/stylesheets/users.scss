@@ -1,3 +1,50 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'variable';
+.user-show-container{
+  height: calc(100vh - 90px);
+  width: 100%;
+  display: $div-display;
+  flex-direction: $flex-direction-row;
+}
+.user-profile{
+  width: 30%;
+  height: 100%;
+  border-right: 1px solid rgba($color: black, $alpha: 0.4);
+}
+.user-profile-pic{
+  width: 100%;
+  height: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.user-posts{
+  width: 70%;
+  height: 100%;
+}
+.user-show-pic{
+  height: 200px;
+  width: 200px;
+  border-radius: 100px;
+}
+.user-profile-name{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.user-show-edit{
+  height: fit-content;
+  margin-left: 20px;
+}
+.user-profile-types{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.user-show-pass-edit{
+  margin-left: 20px;
+}

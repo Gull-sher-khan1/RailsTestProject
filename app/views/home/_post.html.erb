@@ -1,0 +1,65 @@
+<div class="home-page-content-posts">
+  <div id="home-page-content-post-<%= post.id %>" class="home-page-content-post">
+    <div class="home-page-content-post-user">
+      <div class="user-image-post">
+        <%= render partial: 'userinfo', locals: {user: users[user_ids.find_index(post.user_id)], partial:true}%>
+      </div>
+      <%if signed_user.id == post.user_id%>
+      <div class="post_update_delete">
+        <div class="post-edit-<%=post.id%> edit-buttons-posts">
+          <%= button_to "edit", {controller: :posts, action: :edit, id: post.id}, method: :get, remote: :true, id:"edit_button_post_#{post.id}"%>
+          <%= button_tag "done", type: 'submit', form: "edit_post_#{post.id}", id:"edit_done_button_post_#{post.id}", class: "display-none"%>
+        </div>
+        <%= button_to "delete", {controller: :posts, action: :destroy, id: post.id}, method: :delete, remote: :true%>
+      </div>
+      <%end%>
+    </div>
+
+    <div id="post-body-<%=post.id%>" class="posts-body">
+      <div class="home-page-content-post-text">
+        <div class="post-body-<%= post.id%> post-body">
+          <p id="post-body-text-<%= post.id%>"><%= post.text%></p>
+        <%= form_for Post.new ,url: {action: :update, controller: :posts, id: post.id }, method: :patch,html:{ id: "edit_post_#{post.id}", class: "form-edit display-none"}, remote: true do |post_form| %>
+        <!--must copy new_post from scss file before transferring-->
+        <%= post_form.text_area :text, class: "post-text-edit", value: post.text %>
+        <%= post_form.file_field :attachment, multiple: :true, class: "files-button"%>
+        <div class="post-attachments-button">
+        <%= button_tag "Attachments", type: :button%>
+        </div>
+        <% end%>
+        </div>
+      </div>
+    </div>
+
+    <div class="home-page-content-post-button home-page-content-post-button-border-removed home-page-content-post-button-<%=post.id%>">
+      <%like_id=Like.where(likeable_id: post.id, user_id: signed_user.id).pluck(:id)%>
+      <%= form_with url: {controller: :likes, action: :create, user_id: signed_user.id}, id: "like_ajax_#{post.id}" do |form| %>
+      <%= form.hidden_field :likeable_id, value: post.id, autocomplete: 'off' %>
+      <%= form.hidden_field :from, value: :post, autocomplete: 'off' %>
+      <% end %>
+      <div id="like_buttons_<%=post.id%>">
+      <%if like_id.size == 0%>
+        <%= button_tag "Like", type: 'submit', form: "like_ajax_#{post.id}", id:"like_post_#{post.id}"%>
+      <%else%>
+        <%= button_to "Liked",{controller: :likes, action: :destroy, id: like_id[0]}, method: :delete, remote: :true, id:"like_post_#{post.id}"%>
+      <%end%>
+      </div>
+      <%= form_with url: get_comments_path, id: "comments_ajax_#{post.id}" do |form| %>
+      <%= form.hidden_field :commentable_id, value: post.id, autocomplete: 'off' %>
+      <% end %>
+      <%= button_tag "comments", onclick: "show_post_comments(#{post_iteration.index})", type: 'submit', form: "comments_ajax_#{post.id}", id:"comment_post_#{post.id}"%>
+    </div>
+    <div class="home-page-content-comments-div display-none">
+      <div class="home-page-content-new-comment ">
+        <%= form_with model: Comment.new ,url: {action: :create, controller: :comments, user_id: @user.id}, method: :post, class: 'new-comment' do |f| %>
+        <!--must copy new_post from scss file before transferring-->
+        <%= f.hidden_field :commentable_id, value: post.id %>
+        <%= f.text_area :text, class: 'comment-text' %>
+        <%= f.submit 'comment'%>
+        <% end%>
+      </div>
+      <div id="home_post_comments_<%= post.id%>">
+      </div>
+    </div>
+  </div>
+</div>

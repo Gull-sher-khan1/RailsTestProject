@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
-  belongs_to :user
-  has_many :comments, as: :commentable
-  has_many :attachments, as: :attachable
-  has_many :likes, as: :likeable
+  validates :text, presence: true
+  belongs_to :user,  inverse_of: :posts
+  has_many :comments, as: :commentable, dependent: :destroy
+  has_many :attachments, as: :attachable, dependent: :destroy
+  has_many :likes, as: :likeable, dependent: :destroy
 end

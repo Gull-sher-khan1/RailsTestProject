@@ -1,0 +1,19 @@
+<div class="user-show-container">
+  <div class="user-profile">
+    <div class="user-profile-pic">
+    <%= image_tag("https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8bWFufGVufDB8fDB8fA%3D%3D&w=1000&q=80", class: "user-show-pic")%>
+    </div>
+    <div class="user-profile-options">
+      <div class="user-profile-name">
+      <p><%=@user.first_name + ' ' + @user.last_name%></p>
+      <%=button_tag 'edit', class: "user-show-edit"%>
+      </div>
+      <div class="user-profile-types">
+      <%=button_tag 'Public Account'%>
+      <%=button_tag 'Edit Password or Email', class: "user-show-pass-edit"%>
+      </div>
+    </div>
+  </div>
+  <div class="user-posts">
+  </div>
+</div>

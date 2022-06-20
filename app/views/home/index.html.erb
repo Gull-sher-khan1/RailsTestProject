@@ -1,4 +1,59 @@
-<h1>Hello</h1>
+<div class="home-page-contents">
+  <div class="home-page-content-users">
+    <%=render partial: 'user', collection: @followers%>
+  </div>
+  <div class="home-page-content-posts-and-stories">
+  <div class="stories-div">
+    <div class="home-page-content-stories">
+      <div class="home-page-content-stories-container">
+        <div class="stories">
+      a
+        </div>
+        <div class="stories">
+      b
+        </div>
+        <div class="stories">
+      c
+        </div>
+        <div class="stories">
+      d
+        </div>
+        <div class="stories">
+      e
+        </div>
+        <div class="stories">
+      f
+        </div>
+        <div class="stories">
+      g
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="new-post-div">
+    <div class="home-page-content-new-post">
+      <div class="home-page-content-new-post-user">
+        <div class="user-image-post">
+          <%= render partial: 'userinfo', locals: {user: @user, partial: true}%>
+        </div>
+      </div>
+      <div class="home-page-content-new-post-text">
+        <%= form_for Post.new(user_id: @user.id) ,url: {action: :create, controller: :posts, user_id: @user.id}, method: :post, remote: true do |post_form| %>
+        <!--must copy new_post from scss file before transferring-->
+        <%= post_form.text_area :text, class: 'post-text' %>
+      </div>
+      <div class="home-page-content-new-post-button">
+        <%= post_form.file_field :attachment, multiple: :true, class: 'files-button'%>
+        <%= button_tag 'Attachments', type: :button%>
+        <%= post_form.submit 'send'%>
+        <% end%>
+      </div>
+    </div>
+    </div>
+    <div class="home-page-content-posts-div">
+      <%= render partial: 'post', collection:@posts, locals:{users: @users, user_ids: @user_ids, signed_user: @user, likes: @likes_posts}%>
+    </div>
+  </div>
+</div>
 <%= button_to "Cancel my account", registration_path(@user), data: { confirm: "Are you sure?" }, method: :delete %></p>
-<%= button_to "Sign out", destroy_session_path(@user), method: :delete %></p>
 <%= button_to "Edit", edit_registration_path(@user), method: :get %></p>

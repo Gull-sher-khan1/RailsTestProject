@@ -1,0 +1,6 @@
+<%puts from%>
+<%if from == :create%>
+  document.getElementById("like_buttons_<%=post.id%>").innerHTML = '<%= button_to "Liked",{controller: :likes, action: :destroy, id: like_id[0]}, method: :delete , remote: :true, id:"like_post_#{post.id}"%>';
+<%else%>
+  document.getElementById("like_buttons_<%=post.id%>").innerHTML = '<%= button_tag "Like", type: "submit", form: "like_ajax_#{post.id}", id:"like_post_#{post.id}"%>';
+<%end%>

@@ -21,7 +21,9 @@ class AttachmentsController < ApplicationController
         attachment = params[:attachment][:attachment]
         res=Cloudinary::Uploader.upload(attachment.tempfile,:folder => "rails_test_project/")
         @attachment.uri = res["url"]
-        @attachment.save
+        if @attachment.save
+          StoryCleanupJob.set(wait: 1.day).perform_later(@attachment,@story)
+        end
       else
           user = User.find(params[:user_id])
           attachment = params[:attachment][:attachment]

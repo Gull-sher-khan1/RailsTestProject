@@ -1,0 +1,8 @@
+document.getElementsByClassName("story-show-container")[0].classList.remove("display-none");
+{
+  let ele = document.getElementsByClassName("story-show-image")[0];
+  ele.innerHTML = "<img src='<%=@story.uri%>' class='story-image'>";
+  ele=document.getElementsByClassName("story-show-buttons")[0];
+  ele.innerHTML="<%= escape_javascript button_to 'delete', story_path, class: 'story-show-button', method: :delete, remote: true %>";
+  ele.innerHTML+="<button class='story-show-button' onClick='close_window()'>close</button>";
+}

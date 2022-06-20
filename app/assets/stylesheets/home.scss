@@ -43,9 +43,14 @@
 .stories{
   height: 250px;
   width: 150px;
-  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-left: 10px;
   margin-right: 10px;
+  overflow: hidden;
+  background-color: black;
+  border: 1px solid ;
 }
 .home-page-content-stories-container{
   width:fit-content;
@@ -307,4 +312,54 @@
 }
 .story-add-button{
   width: 70%;
+}
+.fade{
+  min-width: 150px;
+  min-height: 250px;
+  background-color: rgba(black, 0);
+  border: 0px solid;
+}
+.fade:hover{
+  background-color: rgba(0,0,0,0.2);
+}
+.story-show{
+  background-color: rgba(0,0,0,0.8);
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  left: 0%;
+  top: 0%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 2;
+}
+.story-show-image{
+  height: 95%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.story-show-buttons{
+  width: 100%;
+  display: flex;
+  justify-content: right;
+  padding-right: 20px;
+}
+.story-show-button{
+  margin-left: 20px;
+}
+.fade-form{
+  min-width: 150px;
+  min-height: 250px;
+  position: absolute;
+  background-color: rgba(black, 0);
+}
+.story-image{
+  max-height: 95%;
+}
+.story-img{
+  height: 250px;
 }

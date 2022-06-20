@@ -10,6 +10,7 @@ class HomeController < ApplicationController
     @comments = Comment.none
     @likes_posts = Like.includes(:user).where(likeable_type: "Post")
     @attachments = Attachment.where(attachable_id: @posts.pluck(:id), attachable_type: 'Post')
+    @stories = Attachment.where(attachable_type: 'Story').order('RANDOM()').limit(10)
     if @user_ids.index(current_user.id) == nil
       @user_ids<<current_user.id
     end
@@ -23,6 +24,12 @@ class HomeController < ApplicationController
     @users = User.find(user_ids)
     respond_to do |format|
       format.js {render 'render_comments.js.erb', layout: false, locals: {users: @users, user_ids: user_ids, post: post}}
+    end
+  end
+  def show_story
+    @story=Attachment.find(params[:id])
+    respond_to do |format|
+      format.js {render 'home/render_story.js.erb', layout: false}
     end
   end
 end

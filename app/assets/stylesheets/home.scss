@@ -332,6 +332,8 @@
   min-height: 250px;
   background-color: rgba(black, 0);
   border: 0px solid;
+  position: relative;
+  z-index: 1;
 }
 .fade:hover{
   background-color: rgba(0,0,0,0.2);
@@ -381,6 +383,7 @@
   min-width: 150px;
   min-height: 250px;
   position: absolute;
+  z-index: 1;
   background-color: rgba(black, 0);
 }
 .story-image{

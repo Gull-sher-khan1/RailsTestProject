@@ -2,7 +2,7 @@ class FollowingsController < ApplicationController
   layout 'navbar'
   def index
     @q = User.ransack(params[:q])
-    @user=User.find(current_user.id)
+    @user=User.find_by_id(current_user.id)
     @following_requests= Following.includes(:user).where(user_id: current_user.id, request_accepted: false).all
     @user_ids=@following_requests.pluck(:follower_id)
     @users = User.includes(:followings).find(@user_ids)
@@ -18,7 +18,7 @@ class FollowingsController < ApplicationController
     end
   end
   def destroy
-    @request=Following.find(params[:id])
+    @request=Following.find_by_id(params[:id])
     @request.destroy
     if params[:from]=='delete'
       respond_to do |format|
@@ -31,7 +31,7 @@ class FollowingsController < ApplicationController
     end
   end
   def update
-    @request=Following.find(params[:id])
+    @request=Following.find_by_id(params[:id])
     @request.update(request_accepted: true)
     respond_to do |format|
       format.js {render 'remove_request.js.erb', layout: false, locals: {following_request: @request}}

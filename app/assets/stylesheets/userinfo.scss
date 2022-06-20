@@ -9,3 +9,14 @@
 .user-name{
   margin-left: 10px;
 }
+
+.user-name-link{
+  text-decoration: none;
+  color: black;
+  display: flex;
+  flex-direction: row;
+}
+.notify{
+  position: absolute;
+  top: 0%;
+}

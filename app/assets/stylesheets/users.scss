@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import 'variable';
+@import "font-awesome";
 .user-show-container{
   height: calc(100vh - 90px);
   width: 100%;
@@ -47,4 +48,19 @@
 }
 .user-show-pass-edit{
   margin-left: 20px;
+}
+.user-posts{
+  padding-left: 40px;
+  overflow-y: scroll;
+}
+.user-profile-name-edit{
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.edit_name{
+  display: flex;
+  flex-direction: column;
+}
+.form-name-edit{
+  margin-bottom: 20px;
 }

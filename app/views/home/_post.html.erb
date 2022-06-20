@@ -1,8 +1,8 @@
-<div class="home-page-content-posts">
+<div class="home-page-content-posts home-page-content-posts-<%= post.id %>">
   <div id="home-page-content-post-<%= post.id %>" class="home-page-content-post">
     <div class="home-page-content-post-user">
       <div class="user-image-post">
-        <%= render partial: 'userinfo', locals: {user: users[user_ids.find_index(post.user_id)], partial:true}%>
+        <%= render partial: 'home/userinfo', locals: {user: users[user_ids.find_index(post.user_id)], partial:true}%>
       </div>
       <%if signed_user.id == post.user_id%>
       <div class="post_update_delete">

@@ -1,4 +1,5 @@
 class Following < ApplicationRecord
-  belongs_to :user
-  belongs_to :follower, class_name: "user"
+  validates :user_id, presence: true, uniqueness: { scope: :follower_id }
+  belongs_to :user, inverse_of: :followings
+  belongs_to :follower, class_name: "User", inverse_of: :requests
 end

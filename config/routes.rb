@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :comments
     resources :stories
     resources :attachments, except:[:edit, :update]
-    resources :followings, only: [:destroy, :create, :index]
+    resources :followings, only: [:destroy, :create, :index, :update]
     resources :likes, only: [:destroy, :create]
   end
   post '/get_comments', to: 'home#get_comments'

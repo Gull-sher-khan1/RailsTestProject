@@ -1,5 +1,6 @@
 class FollowingsController < ApplicationController
   layout 'navbar'
+  before_action :authenticate_user!
   def index
     @q = User.ransack(params[:q])
     @user=User.find_by_id(current_user.id)

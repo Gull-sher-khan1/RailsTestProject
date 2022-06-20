@@ -1,0 +1,4 @@
+{
+  let ele = document.getElementsByClassName("comment-container")[0];
+  ele.innerHTML="<%= escape_javascript render partial: 'home/comment', locals:{comment: @comment, users: @users, user_ids: @user_ids, post: post}%>" + ele.innerHTML;
+}

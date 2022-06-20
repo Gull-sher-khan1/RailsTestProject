@@ -31,21 +31,20 @@
       </div>
       <div class="user-name-edit-button">
       <%if current_user.id == @profile_user.id%>
-      <%=button_to 'edit', {controller: :users, action: :edit, id: current_user.id, from: :edit}, method: :get, remote: true, class: "user-name-edit"%>
+      <%=button_to 'Edit', {controller: :users, action: :edit, id: current_user.id, from: :edit}, method: :get, remote: true, class: "user-name-edit"%>
       <%end%>
       </div>
       </div>
       <div class="user-profile-types">
       <%if current_user.id == @profile_user.id%>
-      <%=button_to (@profile_user.private_account!=true ? 'Public Account': 'Private Account'), {controller: :users, action: :update, id: current_user.id, from: :private}, method: :patch, remote: :true, id:"user-private-account"%>
-      <%=button_to 'Edit Password or Email', edit_user_registration_path, class: "user-show-pass-edit", method: :get%>
+      <%=button_to (@profile_user.private_account!=true ? 'Public Account': 'Private Account'), {controller: :users, action: :update, id: current_user.id, from: :private}, method: :patch, remote: :true, id:"user-private-account", class: 'show-button'%>
       <%else%>
         <div class="follow-button">
         <%request = Following.where(user_id: @profile_user.id, follower_id: @user.id).pluck%>
         <%if request.count == 0%>
         <%=button_to 'Follow', user_followings_path(@profile_user.id), class: "user-follow", method: :post, remote: true%>
         <%else%>
-        <%=button_to request[0][1]=="pending" ? 'Follow request pending' : 'Following', following_path(request[0][0]), class: "user-follow", method: :delete, remote: true%>
+        <%=button_to request[0][1]==false ? 'Follow request pending' : 'Following', following_path(request[0][0]), class: "user-follow", method: :delete, remote: true%>
         <%end%>
         </div>
       <%end%>

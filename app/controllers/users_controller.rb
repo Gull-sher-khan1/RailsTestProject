@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     if @profile_user.id == current_user.id || (@profile_user.id != current_user.id && @profile_user.private_account!=true)
       @posts = Post.where(user_id: @profile_user.id)
     else
-      @posts = nil
+      @posts = Post.where(user_id: -1)
     end
     @likes_posts = Like.includes(:user).where(likeable_type: "Post")
     @attachments = Attachment.where(attachable_id: @posts.pluck(:id))

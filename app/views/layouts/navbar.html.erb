@@ -9,22 +9,22 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="body">
+  <body class="body" onClick="remove_content()">
     <div class="nav-bar">
   <div class="user-image">
   <a class="user-show-link" href=<%=user_path(current_user.id)%>>
-  <button class="user-profile-button">
+  <button class="user-profile-button navbar-button">
   <%attch = Attachment.where(attachable_id: current_user.id, attachable_type: 'User')%>
     <%= render partial: 'home/userinfo', locals: {user: @user, partial: false, attachment: attch.size==0 ? nil : attch.first}%>
   </button>
   </a>
-  <a href="/">
-  <button class="user-home-button">
+  <a href="/" class="navbar-option-link">
+  <button class="user-home-button navbar-button">
     <i class="fa fa-home fa-2x" aria-hidden="true"></i>
   </button>
   </a>
-  <a href="<%=user_followings_path(@user.id)%>">
-  <button class="user-home-button">
+  <a href="<%=user_followings_path(@user.id)%>" class="navbar-option-link">
+  <button class="user-home-button navbar-button">
     <i class="fa fa-user-plus fa-2x" aria-hidden="true"></i>
     <div class="notify">
     <% requests = Following.where(user_id: @user.id, request_accepted: false).count%>
@@ -41,15 +41,24 @@
   </a>
   </div>
   <div class="insta-search">
-    <%= search_form_for @q, url: '/search', remote: true do |f| %>
-    <%= f.search_field :first_name_or_last_name_cont %>
-    <%= f.submit %>
+    <%= search_form_for @q, url: '/search', class: "search-form", remote: true do |f| %>
+    <%= f.search_field :first_name_or_last_name_cont, oninput: "submit_search()", autocomplete: :off, class: "search-field", placeholder: "search user" %>
+    <%= f.submit 'submit', class: "submit_search display-none"%>
     <% end %>
     <div class="found-users">
     </div>
   </div>
   <div class="insta-options">
-    <%= button_to "Sign out", destroy_session_path(@user), method: :delete %></p>
+  <button class="user-gear-button navbar-button" onClick="show_options()">
+    <i class="fa fa-gear fa-2x" aria-hidden="true"></i>
+  </button>
+  <div class="gear-options-container display-none">
+  <div class="gear-options">
+    <%= button_to "Sign out", destroy_session_path(@user), method: :delete, class:"gear-option", form_class: "gear-option-form" %>
+    <%= button_to "Delete Account", registration_path(@user), data: { confirm: "Are you sure?" }, method: :delete, class:"gear-option", form_class: "gear-option-form" %>
+    <%= button_to "Edit Account", edit_registration_path(@user), method: :get, class:"gear-option", form_class: "gear-option-form" %>
+  </div>
+  </div>
   </div>
 </div>
 <%= yield%>

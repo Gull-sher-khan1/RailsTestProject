@@ -4,6 +4,11 @@ class CommentsController < ApplicationController
     @comment=post.comments.new(strong_params[:comment])
     @comment.user_id=strong_params[:user_id]
     @comment.save
+    @user_ids = [current_user.id]
+    @users = User.find(@user_ids)
+    respond_to do |format|
+      format.js {render 'home/render_comment.js.erb', layout: false, locals: {post: post}}
+    end
   end
   def destroy
     @comment=Comment.find(params[:id])

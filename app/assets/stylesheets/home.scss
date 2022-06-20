@@ -2,6 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import 'variable';
+.body{
+  font-family: sans-serif;
+  min-height: 100vh;
+  font-size: 16px;
+}
+.overflow-hidden{
+  overflow: hidden;
+}
 .home-page-contents{
   width: 100%;
   height: calc(100% - 50px);
@@ -36,7 +44,9 @@
 .home-page-content-stories{
   width: 70%;
   height: 290px;
-  background-color: rgba(0,0,0,0.2);
+  background-color: white;
+  box-shadow: 0px 0px 3px gray;
+  border-radius: 5px;
   overflow-x: scroll;
   overflow-y: hidden;
 }
@@ -51,6 +61,7 @@
   overflow: hidden;
   background-color: black;
   border: 1px solid ;
+  border-radius: 5px;
 }
 .home-page-content-stories-container{
   width:fit-content;
@@ -61,9 +72,10 @@
 }
 .post-text{
   width: 100%;
-  max-width: 100%;
   height: 150px;
   margin-bottom: 20px;
+  border: 1px solid gray;
+  border-radius: 5px;
   resize: none;
 }
 .home-page-content-new-post{
@@ -79,6 +91,8 @@
 }
 .new_post{
   width: 90%;
+  display: flex;
+  flex-direction: column;
 }
 .files-button{
   display: none;
@@ -110,7 +124,8 @@
   flex-direction: $flex-direction-column;
 }
 .home-page-content-posts{
-  background-color: rgba(0,0,0,0.2);
+  border-radius: 5px;
+  box-shadow: 0px 0px 3px gray;
   width: 60%;
   height: fit-content;
   align-self: center;
@@ -119,11 +134,9 @@
 }
 .post-body{
   width: 90%;
-  min-height: 150px;
   height: fit-content;
   margin-bottom: 20px;
   background-color: white;
-  border: 1px solid rgba(0,0,0,0.4);
 }
 .home-page-content-post-text{
   width: 100%;
@@ -146,11 +159,14 @@
   height: fit-content;
   display: $div-display;
   flex-direction: column;
+  justify-content: center;
 }
 .comment-text{
   width: 100%;
   height: 80px;
   margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid gray;
   resize: none;
 }
 .home-page-content-new-comment{
@@ -182,8 +198,6 @@
   width: 90%;
   height: fit-content;
   margin-bottom: 20px;
-  background-color: white;
-  border: 1px solid rgba(0,0,0,0.4);
 }
 .home-page-content-comment-button{
   margin-bottom: 20px;
@@ -269,7 +283,7 @@
   min-width: 185px;
 }
 .index-images{
-  width: 90%;
+  width: 100%;
   height: fit-content;
   max-height: 150px;
   overflow-x: scroll;
@@ -288,7 +302,7 @@
   border-radius: 5px;
 }
 .post-images{
-  width: 90%;
+  width: 100%;
   height: fit-content;
   max-height: 150px;
   overflow-x: scroll;
@@ -350,6 +364,18 @@
 }
 .story-show-button{
   margin-left: 20px;
+  background-color: rgba(0,0,0,0);
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  color: red;
+  cursor: pointer;
+  border: 3px solid red;
+  margin-right: 10px;
+}
+.story-show-button:hover{
+  background-color: red;
+  color: white;
 }
 .fade-form{
   min-width: 150px;
@@ -362,4 +388,194 @@
 }
 .story-img{
   height: 250px;
+}
+.add-button-form{
+  width: 200px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.add-story-button{
+  width: 150px;
+  height: 50px;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid blueviolet;
+  box-shadow: 0px 0px 1px;
+}
+.add-story-button:hover{
+  background-color: rgba($color: blueviolet, $alpha: 1);
+  color: white;
+}
+.home-page-content-new-post{
+  background-color: white;
+  box-shadow: 0px 0px 3px gray;
+  border-radius: 5px;
+}
+.text-form-submit{
+  width: 120px;
+  height: 40px;
+  background-color: blueviolet;
+  color: white;
+  border-radius: 5px;
+  border: 1px solid blueviolet;
+  box-shadow: 0px 0px 1px;
+  align-self:flex-end;
+}
+.comment-form-submit{
+  width: 120px;
+  height: 40px;
+  background-color: blueviolet;
+  color: white;
+  border-radius: 5px;
+  border: 1px solid blueviolet;
+  box-shadow: 0px 0px 1px;
+  align-self:flex-end;
+}
+.comment-form-submit:hover{
+  background-color: rgba($color: blueviolet, $alpha: 0.8);
+  border: 1px solid rgba($color: blueviolet, $alpha: 0.8);
+}
+.text-form-submit:hover{
+  background-color: rgba($color: blueviolet, $alpha: 0.8);
+  border: 1px solid rgba($color: blueviolet, $alpha: 0.8);
+}
+.post-icon{
+  margin-right: 10px;
+}
+.attachments-button{
+  background-color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  color: blueviolet;
+  cursor: pointer;
+  border: 1px solid blueviolet;
+  box-shadow: 0px 0px 2px;
+}
+.attachments-button:hover{
+  background-color: blueviolet;
+  color: white;
+}
+.image-hundred{
+  width: inherit;
+}
+.post-edit-button{
+  background-color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  color: blueviolet;
+  cursor: pointer;
+  border: 1px solid blueviolet;
+  box-shadow: 0px 0px 2px;
+  margin-right: 10px;
+}
+.post-edit-button:hover{
+  background-color: blueviolet;
+  color: white;
+}
+.post-delete-button{
+  background-color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  color: red;
+  cursor: pointer;
+  border: 1px solid red;
+  box-shadow: 0px 0px 2px;
+  margin-right: 10px;
+}
+.post-delete-button:hover{
+  background-color: red;
+  color: white;
+}
+.post-done-button{
+  background-color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  color: green;
+  cursor: pointer;
+  border: 1px solid green;
+  box-shadow: 0px 0px 2px;
+  margin-right: 10px;
+}
+.post-done-button:hover{
+  background-color: green;
+  color: white;
+}
+.thumbs-up-like{
+  background-color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  color: blueviolet;
+  cursor: pointer;
+  border: 1px solid blueviolet;
+  box-shadow: 0px 0px 2px;
+  margin-right: 10px;
+}
+.thumbs-up-like:hover{
+  background-color: blueviolet;
+  color: white;
+}
+
+.thumbs-up-liked{
+  background-color: blueviolet;
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  color: white;
+  cursor: pointer;
+  border: 1px solid blueviolet;
+  box-shadow: 0px 0px 2px;
+  margin-right: 10px;
+}
+.thumbs-up-like:hover{
+  background-color: white;
+  color: blueviolet;
+}
+.post-comments-button{
+  background-color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  color: green;
+  cursor: pointer;
+  border: 1px solid green;
+  box-shadow: 0px 0px 2px;
+  margin-right: 10px;
+}
+.post-comments-button:hover{
+  background-color: green;
+  color: white;
+}
+.comment{
+  width: 100%;
+}
+.comment:hover{
+  background-color: rgba($color: blueviolet, $alpha: 0.1);
+}
+.comment-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.story-close-button{
+  background-color: rgba(0,0,0,0);
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  color: white;
+  cursor: pointer;
+  border: 3px solid white;
+}
+.story-close-button:hover{
+  background-color: white;
+  color: black;
+}
+.search-field{
+  height: 30px;
 }

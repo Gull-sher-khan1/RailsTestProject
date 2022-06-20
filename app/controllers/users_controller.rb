@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       @posts = Post.where(user_id: -1)
     end
     @likes_posts = Like.includes(:user).where(likeable_type: "Post")
-    @attachments = Attachment.where(attachable_id: @posts.pluck(:id))
+    @attachments = Attachment.where(attachable_id: @posts.pluck(:id), attachable_type: 'Post')
     @user_attachments = Attachment.where(attachable_id: @profile_user.id, attachable_type: 'User')
     @user_pic = Attachment.where(attachable_id: @profile_user.id, attachable_type: 'User')
     p @user_pic

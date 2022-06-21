@@ -2,7 +2,7 @@ class FollowingsController < ApplicationController
   layout 'navbar'
   before_action :authenticate_user!
   def index
-    @q = User.ransack(params[:q])
+    @q = User.ransack(strong_params[:q])
     @user=User.find_by_id(current_user.id)
     @following_requests= Following.includes(:user).where(user_id: current_user.id, request_accepted: false).all
     @user_ids=@following_requests.pluck(:follower_id)
@@ -10,7 +10,7 @@ class FollowingsController < ApplicationController
   end
   def create
     following_request = Following.new
-    following_request.user_id = params[:user_id]
+    following_request.user_id = strong_params[:user_id]
     following_request.request_accepted = false
     following_request.follower_id = current_user.id
     following_request.save
@@ -19,9 +19,9 @@ class FollowingsController < ApplicationController
     end
   end
   def destroy
-    @request=Following.find_by_id(params[:id])
+    @request=Following.find_by_id(strong_params[:id])
     @request.destroy
-    if params[:from]=='delete'
+    if strong_params[:from]=='delete'
       respond_to do |format|
         format.js {render 'remove_request.js.erb', layout: false, locals: {following_request: @request}}
       end
@@ -32,10 +32,15 @@ class FollowingsController < ApplicationController
     end
   end
   def update
-    @request=Following.find_by_id(params[:id])
+    @request=Following.find_by_id(strong_params[:id])
     @request.update(request_accepted: true)
     respond_to do |format|
       format.js {render 'remove_request.js.erb', layout: false, locals: {following_request: @request}}
     end
+  end
+
+  private
+  def strong_params
+    params.permit!
   end
 end

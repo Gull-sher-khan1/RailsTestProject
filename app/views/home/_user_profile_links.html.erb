@@ -2,15 +2,15 @@
   <%index = found_users.index(user)%>
   <%url = attachments.size > index ? attachments[index].uri : 'user.jpg' %>
   <div class="user-links">
-  <a class="user-name-link user-find-link" href="<%= user_path(user.id)%>">
-  <button class="user-links-button">
-  <%= image_tag(url, class: "user-pic")%>
-  <p class="user-name"><%= user.first_name + ' ' + user.last_name%></p>
-  </button>
-  </a>
+    <a class="user-name-link user-find-link" href="<%= user_path(user.id)%>">
+      <button class="user-links-button">
+        <%= image_tag(url, class: "user-pic")%>
+        <p class="user-name"><%= user.first_name + ' ' + user.last_name%></p>
+      </button>
+    </a>
   </div>
 <%else%>
-<div class="user-no-links">
-  <p class="user-no-links-text"><i>no user found</i></p>
+  <div class="user-no-links">
+    <p class="user-no-links-text"><i>no user found</i></p>
   </div>
 <%end%>

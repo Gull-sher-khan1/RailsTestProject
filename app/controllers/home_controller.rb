@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   before_action :authenticate_user!
   layout 'navbar'
   def index
-    @q = User.ransack(params[:q])
+    @q = User.ransack(strong_params[:q])
     @user = current_user
     following_ids= Following.where(follower_id: current_user.id,request_accepted: true).pluck(:user_id)
     @followers = User.where(id: following_ids)
@@ -20,7 +20,7 @@ class HomeController < ApplicationController
     @user_attachments = Attachment.where(attachable_id: @user_ids, attachable_type: 'User')
   end
   def get_comments
-    post=Post.find_by_id(params[:commentable_id])
+    post=Post.find_by_id(strong_params[:commentable_id])
     @comments = post.comments.all.limit(10)
     user_ids = Comment.includes(:user).distinct.pluck("user_id")
     @users = User.find(user_ids)
@@ -29,17 +29,21 @@ class HomeController < ApplicationController
     end
   end
   def show_story
-    @attachment=Attachment.find(params[:id])
-    @story=Story.find_by_attachable_id(@attachment.attachable_id)
+    @attachment=Attachment.find(strong_params[:id])
+    @story=Story.find_by_id(@attachment.attachable_id)
     respond_to do |format|
       format.js {render 'home/render_story.js.erb', layout: false}
     end
   end
   def search
-    @q = User.ransack(params[:q])
+    @q = User.ransack(strong_params[:q])
     @found_users = @q.result(distinct: true)
     respond_to do |format|
       format.js {render 'home/send_users.js.erb', layout: false}
     end
+  end
+
+  def strong_params
+    params.permit!
   end
 end

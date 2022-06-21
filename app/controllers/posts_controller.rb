@@ -1,9 +1,7 @@
 class PostsController < ApplicationController
-  # before editting find wether the current user is authorized?
-  # updation
-  # ajax edit button
+  before_action :authenticate_user!
   def create
-    params[:post].delete(:attachment)
+    strong_params[:post].delete(:attachment)
     @post=Post.new(strong_params[:post])
     @post.user_id=strong_params[:user_id]
     @post.save
@@ -15,9 +13,8 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post=Post.find(params[:id])
+    @post=Post.find_by_id(strong_params[:id])
     @attachments = @post.attachments
-    p @attachments
     @attachments.each do |file|
       uri = file.uri.split('/',-1)
       Cloudinary::Uploader.destroy('rails_test_project/' + uri[uri.size-1].split('.',-1)[0])
@@ -25,20 +22,20 @@ class PostsController < ApplicationController
     end
     @post.destroy
     respond_to do |format|
-      format.js {render 'home/remove_post.js.erb', layout: false, locals: {post_id: params[:id]}}
+      format.js {render 'home/remove_post.js.erb', layout: false, locals: {post_id: strong_params[:id]}}
     end
   end
 
   def edit
-    post = Post.find(params[:id])
+    post = Post.find_by_id(strong_params[:id])
     respond_to do |format|
       format.js {render 'home/edit_post.js.erb', layout: false, locals: {post: post}}
     end
   end
 
   def update
-    post = Post.find(params[:id])
-    post.update(text: params[:post][:text])
+    post = Post.find_by_id(strong_params[:id])
+    post.update(text: strong_params[:post][:text])
     respond_to do |format|
       format.js {render 'home/edit_post.js.erb', layout: false, locals: {post: post}}
     end

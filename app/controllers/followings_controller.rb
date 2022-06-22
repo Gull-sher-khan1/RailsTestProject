@@ -1,8 +1,8 @@
 class FollowingsController < ApplicationController
   layout 'navbar'
-  before_action :authenticate_user!
+
   def index
-    @q = User.ransack(strong_params[:q])
+    @search_query = User.ransack(strong_params[:q])
     @user=User.find_by_id(current_user.id)
     @following_requests= Following.includes(:user).where(user_id: current_user.id, request_accepted: false).all
     @user_ids=@following_requests.pluck(:follower_id)

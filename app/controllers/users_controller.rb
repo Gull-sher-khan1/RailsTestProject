@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
   layout 'navbar'
   def show
-    @q = User.ransack(strong_params[:q])
+    @search_query = User.ransack(strong_params[:q])
     @user=current_user
     @profile_user=User.find(strong_params[:id])
     if @profile_user.id == current_user.id || (@profile_user.id != current_user.id && @profile_user.private_account!=true)

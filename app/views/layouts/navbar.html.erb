@@ -23,11 +23,11 @@
     <i class="fa fa-home fa-2x" aria-hidden="true"></i>
   </button>
   </a>
-  <a href="<%=user_followings_path(@user.id)%>" class="navbar-option-link">
+  <a href="<%=user_followings_path(current_user.id)%>" class="navbar-option-link">
   <button class="user-home-button navbar-button">
     <i class="fa fa-user-plus fa-2x" aria-hidden="true"></i>
     <div class="notify">
-    <% requests = Following.where(user_id: @user.id, request_accepted: false).count%>
+    <% requests = Following.where(user_id: current_user.id, request_accepted: false).count%>
     <% if requests!=0%>
       <svg height="30" width="30" class="notify-icon">
         <circle cx="15" cy="15" r="10" stroke-width="0" fill="red" />
@@ -41,7 +41,7 @@
   </a>
   </div>
   <div class="insta-search">
-    <%= search_form_for @q, url: '/search', class: "search-form", remote: true do |f| %>
+    <%= search_form_for @search_query, url: '/search', class: "search-form", remote: true do |f| %>
     <%= f.search_field :first_name_or_last_name_cont, oninput: "submit_search()", autocomplete: :off, class: "search-field", placeholder: "search user" %>
     <%= f.submit 'submit', class: "submit_search display-none"%>
     <% end %>
@@ -54,9 +54,9 @@
   </button>
   <div class="gear-options-container display-none">
   <div class="gear-options">
-    <%= button_to "Sign out", destroy_session_path(@user), method: :delete, class:"gear-option", form_class: "gear-option-form" %>
-    <%= button_to "Delete Account", registration_path(@user), data: { confirm: "Are you sure?" }, method: :delete, class:"gear-option", form_class: "gear-option-form" %>
-    <%= button_to "Edit Account", edit_registration_path(@user), method: :get, class:"gear-option", form_class: "gear-option-form" %>
+    <%= button_to "Sign out", destroy_session_path(current_user), method: :delete, class:"gear-option", form_class: "gear-option-form" %>
+    <%= button_to "Delete Account", registration_path(current_user), data: { confirm: "Are you sure?" }, method: :delete, class:"gear-option", form_class: "gear-option-form" %>
+    <%= button_to "Edit Account", edit_registration_path(current_user), method: :get, class:"gear-option", form_class: "gear-option-form" %>
   </div>
   </div>
   </div>

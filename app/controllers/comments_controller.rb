@@ -1,15 +1,12 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!
 
   def create
     post=Post.find_by_id(strong_params[:comment][:commentable_id])
     @comment=post.comments.create(user_id: strong_params[:user_id], text: strong_params[:comment][:text])
-    if @comment
-      @user_ids = [current_user.id]
-      @users = User.find(@user_ids)
-      respond_to do |format|
-        format.js {render 'home/render_comment.js.erb', layout: false, locals: {post: post}}
-      end
+    @user_ids = [current_user.id]
+    @users = User.find(@user_ids)
+    respond_to do |format|
+      format.js {render 'home/render_comment.js.erb', layout: false, locals: {post: post}}
     end
   end
 

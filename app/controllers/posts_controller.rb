@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!
   def create
     strong_params[:post].delete(:attachment)
     @post=Post.new(strong_params[:post])

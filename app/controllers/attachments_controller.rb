@@ -1,7 +1,4 @@
 class AttachmentsController < ApplicationController
-  before_action :authenticate_user!
-  def index
-  end
 
   def create
     if params.key?('attachment')

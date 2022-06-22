@@ -1,8 +1,8 @@
 <%url = attachment==nil ? 'user.jpg' : attachment.uri%>
 <%if partial!=true && partial!='index'%>
-  <a class="user-name-link" href="<%= user_path(@user.id)%>">
+  <a class="user-name-link" href="<%= user_path(current_user.id)%>">
     <%= image_tag(url, class: "user-pic")%>
-    <p class="user-name"><%= @user.first_name + ' ' + @user.last_name%></p>
+    <p class="user-name"><%= current_user.first_name + ' ' + current_user.last_name%></p>
   </a>
 <%elsif partial=='index'%>
   <%url = attachments.where(attachable_id: user.id).pluck(:uri)[0]%>

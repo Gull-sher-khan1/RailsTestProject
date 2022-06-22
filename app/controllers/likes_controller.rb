@@ -1,5 +1,5 @@
 class LikesController < ApplicationController
-  before_action :authenticate_user!
+
   def create
     if(strong_params[:from]=="post")
       @obj=Post.find_by_id(strong_params[:likeable_id])

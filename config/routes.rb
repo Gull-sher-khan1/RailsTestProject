@@ -2,11 +2,11 @@
 
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'user/registrations' }
-  resources :users, shallow: true, only: %i[index edit update show] do
-    resources :posts
-    resources :comments
+  resources :users, shallow: true, only: %i[edit update show] do
+    resources :posts, except: %i[index new show]
+    resources :comments, except: %i[index new show]
     resources :stories, only: %i[create destroy]
-    resources :attachments, except: [:edit]
+    resources :attachments, only: %i[create update]
     resources :followings, only: %i[destroy create index update]
     resources :likes, only: %i[destroy create]
   end

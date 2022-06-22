@@ -7,4 +7,9 @@ module UserConcern
     @user_ids = objects.distinct.pluck('user_id')
     @users = User.find(@user_ids)
   end
+
+  def set_followers(objects)
+    @user_ids = objects.distinct.pluck('follower_id')
+    @users = User.find(@user_ids)
+  end
 end

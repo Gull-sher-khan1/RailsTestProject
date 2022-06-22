@@ -1,7 +1,10 @@
 <div class="request-container-<%= following_request.id%> request-container">
   <div class="request">
     <div class="user-info">
-      <%user = users[user_ids.find_index(following_request.follower_id)]%>
+    <%p following_request%>
+    <%p @user_ids%>
+    <%p @users%>
+      <%user = @users[@user_ids.find_index(following_request.follower_id)]%>
       <%= render partial: 'home/userinfo', locals: {user: user ,attachment: user.attachment ,partial:true}%>
     </div>
     <div class="request-options">

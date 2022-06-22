@@ -2,22 +2,15 @@
 
 class HomeController < ApplicationController
   layout 'navbar'
+  before_action :set_search, :set_comment, :set_posts, :set_likes, :set_stories, :set_attachments, only: [:index, :search]
   include UserConcern
   def index
-    @search_query = User.ransack(strong_params[:q])
-    @posts = Post.user_posts
-    set_users(@posts)
-    @comments = Comment.none
-    @likes_posts = Like.like_users
-    @attachments = Attachment.post_attachments(@posts)
-    @stories = Attachment.where(attachable_type: 'Story').order('RANDOM()').limit(7)
-    @user_ids << current_user.id if @user_ids.index(current_user.id).nil?
-    @user_attachments = Attachment.where(attachable_id: @user_ids, attachable_type: 'User')
+
   end
 
   def get_comments
     post = Post.find_by(id: strong_params[:commentable_id])
-    @comments = post.comments.all.limit(10)
+    @comments = post.comments
     set_users(@comments)
     respond_to do |format|
       format.js do
@@ -35,7 +28,6 @@ class HomeController < ApplicationController
   end
 
   def search
-    @search_query = User.ransack(strong_params[:q])
     @found_users = @search_query.result(distinct: true)
     respond_to do |format|
       format.js { render 'home/send_users.js.erb', layout: false }
@@ -44,6 +36,33 @@ class HomeController < ApplicationController
   private
   def strong_params
     params.permit!
+  end
+
+  def set_search
+    @search_query = User.ransack(strong_params[:q])
+  end
+
+  def set_comment
+    @comments = Comment.none
+  end
+
+  def set_posts
+    @posts = Post.user_posts
+    set_users(@posts)
+  end
+
+  def set_likes
+    @likes_posts = Like.like_users
+  end
+
+  def set_stories
+    @stories = Attachment.random_stories
+  end
+
+  def set_attachments
+    @attachments = Attachment.post_attachments(@posts)
+    @user_ids << current_user.id if @user_ids.index(current_user.id).nil?
+    @user_attachments = Attachment.users_attachments(@user_ids)
   end
 
 end

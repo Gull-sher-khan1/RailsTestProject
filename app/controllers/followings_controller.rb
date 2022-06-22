@@ -3,19 +3,15 @@
 class FollowingsController < ApplicationController
   layout 'navbar'
   include UserConcern
+  before_action :set_search, only: :index
   def index
-    @search_query = User.ransack(strong_params[:q])
-    @user = User.find_by(id: current_user.id)
-    @following_requests = Following.includes(:user).where(user_id: current_user.id, request_accepted: false).all
-    set_users(@following_requests)
+    @user = current_user
+    @following_requests = Following.pending_requests(current_user.id)
+    set_followers(@following_requests)
   end
 
   def create
-    following_request = Following.new
-    following_request.user_id = strong_params[:user_id]
-    following_request.request_accepted = false
-    following_request.follower_id = current_user.id
-    following_request.save
+    following_request=Following.create(user_id: strong_params[:user_id],request_accepted: false, follower_id: current_user.id)
     respond_to do |format|
       format.js do
         render 'change_follow_button.js.erb', layout: false, locals: { request: following_request, from: :create }
@@ -49,5 +45,9 @@ class FollowingsController < ApplicationController
 
   def strong_params
     params.permit!
+  end
+
+  def set_search
+    @search_query = User.ransack(strong_params[:q])
   end
 end

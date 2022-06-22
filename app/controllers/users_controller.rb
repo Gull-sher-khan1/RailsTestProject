@@ -2,19 +2,21 @@
 
 class UsersController < ApplicationController
   layout 'navbar'
+  include UserConcern
+  before_action :set_search, only: :show
+
   def show
-    @search_query = User.ransack(strong_params[:q])
+
     @user = current_user
     @profile_user = User.find(strong_params[:id])
     if @profile_user.id == current_user.id || (@profile_user.id != current_user.id && @profile_user.private_account != true)
       @posts = Post.where(user_id: @profile_user.id)
     else
-      @posts = Post.where(user_id: -1)
+      @posts = Post.none
     end
-    @likes_posts = Like.includes(:user).where(likeable_type: 'Post')
-    @attachments = Attachment.where(attachable_id: @posts.pluck(:id), attachable_type: 'Post')
-    @user_attachments = Attachment.where(attachable_id: @profile_user.id, attachable_type: 'User')
-    @user_pic = Attachment.where(attachable_id: @profile_user.id, attachable_type: 'User')
+    @likes_posts = Like.posts_like
+    @attachments = Attachment.post_attachments(@posts.pluck(:id))
+    @user_pic = @user_attachments = Attachment.users_attachments([@profile_user.id])
   end
 
   def edit
@@ -44,4 +46,6 @@ class UsersController < ApplicationController
   def strong_params
     params.permit!
   end
+
+
 end

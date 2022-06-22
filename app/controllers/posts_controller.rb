@@ -2,12 +2,11 @@
 
 class PostsController < ApplicationController
   def create
-    strong_params[:post].delete(:attachment)
     @post = Post.new(strong_params[:post])
     @post.user_id = strong_params[:user_id]
     @post.save
     @user = current_user
-    @like_post = Like.includes(:user).where(likeable_id: @post.id)
+    @like_post = Like.post_like(@post.id)
     respond_to do |format|
       format.js do
         render 'posts/send_attachments.js.erb', layout: false,

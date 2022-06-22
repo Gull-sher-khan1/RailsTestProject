@@ -46,8 +46,4 @@ class FollowingsController < ApplicationController
   def strong_params
     params.permit!
   end
-
-  def set_search
-    @search_query = User.ransack(strong_params[:q])
-  end
 end

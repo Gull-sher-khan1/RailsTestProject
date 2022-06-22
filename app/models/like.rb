@@ -6,4 +6,6 @@ class Like < ApplicationRecord
   belongs_to :user, inverse_of: :likes
 
   scope :like_users, -> { includes(:user).where(likeable_type: 'Post')}
+  scope :post_like, ->(id) {includes(:user).where(likeable_id: id)}
+  scope :posts_like, -> {includes(:user).where(likeable_type: 'Post')}
 end

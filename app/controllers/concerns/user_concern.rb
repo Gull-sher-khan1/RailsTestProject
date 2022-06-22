@@ -12,4 +12,8 @@ module UserConcern
     @user_ids = objects.distinct.pluck('follower_id')
     @users = User.find(@user_ids)
   end
+
+  def set_search
+    @search_query = User.ransack(strong_params[:q])
+  end
 end

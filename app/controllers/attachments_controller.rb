@@ -39,7 +39,7 @@ class AttachmentsController < ApplicationController
       end
     # it runs when post is edited first it destroys the attachments from cloudinary then uploads it
     else
-      @attachments = Attachment.where(attachable_id: strong_params[:id], attachable_type: 'Post')
+      @attachments = Attachment.post_attachments(strong_params[:id])
       CloudinaryService.batch_destroy(@attachments)
       if strong_params.key?('attachment')
         @post = Post.find(strong_params[:id])

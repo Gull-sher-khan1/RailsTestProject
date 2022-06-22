@@ -2,7 +2,7 @@
 
 class LikesController < ApplicationController
   def create
-    @obj = Post.find_by(id: strong_params[:likeable_id]) if strong_params[:from] == 'post'
+    @obj = Post.find_by_id(strong_params[:likeable_id]) if strong_params[:from] == 'post'
     @like = @obj.likes.new
     @like.user_id = strong_params[:user_id]
     @like.save

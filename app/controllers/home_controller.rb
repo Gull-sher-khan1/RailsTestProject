@@ -2,8 +2,9 @@
 
 class HomeController < ApplicationController
   layout 'navbar'
-  before_action :set_search, :set_comment, :set_posts, :set_likes, :set_stories, :set_attachments, only: [:index, :search]
+
   include UserConcern
+  before_action :set_search, :set_comment, :set_posts, :set_likes, :set_stories, :set_attachments, only: [:index, :search]
   def index
 
   end
@@ -38,9 +39,7 @@ class HomeController < ApplicationController
     params.permit!
   end
 
-  def set_search
-    @search_query = User.ransack(strong_params[:q])
-  end
+
 
   def set_comment
     @comments = Comment.none
@@ -60,7 +59,7 @@ class HomeController < ApplicationController
   end
 
   def set_attachments
-    @attachments = Attachment.post_attachments(@posts)
+    @attachments = Attachment.posts_attachments(@posts)
     @user_ids << current_user.id if @user_ids.index(current_user.id).nil?
     @user_attachments = Attachment.users_attachments(@user_ids)
   end

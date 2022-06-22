@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-module User
-  class PasswordsController < Devise::PasswordsController
+class User::PasswordsController < Devise::PasswordsController
     # GET /resource/password/new
     # def new
     #   super
@@ -32,5 +31,4 @@ module User
     # def after_sending_reset_password_instructions_path_for(resource_name)
     #   super(resource_name)
     # end
-  end
 end

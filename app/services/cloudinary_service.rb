@@ -7,13 +7,13 @@ class CloudinaryService
   end
 
   def self.batch_upload(object, attachments)
-    unless object.nil?
-      attachments.each do |file|
-        res = Cloudinary::Uploader.upload(file.tempfile, folder: 'rails_test_project/')
-        attachment = object.attachments.new
-        attachment.uri = res['url']
-        attachment.save
-      end
+    return if object.nil?
+
+    attachments.each do |file|
+      res = Cloudinary::Uploader.upload(file.tempfile, folder: 'rails_test_project/')
+      attachment = object.attachments.new
+      attachment.uri = res['url']
+      attachment.save
     end
   end
 

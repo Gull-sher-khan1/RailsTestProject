@@ -1,4 +1,3 @@
 <%= form_for Comment.new ,url: {action: :update, controller: :comments, id: comment.id }, method: :patch,html:{ id: "edit_comment_#{comment.id}", class: "form-edit-comment"}, remote: true do |post_form| %>
-  <!--must copy new_post from scss file before transferring-->
   <%= post_form.text_area :text, class: "comment-text-edit", value: comment.text %>
 <%end%>

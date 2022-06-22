@@ -1,68 +1,65 @@
 <div class="story-show-container display-none">
-<div class="story-show">
-<div class="story-show-buttons">
+  <div class="story-show">
+    <div class="story-show-buttons">
 
+    </div>
+    <div class="story-show-image">
+    </div>
+  </div>
 </div>
-<div class="story-show-image">
-</div>
-</div>
-</div>
+
 <div class="home-page-contents">
-  <div class="home-page-content-users">
-    <%=render partial: 'home/userinfo', collection: @followers, as: :user, locals:{partial: 'index', attachment: nil, attachments: @following_attachments}%>
-  </div>
   <div class="home-page-content-posts-and-stories">
-  <div class="story-add-div">
-    <div class="story-add-button">
+    <div class="story-add-div">
+      <div class="story-add-button">
         <%= form_for Attachment.new ,url: {action: :create, controller: :attachments, user_id: current_user.id, from: :story}, html:{id: 'story_form_submit', class: 'add-button-form'} ,method: :post, remote: true do |form| %>
-        <%= form.file_field :attachment, class: 'story-files-button', accept: "image/*", onchange: "story_form_submit()"%>
-        <%= button_tag 'Add Story', type: :button, onClick:"story_upload()", class: 'add-story-button'%>
-        <%= hidden_field_tag :authenticity_token, value: form_authenticity_token %>
+          <%= form.file_field :attachment, class: 'story-files-button', accept: "image/*", onchange: "story_form_submit()"%>
+          <%= button_tag 'Add Story', type: :button, onClick:"story_upload()", class: 'add-story-button'%>
+          <%= hidden_field_tag :authenticity_token, value: form_authenticity_token %>
         <% end%>
-    </div>
-  </div>
-  <div class="stories-div">
-    <div class="home-page-content-stories">
-      <div class="home-page-content-stories-container">
-        <%= render partial: 'story', collection:@stories %>
       </div>
     </div>
-  </div>
-  <div class="new-post-div">
-    <div class="home-page-content-new-post">
-      <div class="home-page-content-new-post-user">
-        <div class="user-image-post">
-          <%= render partial: 'userinfo', locals: {user: @user, partial: true, attachment: @user_attachments.find_by_attachable_id(current_user.id)}%>
+    <div class="stories-div">
+      <div class="home-page-content-stories">
+        <div class="home-page-content-stories-container">
+          <%= render partial: 'story', collection:@stories %>
         </div>
       </div>
-      <div class="home-page-content-new-post-text">
-        <%= form_for Post.new(user_id: @user.id) ,url: {action: :create, controller: :posts, user_id: @user.id}, html:{class: "post-new-text new_post"}, method: :post, remote: true do |post_form| %>
-        <!--must copy new_post from scss file before transferring-->
-        <%= post_form.text_area :text, class: 'post-text' %>
+    </div>
+    <div class="new-post-div">
+      <div class="home-page-content-new-post">
+        <div class="home-page-content-new-post-user">
+          <div class="user-image-post">
+            <%= render partial: 'userinfo', locals: {user: current_user, partial: true, attachment: @user_attachments.find_by_attachable_id(current_user.id)}%>
+          </div>
+        </div>
+        <div class="home-page-content-new-post-text">
+          <%= form_for Post.new(user_id: current_user.id) ,url: {action: :create, controller: :posts, user_id: current_user.id}, html:{class: "post-new-text new_post"}, method: :post, remote: true do |post_form| %>
+            <%= post_form.text_area :text, class: 'post-text' %>
 
-      <div class="index-images-div">
-        <div class="index-images">
+            <div class="index-images-div">
+              <div class="index-images">
+              </div>
+            </div>
+            <%= post_form.button "Post", class:"text-form-submit" do%>
+              <span><i class="fa fa-paper-plane post-icon"></i>  Post</span>
+            <%end%>
+          <%end%>
+        </div>
+        <div class="home-page-content-new-post-button">
+          <%= form_for Post.new.attachments.new ,url: {action: :create, controller: :attachments, user_id: current_user.id, from: :post},  html:{class: "post-new-attachments new_post"}, method: :post, remote: true do |post_form| %>
+            <%= post_form.file_field :attachment, class: 'files-button', multiple: true, id:'files-button', accept: "image/*", onchange:"getFiles()"%>
+            <%= button_tag nil, type: :button, onClick:"files_upload()", class: 'attachments-button' do%>
+              <i class="fa fa-paperclip fa-2x"></i>
+            <%end%>
+            <%= hidden_field_tag :authenticity_token, value: form_authenticity_token %>
+            <%= hidden_field_tag :post_id,1, class:"attachments-post-id"%>
+          <% end%>
         </div>
       </div>
-        <%= post_form.button "Post", class:"text-form-submit" do%>
-          <span><i class="fa fa-paper-plane post-icon"></i>  Post</span>
-        <%end%>
-        <%end%>
-      </div>
-      <div class="home-page-content-new-post-button">
-        <%= form_for Post.new.attachments.new ,url: {action: :create, controller: :attachments, user_id: @user.id, from: :post},  html:{class: "post-new-attachments new_post"}, method: :post, remote: true do |post_form| %>
-        <%= post_form.file_field :attachment, class: 'files-button', multiple: true, id:'files-button', accept: "image/*", onchange:"getFiles()"%>
-        <%= button_tag nil, type: :button, onClick:"files_upload()", class: 'attachments-button' do%>
-        <i class="fa fa-paperclip fa-2x"></i>
-        <%end%>
-        <%= hidden_field_tag :authenticity_token, value: form_authenticity_token %>
-        <%= hidden_field_tag :post_id,1, class:"attachments-post-id"%>
-        <% end%>
-      </div>
-    </div>
     </div>
     <div class="home-page-content-posts-div">
-      <%= render partial: 'post', collection:@posts, locals:{users: @users, user_ids: @user_ids, signed_user: @user, likes: @likes_posts, posts_attachments: @attachments, attachments: @user_attachments}%>
+      <%= render partial: 'post', collection:@posts, locals:{users: @users, user_ids: @user_ids, signed_user: current_user, likes: @likes_posts, posts_attachments: @attachments, attachments: @user_attachments}%>
     </div>
   </div>
 </div>

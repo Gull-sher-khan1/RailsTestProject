@@ -37,7 +37,7 @@ class HomeController < ApplicationController
   end
 
   def search
-    @q = User.ransack(strong_params[:q])
+    @search_query = User.ransack(strong_params[:q])
     @found_users = @q.result(distinct: true)
     respond_to do |format|
       format.js { render 'home/send_users.js.erb', layout: false }

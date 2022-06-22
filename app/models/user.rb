@@ -12,4 +12,6 @@ class User < ApplicationRecord
   has_many :likes, inverse_of: :user, dependent: :destroy
   has_many :requests, class_name: 'following', foreign_key: 'follower_id', inverse_of: :follower, dependent: :destroy
   has_one :attachment, as: :attachable, dependent: :destroy
+
+
 end

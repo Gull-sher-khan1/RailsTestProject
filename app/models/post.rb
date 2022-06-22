@@ -6,4 +6,6 @@ class Post < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :attachments, as: :attachable, dependent: :destroy
   has_many :likes, as: :likeable, dependent: :destroy
+
+  scope :user_posts, -> { includes(:user)}
 end

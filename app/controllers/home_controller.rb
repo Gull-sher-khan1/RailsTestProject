@@ -2,15 +2,14 @@
 
 class HomeController < ApplicationController
   layout 'navbar'
-
+  include UserConcern
   def index
     @search_query = User.ransack(strong_params[:q])
-    @posts = Post.includes(:user)
-    @user_ids = @posts.distinct.pluck('user_id')
-    @users = User.find(@user_ids)
+    @posts = Post.user_posts
+    set_users(@posts)
     @comments = Comment.none
-    @likes_posts = Like.includes(:user).where(likeable_type: 'Post')
-    @attachments = Attachment.where(attachable_id: @posts.pluck(:id), attachable_type: 'Post')
+    @likes_posts = Like.like_users
+    @attachments = Attachment.post_attachments(@posts)
     @stories = Attachment.where(attachable_type: 'Story').order('RANDOM()').limit(7)
     @user_ids << current_user.id if @user_ids.index(current_user.id).nil?
     @user_attachments = Attachment.where(attachable_id: @user_ids, attachable_type: 'User')
@@ -19,11 +18,10 @@ class HomeController < ApplicationController
   def get_comments
     post = Post.find_by(id: strong_params[:commentable_id])
     @comments = post.comments.all.limit(10)
-    user_ids = Comment.includes(:user).distinct.pluck('user_id')
-    @users = User.find(user_ids)
+    set_users(@comments)
     respond_to do |format|
       format.js do
-        render 'render_comments.js.erb', layout: false, locals: { users: @users, user_ids: user_ids, post: post }
+        render 'render_comments.js.erb', layout: false, locals: { users: @users, user_ids: @user_ids, post: post }
       end
     end
   end
@@ -38,13 +36,14 @@ class HomeController < ApplicationController
 
   def search
     @search_query = User.ransack(strong_params[:q])
-    @found_users = @q.result(distinct: true)
+    @found_users = @search_query.result(distinct: true)
     respond_to do |format|
       format.js { render 'home/send_users.js.erb', layout: false }
     end
   end
-
+  private
   def strong_params
     params.permit!
   end
+
 end

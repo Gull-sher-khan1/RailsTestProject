@@ -2,13 +2,12 @@
 
 class FollowingsController < ApplicationController
   layout 'navbar'
-
+  include UserConcern
   def index
     @search_query = User.ransack(strong_params[:q])
     @user = User.find_by(id: current_user.id)
     @following_requests = Following.includes(:user).where(user_id: current_user.id, request_accepted: false).all
-    @user_ids = @following_requests.pluck(:follower_id)
-    @users = User.includes(:followings).find(@user_ids)
+    set_users(@following_requests)
   end
 
   def create

@@ -14,6 +14,12 @@ class User < ApplicationRecord
   has_many :requests, class_name: 'Following', foreign_key: 'follower_id', inverse_of: :follower, dependent: :destroy
   has_one :attachment, as: :attachable, dependent: :destroy
 
+  validates :firstname, presence: true
+  validates :email, presence: true
+  validates :last_name, presence: true
+  validates_format_of :email,
+  :with => /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+
   protected
   def confirmation_required?
     false

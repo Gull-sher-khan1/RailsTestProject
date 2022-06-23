@@ -22,8 +22,6 @@
       <%end%>
     </div>
 
-
-
     <div id="post-body-<%=post.id%>" class="posts-body">
       <div class="home-page-content-post-text">
         <div class="post-body-<%= post.id%> post-body">
@@ -49,8 +47,6 @@
         </div>
       </div>
     </div>
-
-
 
     <div class="home-page-content-post-button home-page-content-post-button-border-removed home-page-content-post-button-<%=post.id%>">
       <%like_id=Like.where(likeable_id: post.id, user_id: signed_user.id).pluck(:id)%>
@@ -87,6 +83,7 @@
         <% end%>
       </div>
       <div id="home_post_comments_<%= post.id%>" class=" comment-container">
+
       </div>
     </div>
   </div>

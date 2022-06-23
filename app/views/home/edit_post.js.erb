@@ -1,31 +1,31 @@
 {
   let ele=[];
-ele.push(document.getElementById("edit_post_<%=post.id%>"));
-ele.push(document.getElementById("post-body-text-<%= post.id%>"));
-ele.push(document.getElementsByClassName("post-body-<%= post.id%>")[0]);
-ele.push(document.getElementsByClassName("home-page-content-post-button-<%=post.id%>")[0]);
-ele.push(document.getElementById("edit_done_button_post_<%= post.id%>"));
-ele.push(document.getElementById("edit_button_post_<%= post.id%>"));
-ele.push(document.getElementsByClassName("post-edit-attachments-<%= post.id%>")[0]);
-if (ele[0].classList.contains("display-none"))
-{
-  ele[0].classList.remove("display-none");
-  ele[1].classList.add("display-none");
-  ele[2].classList.add("post-body-color-removed");
-  ele[3].classList.add("display-none");
-  ele[4].classList.remove("display-none");
-  ele[5].classList.add("display-none");
-  ele[6].classList.remove("display-none");
-}
-else
-{
-  ele[6].submit();
-  ele[0].classList.add("display-none");
-  ele[1].classList.remove("display-none");
-  ele[2].classList.remove("post-body-color-removed");
-  ele[3].classList.remove("display-none");
-  ele[4].classList.add("display-none");
-  ele[5].classList.remove("display-none");
-  ele[6].classList.add("display-none");
-}
+  ele.push(document.getElementById("edit_post_<%=post.id%>"));
+  ele.push(document.getElementById("post-body-text-<%= post.id%>"));
+  ele.push(document.getElementsByClassName("post-body-<%= post.id%>")[0]);
+  ele.push(document.getElementsByClassName("home-page-content-post-button-<%=post.id%>")[0]);
+  ele.push(document.getElementById("edit_done_button_post_<%= post.id%>"));
+  ele.push(document.getElementById("edit_button_post_<%= post.id%>"));
+  ele.push(document.getElementsByClassName("post-edit-attachments-<%= post.id%>")[0]);
+  if (ele[0].classList.contains("display-none"))
+  {
+    ele[0].classList.remove("display-none");
+    ele[1].classList.add("display-none");
+    ele[2].classList.add("post-body-color-removed");
+    ele[3].classList.add("display-none");
+    ele[4].classList.remove("display-none");
+    ele[5].classList.add("display-none");
+    ele[6].classList.remove("display-none");
+  }
+  else
+  {
+    ele[6].submit();
+    ele[0].classList.add("display-none");
+    ele[1].classList.remove("display-none");
+    ele[2].classList.remove("post-body-color-removed");
+    ele[3].classList.remove("display-none");
+    ele[4].classList.add("display-none");
+    ele[5].classList.remove("display-none");
+    ele[6].classList.add("display-none");
+  }
 }

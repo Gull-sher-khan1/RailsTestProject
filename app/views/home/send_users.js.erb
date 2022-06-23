@@ -1,5 +1,5 @@
 <%if @found_users.first==nil%>
-<%@found_users=[User.new]%>
+  <%@found_users=[User.new]%>
 <%end%>
 document.getElementsByClassName("found-users")[0].innerHTML="<%= escape_javascript render partial: 'home/user_profile_links', collection: @found_users, as: :user, locals: {attachments: Attachment.where(attachable_type: 'User', attachable_id: @found_users.pluck(:id)), found_users: @found_users} %>"
 

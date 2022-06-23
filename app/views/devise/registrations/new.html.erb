@@ -10,12 +10,12 @@
 
   <div class="field">
     <%= f.label :first_name %><br />
-    <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name" %>
+    <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", class: 'first_name_input_tag' %>
   </div>
 
   <div class="field">
     <%= f.label :last_name %><br />
-    <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %>
+    <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", class: 'last_name_input_tag' %>
   </div>
 
   <div class="field">
@@ -32,7 +32,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up", class: 'buttons-login margin' %>
+    <%= f.submit "Sign up", class: 'buttons-login margin', onclick: 'validate_first_and_last_name()' %>
   </div>
 <% end %>
 

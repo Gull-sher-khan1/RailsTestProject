@@ -11,6 +11,7 @@ class User::RegistrationsController < Devise::RegistrationsController
 
     # POST /resource
      def create
+      return if !(params.key?('first_name') && params.key?('last_name'))
        super
        UserMailer.welcome_email(sign_up_params).deliver
      end

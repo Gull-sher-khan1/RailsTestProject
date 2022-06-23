@@ -36,9 +36,9 @@
         <div class="home-page-content-new-post-text">
           <%= form_for Post.new(user_id: current_user.id) ,url: {action: :create, controller: :posts, user_id: current_user.id}, html:{class: "post-new-text new_post"}, method: :post, remote: true do |post_form| %>
             <%= post_form.text_area :text, class: 'post-text' %>
-
             <div class="index-images-div">
               <div class="index-images">
+
               </div>
             </div>
             <%= post_form.button "Post", class:"text-form-submit" do%>

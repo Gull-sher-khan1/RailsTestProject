@@ -1,6 +1,7 @@
 <%if user.id!=nil%>
-  <%index = found_users.index(user)%>
-  <%url = attachments.size > index ? attachments[index].uri : 'user.jpg' %>
+  <%id = user.id%>
+  <%attachment = attachments.where(attachable_id: id, attachable_type: 'User').first%>
+  <%url = attachment != nil ? attachment.uri : 'user.jpg' %>
   <div class="user-links">
     <a class="user-name-link user-find-link" href="<%= user_path(user.id)%>">
       <button class="user-links-button">

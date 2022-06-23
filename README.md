@@ -13,20 +13,28 @@ Gems
 * ransack
 
 Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
 * Configuration
+  1. get code from git before starting.
+  2. system dependency must be installed like ruby, rails and postgres of above mentioned versions.
+  3. the user profile in postgres must be created first before starting rails server.
+  4. user profile and password must be set in credentials.
+  5. mailer sender email and password (for customization) must be set in credentials before starting rails server.
+  6. cloudinary credentials (for customization) must be set in credentials.
 
 * Database creation
+  1. for database creation first run command rake db:setup which will create and setup database all together.
+  2. you might need to create a database of the test project application inside postgresql before starting server
 
 * Database initialization
+  1. run all the migrations inside the rails application using command rake db:migrate which will run migration in order
+  2. for seed if present to update db, you must run command rake db:seed to initialize it
 
 * How to run the test suite
+  --
 
-* Services (job queues, cache servers, search engines, etc.)
+* Services
+  1. Cloudinary Service object (for basic cloudinary API operations) contains Upload (for individual file upload), batch_upload (for multiple file uplaods), destroy (for individualy destroying file), batch_destroy (for destroying multiple files)
+
 
 * Deployment instructions
 

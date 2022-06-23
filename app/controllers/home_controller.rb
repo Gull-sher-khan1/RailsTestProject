@@ -6,7 +6,6 @@ class HomeController < ApplicationController
   include UserConcern
   before_action :set_search, :set_comment, :set_posts, :set_likes, :set_stories, :set_attachments, only: [:index, :search]
   def index
-
   end
 
   def get_comments

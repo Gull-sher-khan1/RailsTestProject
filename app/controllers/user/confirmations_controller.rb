@@ -2,9 +2,9 @@
 
 class User::ConfirmationsController < Devise::ConfirmationsController
     # GET /resource/confirmation/new
-    # def new
-    #   super
-    # end
+     def new
+       super
+     end
 
     # POST /resource/confirmation
     # def create
@@ -27,5 +27,11 @@ class User::ConfirmationsController < Devise::ConfirmationsController
     # def after_confirmation_path_for(resource_name, resource)
     #   super(resource_name, resource)
     # end
+
+    private
+    def after_confirmation_path_for(resource_name, resource)
+        sign_in(resource) # In case you want to sign in the user
+        redirect_to root_path
+    end
 
 end

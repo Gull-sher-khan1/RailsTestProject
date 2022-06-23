@@ -2,6 +2,6 @@
 
 class AddLastNameToUsers < ActiveRecord::Migration[5.2]
   def change
-    add_column :users, :LastName, :string
+    add_column :users, :LastName, :string, null: false
   end
 end

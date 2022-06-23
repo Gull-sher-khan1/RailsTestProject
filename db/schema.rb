@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2022_06_23_080832) do
   end
 
   create_table "attachments", force: :cascade do |t|
-    t.string "uri"
+    t.string "uri", default: "user.jpg", null: false
     t.integer "attachable_id"
     t.string "attachable_type"
     t.datetime "created_at", null: false
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 2022_06_23_080832) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.string "text"
+    t.string "text", null: false
     t.integer "commentable_id"
     t.string "commentable_type"
     t.bigint "user_id"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2022_06_23_080832) do
   end
 
   create_table "followings", force: :cascade do |t|
-    t.boolean "request_accepted"
+    t.boolean "request_accepted", null: false
     t.bigint "user_id"
     t.bigint "follower_id"
     t.datetime "created_at", null: false
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 2022_06_23_080832) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.string "text"
+    t.string "text", null: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -101,9 +101,9 @@ ActiveRecord::Schema.define(version: 2022_06_23_080832) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "first_name"
-    t.string "last_name"
-    t.boolean "private_account"
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.boolean "private_account", default: false
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"

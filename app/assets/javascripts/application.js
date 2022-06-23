@@ -18,3 +18,19 @@ function files_upload()
 {
   document.getElementById('files-button').click();
 }
+function validate_first_and_last_name()
+{
+  str = '';
+  if (document.getElementsByClassName('first_name_input_tag')[0].value.length == 0)
+  {
+    str += 'first name, ';
+  }
+  if (document.getElementsByClassName('last_name_input_tag')[0].value.length == 0)
+  {
+    str += 'last name cant be empty';
+  }
+  if (str.length!=0)
+  {
+    alert(str);
+  }
+}

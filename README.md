@@ -30,7 +30,6 @@ Things you may want to cover:
   2. for seed if present to update db, you must run command rake db:seed to initialize it
 
 * How to run the test suite
-  --
 
 * Services
   1. Cloudinary Service object (for basic cloudinary API operations) contains Upload (for individual file upload), batch_upload (for multiple file uplaods), destroy (for individualy destroying file), batch_destroy (for destroying multiple files)

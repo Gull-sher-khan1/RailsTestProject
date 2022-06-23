@@ -30,12 +30,15 @@ Things you may want to cover:
   2. for seed if present to update db, you must run command rake db:seed to initialize it
 
 * How to run the test suite
-  --
 
 * Services
   1. Cloudinary Service object (for basic cloudinary API operations) contains Upload (for individual file upload), batch_upload (for multiple file uplaods), destroy (for individualy destroying file), batch_destroy (for destroying multiple files)
 
 
 * Deployment instructions
+  1. for deployment on heroku enable automatic deploys for git to make deployment auto and easier on pushing in git.
+  2. on deployment got to console and run commands given below in order.
+  3. rake db:setup, rake db:migrate, rake db:seed
+  4. in order to run on console and test models use rails c
 
 * ...

@@ -17,7 +17,9 @@
 <% end %>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-  <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
+  <%= link_to new_confirmation_path(resource_name), class: 'login-links' do%>
+  <button class="buttons-login">Didn't receive confirmation instructions?</button>
+  <%end%><br />
 <% end %>
 
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>

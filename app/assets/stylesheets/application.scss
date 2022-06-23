@@ -78,7 +78,8 @@
 .buttons-login{
   min-width: 120px;
   width: fit-content;
-  height: 40px;
+  min-height: 40px;
+  height: fit-content;
   align-self: center;
   margin-left: 10px;
   margin-right: 10px;
@@ -99,4 +100,8 @@
   width: 100%;
   display: flex;
   justify-content: center;
+}
+.margin{
+  margin-bottom: 20px;
+  margin-top: 20px;
 }

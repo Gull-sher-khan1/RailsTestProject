@@ -1,0 +1,6 @@
+<p>Welcome <%= @email %>!</p>
+
+<p>You have successfully signed up to insta clone</p>
+
+<p>PLease confirm your account</p>
+<p><%= link_to 'Confirm my account', confirmation_url(@user, confirmation_token: @token) %></p>

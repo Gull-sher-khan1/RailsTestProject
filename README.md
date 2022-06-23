@@ -37,5 +37,9 @@ Things you may want to cover:
 
 
 * Deployment instructions
+  1. for deployment on heroku enable automatic deploys for git to make deployment auto and easier on pushing in git.
+  2. on deployment got to console and run commands given below in order.
+  3. rake db:setup, rake db:migrate, rake db:seed
+  4. in order to run on console and test models use rails c
 
 * ...

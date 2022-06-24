@@ -40,7 +40,7 @@ class HomeController < ApplicationController
 
   private
   def strong_params
-    params.permit(:commentable_id, :id, :authenticity_token, :q)
+    params.permit(:commentable_id, :id, :authenticity_token, q: [:first_name_or_last_name_cont])
   end
 
   def set_comment

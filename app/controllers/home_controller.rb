@@ -32,7 +32,6 @@ class HomeController < ApplicationController
 
   #search and show result when user tries to search users registered in app
   def search
-    p strong_params
     @found_users = @search_query.result(distinct: true)
     respond_to do |format|
       format.js { render 'home/send_users.js.erb', layout: false }
@@ -42,7 +41,6 @@ class HomeController < ApplicationController
   private
   def strong_params
     params.permit(:commentable_id, :id, :authenticity_token, q: [:first_name_or_last_name_cont])
-
   end
 
   def set_comment

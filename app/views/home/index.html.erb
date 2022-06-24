@@ -1,3 +1,14 @@
+<% flash.each do |name, msg| -%>
+  <div class="flash" onClick="flash_disappear(this)">
+    <div class='<%=name%>-icon-div'>
+      <i class="fa fa-exclamation <%=name%>-icon"></i>
+    </div>
+    <div class="<%=name%>">
+      <%=msg%>
+    </div>
+  </div>
+<% end -%>
+
 <div class="story-show-container display-none">
   <div class="story-show">
     <div class="story-show-buttons">

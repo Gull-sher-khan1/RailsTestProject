@@ -107,3 +107,8 @@ function bodyoverflow_removed()
 {
   document.getElementsByClassName("body")[0].classList.remove("overflow-hidden");
 }
+function flash_disappear(ele)
+{
+  ele.classList.remove("flash");
+  ele.classList.add("display-none");
+}

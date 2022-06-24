@@ -4,46 +4,42 @@ class FollowingsController < ApplicationController
   layout 'navbar'
   include UserConcern
   before_action :set_search, only: :index
+  before_action :set_request, only: [:destroy, :update]
+
   def index
     @user = current_user
-    @following_requests = Following.pending_requests(current_user.id)
+    @following_requests = Following.includes(:user).pending_requests(current_user.id)
     set_followers(@following_requests)
   end
 
   def create
-    following_request=Following.create(user_id: strong_params[:user_id],request_accepted: false, follower_id: current_user.id)
+    @request=Following.create(user_id: strong_params[:user_id],request_accepted: false, follower_id: current_user.id)
     respond_to do |format|
-      format.js do
-        render 'change_follow_button.js.erb', layout: false, locals: { request: following_request, from: :create }
-      end
+      format.js {render 'change_follow_button.js.erb', layout: false, locals: {from: :create }}
     end
   end
 
   def destroy
-    @request = Following.find_by(id: strong_params[:id])
     @request.destroy
-    if strong_params[:from] == 'delete'
-      respond_to do |format|
-        format.js { render 'remove_request.js.erb', layout: false, locals: { following_request: @request } }
-      end
-    else
-      respond_to do |format|
-        format.js { render 'change_follow_button.js.erb', layout: false, locals: { request: @request, from: :destroy } }
-      end
+    respond_to do |format|
+      format.js { render strong_params[:from] == 'delete' ? 'remove_request.js.erb' : 'change_follow_button.js.erb', layout: false, locals: {from: :destroy } }
     end
   end
 
   def update
-    @request = Following.find_by(id: strong_params[:id])
     @request.update(request_accepted: true)
     respond_to do |format|
-      format.js { render 'remove_request.js.erb', layout: false, locals: { following_request: @request } }
+      format.js { render 'remove_request.js.erb', layout: false}
     end
   end
 
   private
-
   def strong_params
-    params.permit!
+    params.permit(:user_id, :id, :from)
+  end
+
+  def set_request
+    @request = Following.find_by_id(strong_params[:id])
+    render js: "window.location = ' #{helpers.flash_helper('could not complete action, try reloading', :alert)}'" if @request == nil
   end
 end

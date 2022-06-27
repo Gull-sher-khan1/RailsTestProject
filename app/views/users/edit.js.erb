@@ -1,0 +1,12 @@
+{
+  let ele = [];
+  let done_button='<%= button_tag "done", type: 'submit', form: "edit_name", id:"edit_name_form_done_button", class: 'user-done-edit' %>';
+  ele.push(document.getElementsByClassName("user-profile-name-edit")[0]);
+  ele.push(document.getElementsByClassName("user-name-edit")[0]);
+  ele.push(document.getElementsByClassName("user-name-edit-button")[0]);
+  ele[0].classList.add("edit");
+  ele[0].classList.remove("name");
+  ele[0].innerHTML = "<%= escape_javascript render(partial: 'name_edit', locals:{option: :edit}) %>";
+  ele[1].classList.add("display-none");
+  ele[2].innerHTML += done_button;
+}

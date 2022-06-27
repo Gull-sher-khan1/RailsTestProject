@@ -8,7 +8,7 @@
       <div class="change-image">
         <% profile_attachment = @profile_user.attachment%>
         <%if profile_attachment == nil%>
-          <%= form_for Attachment.new ,url: {action: :create, controller: :attachments, user_id: @user.id, from: :user},  html:{class: "change-image"}, method: :post, remote: true do |form| %>
+          <%= form_for Attachment.new ,url: {action: :create, controller: :attachments, user_id: current_user.id, from: :user},  html:{class: "change-image"}, method: :post, remote: true do |form| %>
             <%= form.file_field :attachment, class: 'files-button', id:'files-button', accept: "image/*", onchange:'submit_user_form()'%>
             <%= button_tag 'Change Picture', type: :button, onClick:"file_upload()", class: 'indirect-submit'%>
             <%= form.submit 'done', class: 'display-none user-pic-form-submit'%>
@@ -40,7 +40,7 @@
           <%=button_to (@profile_user.private_account!=true ? 'Public Account': 'Private Account'), {controller: :users, action: :update, id: current_user.id, from: :private}, method: :patch, remote: :true, id:"user-private-account", class: 'show-button'%>
         <%else%>
           <div class="follow-button">
-            <%request = Following.where(user_id: @profile_user.id, follower_id: @user.id).pluck%>
+            <%request = Following.where(user_id: @profile_user.id, follower_id: current_user.id).pluck%>
             <%if request.count == 0%>
               <%=button_to 'Follow', user_followings_path(@profile_user.id), class: "user-follow", method: :post, remote: true%>
             <%else%>

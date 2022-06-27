@@ -9,7 +9,6 @@ class HomeController < ApplicationController
   before_action :set_attachment, :set_story, only: :show_story
   def index; end
 
-  # get comments of the specific post whose id has been sent through the parameters in request
   def get_comments
     @comments = @post.comments
     set_users(@comments)
@@ -18,7 +17,6 @@ class HomeController < ApplicationController
     end
   end
 
-  #show story when specific story is clicked
   def show_story
     if @attachment == nil || @story == nil
       redirect_to helpers.flash_helper('could not find story, try reloading', :alert)
@@ -29,7 +27,6 @@ class HomeController < ApplicationController
     end
   end
 
-  #search and show result when user tries to search users registered in app
   def search
     @found_users = @search_query.result(distinct: true)
     respond_to do |format|

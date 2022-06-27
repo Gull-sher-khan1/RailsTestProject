@@ -14,23 +14,16 @@ class FollowingsController < ApplicationController
 
   def create
     @request=Following.create(user_id: strong_params[:user_id],request_accepted: false, follower_id: current_user.id)
-    respond_to do |format|
-      format.js {render 'change_follow_button.js.erb', layout: false, locals: {from: :create }}
-    end
+    redirect_to root_url, alert: 'request could not be created' if @request == nil
   end
 
   def destroy
-    @request.destroy
-    respond_to do |format|
-      format.js { render strong_params[:from] == 'delete' ? 'remove_request.js.erb' : 'change_follow_button.js.erb', layout: false, locals: {from: :destroy } }
-    end
+    redirect_to root_url, alert: 'could not remove request' unless @request.destroy
+    @for = strong_params[:from] == 'delete' ? :request : :follow_button
   end
 
   def update
-    @request.update(request_accepted: true)
-    respond_to do |format|
-      format.js { render 'remove_request.js.erb', layout: false}
-    end
+    redirect_to root_url, alert: 'could not remove request' unless @request.update(request_accepted: true)
   end
 
   private
@@ -40,6 +33,6 @@ class FollowingsController < ApplicationController
 
   def set_request
     @request = Following.find_by_id(strong_params[:id])
-    render js: "window.location = ' #{helpers.flash_helper('could not complete action, try reloading', :alert)}'" if @request == nil
+    redirect_to root_url, alert:'could not complete action, try reloading' if @request == nil
   end
 end

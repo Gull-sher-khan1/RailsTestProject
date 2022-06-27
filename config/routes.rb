@@ -17,11 +17,15 @@ Rails.application.routes.draw do
       get :search
     end
   end
-  # post '/get_comments', to: 'home#get_comments'
-  # post '/show_story/:id', to: 'home#show_story'
-  # post '/attachments/:id', to: 'attachments#update'
-  # post '/posts/:id', to: 'posts#update'
-  # get '/search', to: 'home#search'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :posts, only:[]do
+    member do
+      post :update
+    end
+  end
+  resources :attachments, only:[] do
+    member do
+      post :update
+    end
+  end
   root to: 'home#index'
 end

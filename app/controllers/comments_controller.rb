@@ -6,32 +6,20 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @post.comments.create(user_id: strong_params[:user_id], text: strong_params[:comment][:text])
+    redirect_to root_url, alert: 'could not create comment' if @comment == nil
     @user_ids = [current_user.id]
     @users = [current_user]
-    respond_to do |format|
-      format.js { render 'home/render_comment.js.erb', layout: false}
-    end
   end
 
   def destroy
-    @comment.destroy
-    respond_to do |format|
-      format.js { render 'home/remove_comment.js.erb', layout: false, locals: { comment_id: strong_params[:id] } }
-    end
+    redirect_to root_url, alert: 'could not destroy comment' unless @comment.destroy
   end
 
   def update
-    @comment.update(text: params[:comment][:text])
-    respond_to do |format|
-      format.js { render 'home/edit_comment.js.erb', layout: false}
-    end
+    redirect_to root_url, alert: 'could not destroy comment' unless @comment.update(text: params[:comment][:text])
   end
 
-  def edit
-    respond_to do |format|
-      format.js { render 'home/edit_comment.js.erb', layout: false}
-    end
-  end
+  def edit; end
 
   private
 
@@ -41,11 +29,11 @@ class CommentsController < ApplicationController
 
   def set_post
     @post = Post.find_by_id(strong_params[:comment][:commentable_id])
-    render js: "window.location = ' #{helpers.flash_helper('could not create comment, try reloading', :alert)}'" if @post == nil
+    redirect_to root_url, alert: 'could not create comment, try reloading' if @post == nil
   end
 
   def set_comment
     @comment = Comment.find_by_id(strong_params[:id])
-    render js: "window.location = ' #{helpers.flash_helper('could not complete action, try reloading', :alert)}'" if @comment == nil
+    redirect_to root_url, alert: 'could not complete action, try reloading' if @comment == nil
   end
 end

@@ -1,0 +1,8 @@
+<%if @for==:follow_button%>
+  document.getElementsByClassName("follow-button")[0].innerHTML = '<%=button_to 'Follow', user_followings_path(@request.user_id), class: "user-follow", method: :post, remote: true%>';
+<%else%>
+  let ele = document.getElementsByClassName("request-container-<%= @request.id%>")[0];
+  ele.innerHTML = '';
+  ele.classList.add('display-none');
+  location.reload();
+<%end%>

@@ -6,14 +6,18 @@ class AttachmentsController < ApplicationController
   before_action :upload_post_attachments, only: :create, if: :from_post?
   before_action :set_story, only: :create, if: :from_story?
   before_action :set_user, only: :create, if: :from_user?
-  after_action :save_story_attachment, only: :create, if: :from_story?
   before_action :update_user_pic, only: :update, if: :from_user?
   before_action :update_post_attachments, only: :update, unless: :from_user?
 
   def create
     redirect_back(fallback_location: root_path) if strong_params[:from] != 'user'
     @user.create_attachment(uri: @uri) if from_user?
-    @attachment = @story.build_attachment if from_story?
+    if from_story?
+      redirect_to root_url, alert: 'could not create story' unless @story.save
+      @attachment = @story.build_attachment
+      @attachment.uri = CloudinaryService.upload(strong_params[:attachment][:attachment])
+      StoryCleanupJob.set(wait: 60 * 60 * 24).perform_later(@attachment, @story) if @attachment.save
+    end
   end
 
   def update
@@ -24,15 +28,9 @@ class AttachmentsController < ApplicationController
   end
 
   private
-  def save_story_attachment
-    @attachment.uri = CloudinaryService.upload(strong_params[:attachment][:attachment])
-    StoryCleanupJob.set(wait: 60 * 60 * 24).perform_later(@attachment, @story) if @attachment.save
-  end
-
   def set_story
     @story = Story.new
     @story.user_id = current_user.id
-    redirect_to root_url, alert: 'could not create story' unless @story.save
   end
 
   def strong_params

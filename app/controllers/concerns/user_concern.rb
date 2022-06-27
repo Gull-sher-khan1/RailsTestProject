@@ -5,12 +5,14 @@ module UserConcern
 
   def set_users(objects)
     @user_ids = objects.distinct.pluck(:user_id)
-    @users = User.find(@user_ids)
+    @users = User.where(id: @user_ids)
+    redirect_to root_url, alert: 'could not find users' if @users==nil
   end
 
   def set_followers(objects)
     @user_ids = objects.distinct.pluck(:follower_id)
-    @users = User.find(@user_ids)
+    @users = User.where(id: @user_ids)
+    redirect_to root_url, alert: 'could not find users' if @users==nil
   end
 
   def set_search

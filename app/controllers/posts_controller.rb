@@ -1,52 +1,32 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
+  before_action :set_post, only: [:destroy, :edit, :update]
+
   def create
-    @post = Post.new(strong_params[:post])
-    @post.user_id = strong_params[:user_id]
-    @post.save
-    @user = current_user
+    @post=Post.create(text: strong_params[:post][:text], user_id: strong_params[:user_id])
     @like_post = Like.post_like(@post.id)
-    respond_to do |format|
-      format.js do
-        render 'posts/send_attachments.js.erb', layout: false,
-                                                locals: { post: @post, users: [@user], user_ids: [@user.id], signed_user: @user, likes: [@like_post] }
-      end
-    end
   end
 
   def destroy
-    @post = Post.find_by(id: strong_params[:id])
     @attachments = @post.attachments
-    @attachments.each do |file|
-      uri = file.uri.split('/', -1)
-      Cloudinary::Uploader.destroy("rails_test_project/#{uri[uri.size - 1].split('.', -1)[0]}")
-      file.destroy
-    end
+    CloudinaryService.batch_destroy(@attachments)
     @post.destroy
-    respond_to do |format|
-      format.js { render 'home/remove_post.js.erb', layout: false, locals: { post_id: strong_params[:id] } }
-    end
   end
 
-  def edit
-    post = Post.find_by(id: strong_params[:id])
-    respond_to do |format|
-      format.js { render 'home/edit_post.js.erb', layout: false, locals: { post: post } }
-    end
-  end
+  def edit; end
 
   def update
-    post = Post.find_by(id: strong_params[:id])
-    post.update(text: strong_params[:post][:text])
-    respond_to do |format|
-      format.js { render 'home/edit_post.js.erb', layout: false, locals: { post: post } }
-    end
+    @post.update(text: strong_params[:post][:text])
   end
 
   private
-
   def strong_params
-    params.permit!
+    params.permit(:post_id, :user_id, :id, post: [:text])
+  end
+
+  def set_post
+    @post = Post.find_by_id(strong_params[:id])
+    redirect_to root_url, alert: 'could not perform action for post' if @post==nil
   end
 end

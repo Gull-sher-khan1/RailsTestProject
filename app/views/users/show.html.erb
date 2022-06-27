@@ -40,7 +40,7 @@
           <%=button_to (@profile_user.private_account!=true ? 'Public Account': 'Private Account'), {controller: :users, action: :update, id: current_user.id, from: :private}, method: :patch, remote: :true, id:"user-private-account", class: 'show-button'%>
         <%else%>
           <div class="follow-button">
-            <%request = Following.where(user_id: @profile_user.id, follower_id: current_user.id).pluck%>
+            <%request = get_request(@profile_user.id, current_user.id)%>
             <%if request.count == 0%>
               <%=button_to 'Follow', user_followings_path(@profile_user.id), class: "user-follow", method: :post, remote: true%>
             <%else%>

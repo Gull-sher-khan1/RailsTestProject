@@ -6,16 +6,10 @@ class LikesController < ApplicationController
 
   def create
     @like=@post.likes.create(user_id: strong_params[:user_id])
-    respond_to do |format|
-      format.js {render 'home/change_like.js.erb', layout: false, locals: { like_id: [@like.id], from: :create }}
-    end
   end
 
   def destroy
     @like.destroy
-    respond_to do |format|
-      format.js { render 'home/change_like.js.erb', layout: false, locals: { from: :destroy } }
-    end
   end
 
   private

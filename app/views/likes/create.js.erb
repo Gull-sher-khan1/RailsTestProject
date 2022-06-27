@@ -1,0 +1,1 @@
+document.getElementById("like_buttons_<%=@post.id%>").innerHTML = '<%= escape_javascript render partial: "home/liked", locals:{post:@post, like_id: @like.id} %>';

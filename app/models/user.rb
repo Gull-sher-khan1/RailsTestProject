@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :stories, dependent: :destroy
   has_many :comments, inverse_of: :user, dependent: :destroy
   has_many :likes, inverse_of: :user, dependent: :destroy
-  has_many :requests, class_name: 'Following', foreign_key: 'follower_id', inverse_of: :follower, dependent: :destroy
+  has_many :requests, class_name: :Following, foreign_key: :follower_id, inverse_of: :follower, dependent: :destroy
   has_one :attachment, as: :attachable, dependent: :destroy
 
   validates :first_name, presence: true

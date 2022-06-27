@@ -7,4 +7,6 @@ class Following < ApplicationRecord
   validates :user_id, presence: true, uniqueness: { scope: :follower_id }
 
   scope :pending_requests, ->(id) {where(user_id: id, request_accepted: false)}
+  scope :get_request, ->(profile_user_id,current_user_id) {where(user_id: profile_user_id, follower_id: current_user_id).pluck}
+  scope :request_count, ->(id) {where(user_id: id, request_accepted: false).count}
 end

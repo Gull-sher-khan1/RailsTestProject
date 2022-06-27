@@ -41,7 +41,7 @@ class UsersController < ApplicationController
   end
 
   def set_likes
-    @likes_posts = Like.posts_like
+    @likes_posts = Like.includes(:user).posts_like
   end
 
   def set_user_attachments

@@ -5,19 +5,20 @@ class PostsController < ApplicationController
 
   def create
     @post=Post.create(text: strong_params[:post][:text], user_id: strong_params[:user_id])
+    redirect_to root_url, alert: 'could not create post' if @post == nil
     @like_post = Like.post_like(@post.id)
   end
 
   def destroy
     @attachments = @post.attachments
     CloudinaryService.batch_destroy(@attachments)
-    @post.destroy
+    redirect_to root_url, alert: 'could not destroy post' if !@post.destroy
   end
 
   def edit; end
 
   def update
-    @post.update(text: strong_params[:post][:text])
+    redirect_to root_url, alert: 'could not destroy post' if !@post.update(text: strong_params[:post][:text])
   end
 
   private

@@ -1,0 +1,24 @@
+{
+  <%if @from == :private%>
+    let ele = document.getElementById("user-private-account");
+    if (ele.value == "Public Account")
+    {
+      ele.value = "Private Account";
+    }
+    else{
+      ele.value = "Public Account";
+    }
+  <%else%>
+    let ele = [];
+    let done_button='<%= button_tag "done", type: 'submit', form: "edit_name", id:"edit_name_form_done_button", class: 'user-done-edit' %>';
+    ele.push(document.getElementsByClassName("user-profile-name-edit")[0]);
+    ele.push(document.getElementsByClassName("user-name-edit")[0]);
+    ele.push(document.getElementsByClassName("user-name-edit-button")[0]);
+    ele[0].classList.remove("edit");
+    ele[0].classList.add("name");
+    ele[0].innerHTML = "<%= escape_javascript render(partial: 'name_edit', locals:{option: :text}) %>"
+    ele[1].classList.remove("display-none");
+    ele[2].innerHTML = ele[2].innerHTML.replace(done_button,'');
+    location.reload();
+  <%end%>
+}

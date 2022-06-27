@@ -17,17 +17,17 @@ class UsersController < ApplicationController
 
   def update
     if strong_params[:from] == 'private'
-      redirect_to root_url, alert: 'could not perform action' if @user.update(private_account: @user.private_account != true)
+      redirect_to root_url, alert: 'could not perform action' unless @user.update(private_account: @user.private_account != true)
       @from= :private
     else
-      redirect_to root_url, alert: 'could not update user name' if @user.update(first_name: strong_params[:user][:first_name], last_name: strong_params[:user][:last_name])
+      redirect_to root_url, alert: 'could not update user name' unless @user.update(first_name: strong_params[:user][:first_name], last_name: strong_params[:user][:last_name])
       @from = :name
     end
   end
 
   private
   def strong_params
-    params.permit!
+    params.permit(:id, :from, user:[:first_name, :last_name])
   end
 
   def set_profile_user

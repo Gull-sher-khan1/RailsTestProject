@@ -1,30 +1,34 @@
 # frozen_string_literal: true
 
 class LikesController < ApplicationController
+  before_action :set_post_through_params, only: :create
+  before_action :set_like, :set_post_through_like, only: :destroy
+
   def create
-    @obj = Post.find_by_id(strong_params[:likeable_id]) if strong_params[:from] == 'post'
-    @like = @obj.likes.new
-    @like.user_id = strong_params[:user_id]
-    @like.save
-    respond_to do |format|
-      format.js do
-        render 'home/change_like.js.erb', layout: false, locals: { like_id: [@like.id], post: @obj, from: :create }
-      end
-    end
+    @like=@post.likes.create(user_id: strong_params[:user_id])
   end
 
   def destroy
-    like = Like.find_by(id: strong_params[:id])
-    @obj = Post.find_by(id: like.likeable_id)
-    like.destroy
-    respond_to do |format|
-      format.js { render 'home/change_like.js.erb', layout: false, locals: { post: @obj, from: :destroy } }
-    end
+    @like.destroy
   end
 
   private
-
   def strong_params
-    params.permit!
+    params.permit(:likeable_id, :from, :user_id, :id)
+  end
+
+  def set_like
+    @like = Like.find_by_id(strong_params[:id])
+    redirect_to root_url, alert: 'could not set like, try reloading' if @like==nil
+  end
+
+  def set_post_through_params
+    @post = Post.find_by_id(strong_params[:likeable_id])
+    redirect_to root_url, alert: 'could not set post, try reloading' if @post==nil
+  end
+
+  def set_post_through_like
+    @post = Post.find_by_id(@like.likeable_id)
+    redirect_to root_url, alert: 'could not set post, try reloading' if @post==nil
   end
 end

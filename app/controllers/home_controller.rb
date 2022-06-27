@@ -7,8 +7,7 @@ class HomeController < ApplicationController
   before_action :set_search, :set_comment, :set_posts, :set_likes, :set_stories, :set_attachments, only: [:index, :search]
   before_action :set_post, only: :get_comments
   before_action :set_attachment, :set_story, only: :show_story
-  def index
-  end
+  def index; end
 
   # get comments of the specific post whose id has been sent through the parameters in request
   def get_comments

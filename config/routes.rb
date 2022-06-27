@@ -10,11 +10,22 @@ Rails.application.routes.draw do
     resources :followings, only: %i[destroy create index update]
     resources :likes, only: %i[destroy create]
   end
-  post '/get_comments', to: 'home#get_comments'
-  post '/show_story/:id', to: 'home#show_story'
-  post '/attachments/:id', to: 'attachments#update'
-  post '/posts/:id', to: 'posts#update'
-  get '/search', to: 'home#search'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :home, only: [] do
+    collection do
+      post :get_comments
+      get :show_story
+      get :search
+    end
+  end
+  resources :posts, only:[]do
+    member do
+      post :update
+    end
+  end
+  resources :attachments, only:[] do
+    member do
+      post :update
+    end
+  end
   root to: 'home#index'
 end

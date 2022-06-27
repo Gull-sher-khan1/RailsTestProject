@@ -9,4 +9,5 @@ class Like < ApplicationRecord
   scope :like_users, -> { where(likeable_type: 'Post')}
   scope :post_like, ->(id) {where(likeable_id: id)}
   scope :posts_like, -> {where(likeable_type: 'Post')}
+  scope :get_user_likes, ->(post_id,current_user_id) {where(likeable_id: post_id, user_id: current_user_id).pluck(:id)}
 end

@@ -68,6 +68,7 @@ class HomeController < ApplicationController
   end
 
   def set_attachment
+    p params
     @attachment = Attachment.find_by_id(strong_params[:id])
   end
 

@@ -65,7 +65,7 @@
           <%end%>
         <%end%>
       </div>
-      <%= form_with url: get_comments_path, id: "comments_ajax_#{post.id}" do |form| %>
+      <%= form_with url: get_comments_home_index_path, id: "comments_ajax_#{post.id}" do |form| %>
         <%= form.hidden_field :commentable_id, value: post.id, autocomplete: 'off' %>
       <% end %>
       <%= button_tag onclick: "show_post_comments(#{post_iteration.index})", type: 'submit', form: "comments_ajax_#{post.id}", id:"comment_post_#{post.id}", class:'post-comments-button' do%>

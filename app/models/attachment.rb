@@ -8,5 +8,4 @@ class Attachment < ApplicationRecord
   scope :random_stories, -> {where(attachable_type: 'Story').order('RANDOM()').limit(7)}
   scope :users_attachments, -> (user_ids) {where(attachable_id: user_ids, attachable_type: 'User')}
   scope :post_attachments, -> (id) {where(attachable_id: id, attachable_type: 'Post')}
-  scope :get_attachment, -> (id) {find_by_id(id)}
 end

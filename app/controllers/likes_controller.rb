@@ -6,10 +6,11 @@ class LikesController < ApplicationController
 
   def create
     @like=@post.likes.create(user_id: strong_params[:user_id])
+    redirect_to root_url, alert: 'could not create like' if @like==nil
   end
 
   def destroy
-    @like.destroy
+    redirect_to root_url, alert: 'could not unlike' unless @like.destroy
   end
 
   private

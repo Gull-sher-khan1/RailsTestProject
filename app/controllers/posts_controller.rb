@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   def create
     @post=Post.create(text: strong_params[:post][:text], user_id: strong_params[:user_id])
     redirect_to root_url, alert: 'could not create post' if @post == nil
-    @like_post = Like.post_like(@post.id)
+    @like_post = Like.includes(:user).post_like(@post.id)
   end
 
   def destroy

@@ -13,13 +13,13 @@ class HomeController < ApplicationController
     @comments = @post.comments
     set_users(@comments)
     respond_to do |format|
-      format.js { render 'render_comments.js.erb', layout: false, locals: { users: @users, user_ids: @user_ids} }
+      format.js { render 'render_comments.js.erb', layout: false}
     end
   end
 
   def show_story
     if @attachment == nil || @story == nil
-      redirect_to helpers.flash_helper('could not find story, try reloading', :alert)
+      redirect_to root_url, alert:'could not find story, try reloading'
     else
       respond_to do |format|
         format.js { render 'home/render_story.js.erb', layout: false }
@@ -44,12 +44,12 @@ class HomeController < ApplicationController
   end
 
   def set_posts
-    @posts = Post.user_posts
+    @posts = Post.includes(:user)
     set_users(@posts)
   end
 
   def set_likes
-    @likes_posts = Like.like_users
+    @likes_posts = Like.includes(:user).like_users
   end
 
   def set_stories
@@ -64,16 +64,14 @@ class HomeController < ApplicationController
 
   def set_post
     @post = Post.find_by_id(strong_params[:commentable_id])
-    redirect_to helpers.flash_helper('could not retrieve comments, try reloading', :alert) if @post==nil
+    redirect_to root_url, alert: 'could not retrieve comments, try reloading' if @post==nil
   end
 
   def set_attachment
-    @attachment = Attachment.get_attachment(strong_params[:id])
-    @attachment=nil if @attachment.class.to_s == 'Attachment::ActiveRecord_Relation' && @attachment.count>1
+    @attachment = Attachment.find_by_id(strong_params[:id])
   end
 
   def set_story
-    @story = Story.get_story(@attachment==nil ? 0 : @attachment.attachable_id)
-    @story=nil if @attachment.class.to_s == 'Attachment::ActiveRecord_Relation' && @story.count>1
+    @story = Story.find_by_id(@attachment==nil ? 0 : @attachment.attachable_id)
   end
 end

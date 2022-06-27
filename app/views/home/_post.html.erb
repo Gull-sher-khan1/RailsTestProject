@@ -31,7 +31,7 @@
           <% end%>
           <div class="post-images-div index-images-div post-images-div-<%= post.id%>">
             <div class="post-images index-images post-images-<%= post.id%>">
-              <% specific_post_attachments = posts_attachments.where(attachable_id: post.id)%>
+              <% specific_post_attachments = get_post_attachments(posts_attachments, post.id)%>
               <%= render partial: 'home/post_attachments', collection: specific_post_attachments, as: :attachment%>
             </div>
           </div>
@@ -49,7 +49,7 @@
     </div>
 
     <div class="home-page-content-post-button home-page-content-post-button-border-removed home-page-content-post-button-<%=post.id%>">
-      <%like_id=Like.where(likeable_id: post.id, user_id: signed_user.id).pluck(:id)%>
+      <%like_id = get_user_likes(post.id,current_user.id)%>
       <%= form_with url: {controller: :likes, action: :create, user_id: signed_user.id}, id: "like_ajax_#{post.id}" do |form| %>
         <%= form.hidden_field :likeable_id, value: post.id, autocomplete: 'off' %>
         <%= form.hidden_field :from, value: :post, autocomplete: 'off' %>

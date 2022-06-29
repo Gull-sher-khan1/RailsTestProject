@@ -7,5 +7,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
-User.update_all confirmed_at: DateTime.now
+# user = User.new
+# user.first_name='Anonymous'
+# user.last_name='User'
+# user.email='anonymous@gmail.com'
+# user.confirmed_at=DateTime.now
+# user.save

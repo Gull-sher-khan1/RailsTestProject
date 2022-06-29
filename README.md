@@ -15,10 +15,18 @@ Gems
 * Configuration
   1. get code from git before starting.
   2. system dependency must be installed like ruby, rails and postgres of above mentioned versions.
-  3. the user profile in postgres must be created first before starting rails server.
-  4. user profile and password must be set in credentials.
-  5. mailer sender email and password (for customization) must be set in credentials before starting rails server.
-  6. cloudinary credentials (for customization) must be set in credentials.
+  3. first RVM and then ruby and rails needs to be installed. run following commands.
+  4. curl -L get.rvm.io | bash -s stable
+  5. sudo apt-get install build-essential openssl libreadline6-dev
+  6. rvm install 2.7
+  7. rvm install 3.0
+  8. gem install bundler
+  9. gem install bundler -v 1.17
+  10. gem install rails
+  11. the user profile in postgres must be created first before starting rails server.
+  12. user profile and password must be set in credentials.
+  13. mailer sender email and password (for customization) must be set in credentials before starting rails server.
+  14. cloudinary credentials (for customization) must be set in credentials.
 
 * Database creation
   1. for database creation first run command rake db:setup which will create and setup database all together.

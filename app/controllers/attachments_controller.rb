@@ -7,21 +7,16 @@ class AttachmentsController < ApplicationController
   before_action :set_story, only: :create, if: :from_story?
   before_action :set_user, :upload_user_pic, only: :create, if: :from_user?
   before_action :update_user_pic, only: :update, if: :from_user?
-  before_action :update_post_attachments, only: :update, unless: :from_user?
 
   def create
     @user.create_attachment(uri: @uri) if from_user?
-    if from_story?
-      redirect_to root_url, alert: 'can not create story' unless @story.save
-      @attachment = @story.build_attachment
-      @attachment.uri = CloudinaryService.upload(strong_params[:attachment][:attachment])
-      StoryCleanupJob.set(wait: 60 * 60 * 24).perform_later(@attachment, @story) if @attachment.save
-    end
+    @attachment = AttachmentService.create(@attachment, @story, strong_params[:attachment][:attachment]) if from_story?
     redirect_back(fallback_location: root_path) unless from_user?
   end
 
   def update
-    redirect_back(fallback_location: root_path) if from_user?
+    @post, @attachments = AttachmentService.update(strong_params[:id], params.key?('attachment') ? strong_params[:attachment][:attachment] : nil) unless from_user?
+    redirect_back(fallback_location: root_path) unless from_user?
     redirect_to root_url, alert: 'can not update attahcment' if from_user? && !@attachment.update(uri: @uri)
   end
 
@@ -58,16 +53,6 @@ class AttachmentsController < ApplicationController
                   alert: 'can not update attachment'
     end
     @uri = CloudinaryService.upload(strong_params[:attachment][:attachment])
-  end
-
-  def update_post_attachments
-    @attachments = Attachment.post_attachments(strong_params[:id])
-    redirect_to root_url, alert: 'can not update post' if @attachments.nil?
-    CloudinaryService.batch_destroy(@attachments)
-    attachment_check
-    @post = Post.find_by(id: strong_params[:id])
-    redirect_to root_url, alert: 'can not find post' if @post.nil?
-    CloudinaryService.batch_upload(@post, strong_params[:attachment][:attachment])
   end
 
   def attachment_check

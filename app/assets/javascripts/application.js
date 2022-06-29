@@ -22,10 +22,10 @@ const filesUpload = ()=>{
 
 const validateFirstAndLastName = ()=> {
   str = '';
-  if ($('.first_name_input_tag')[0].value.length === 0) {
+  if ($('.first_name_input_tag').eq(0).val().length === 0) {
     str += 'first name, ';
   }
-  if ($('.last_name_input_tag')[0].value.length === 0) {
+  if ($('.last_name_input_tag').eq(0).val().length === 0) {
     str += 'last name cant be empty';
   }
   if (str.length!=0) {

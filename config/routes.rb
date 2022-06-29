@@ -12,19 +12,9 @@ Rails.application.routes.draw do
   end
   resources :home, only: [] do
     collection do
-      post :get_comments
+      get :get_comments
       get :show_story
       get :search
-    end
-  end
-  resources :posts, only: [] do
-    member do
-      post :update
-    end
-  end
-  resources :attachments, only: [] do
-    member do
-      post :update
     end
   end
   root to: 'home#index'

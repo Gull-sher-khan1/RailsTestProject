@@ -7,15 +7,19 @@ class AttachmentsController < ApplicationController
   before_action :set_story, only: :create, if: :from_story?
   before_action :set_user, :upload_user_pic, only: :create, if: :from_user?
   before_action :update_user_pic, only: :update, if: :from_user?
+  before_action :set_attachments, :set_post,only: :update, unless: :from_user?
 
   def create
     @user.create_attachment(uri: @uri) if from_user?
+    if from_story?
+      redirect_to root_url, alert: 'can not create story' unless @story.save
+    end
     @attachment = AttachmentService.create(@attachment, @story, strong_params[:attachment][:attachment]) if from_story?
     redirect_back(fallback_location: root_path) unless from_user?
   end
 
   def update
-    @post, @attachments = AttachmentService.update(strong_params[:id], params.key?('attachment') ? strong_params[:attachment][:attachment] : nil) unless from_user?
+    AttachmentService.update(@attachments, @post, params.key?('attachment') ? strong_params[:attachment][:attachment] : nil) unless from_user?
     redirect_back(fallback_location: root_path) unless from_user?
     redirect_to root_url, alert: 'can not update attahcment' if from_user? && !@attachment.update(uri: @uri)
   end
@@ -56,6 +60,16 @@ class AttachmentsController < ApplicationController
   end
 
   def attachment_check
-    return unless params.key?('attachment')
+    redirect_back(fallback_location: root_path) unless params.key?('attachment')
+  end
+
+  def set_attachments
+    @attachments = Attachment.post_attachments(strong_params[:id])
+    redirect_to root_url, alert: 'can not update post' if @attachments.nil?
+  end
+
+  def set_post
+    @post = Post.find_by(id: strong_params[:id])
+    redirect_to root_url, alert: 'can not find post' if @post.nil?
   end
 end

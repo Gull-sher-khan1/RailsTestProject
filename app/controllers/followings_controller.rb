@@ -23,7 +23,7 @@ class FollowingsController < ApplicationController
   end
 
   def update
-    redirect_to root_url, alert: 'can not remove request' unless @request.update(request_accepted: true)
+    redirect_to root_url, alert: 'can not update request' unless @request.update(request_accepted: true)
   end
 
   private

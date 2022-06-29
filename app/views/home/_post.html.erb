@@ -26,7 +26,7 @@
       <div class="home-page-content-post-text">
         <div class="post-body-<%= post.id%> post-body">
           <p id="post-body-text-<%= post.id%>"><%= post.text%></p>
-          <%= form_for Post.new ,url: {action: :update, controller: :posts, id: post.id }, method: :patch,html:{ id: "edit_post_#{post.id}", class: "form-edit display-none"}, remote: true do |post_form| %>
+          <%= form_for Post.new ,url: {action: :update, controller: :posts, id: post.id }, method: :patch,html:{ id: "edit_post_#{post.id}", class: "form-edit display-none edit_post_text"}, remote: true do |post_form| %>
             <%= post_form.text_area :text, class: "post-text-edit", value: post.text %>
           <% end%>
           <div class="post-images-div index-images-div post-images-div-<%= post.id%>">
@@ -65,7 +65,7 @@
           <%end%>
         <%end%>
       </div>
-      <%= form_with url: get_comments_home_index_path, id: "comments_ajax_#{post.id}" do |form| %>
+      <%= form_with url: get_comments_home_index_path, id: "comments_ajax_#{post.id}", method: :get do |form| %>
         <%= form.hidden_field :commentable_id, value: post.id, autocomplete: 'off' %>
       <% end %>
       <%= button_tag onclick: "showPostComments(#{post_iteration.index})", type: 'submit', form: "comments_ajax_#{post.id}", id:"comment_post_#{post.id}", class:'post-comments-button' do%>

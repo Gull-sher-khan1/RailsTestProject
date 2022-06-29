@@ -1,7 +1,23 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 // You can use CoffeeScript in this file: http://coffeescript.org/
-const showPostComments = (num) =>{
+
+$('.edit_post_text').on('submit',(function(e) {
+  var formData = new FormData(this);
+
+  formData.append('_method', 'patch');
+  $.ajax({
+    type: "POST",
+    data: formData,
+    cache: false,
+    contentType: false,
+    processData: false
+  }).done(function(r) {
+  console.log(r);
+});
+}));
+
+const showPostComments = (num)=>{
   let div=[];
   div.push($(".home-page-content-comments-div")[num]);
   div.push($(".home-page-content-post-button")[num]);
@@ -71,7 +87,7 @@ const closeWindow = () =>{
   $(".story-show-container")[0].classList.add("display-none");
   $(".body")[0].classList.remove("overflow-hidden");
 }
-const removeContent= () =>{
+const removeContent = () =>{
  let ele =  $(".found-users")[0];
  if (ele.innerHTML)
  {

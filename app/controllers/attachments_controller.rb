@@ -2,7 +2,7 @@
 
 class AttachmentsController < ApplicationController
   include AttachmentConcern
-  before_action :check, only: :create
+  before_action :attachment_check, only: :create
   before_action :upload_post_attachments, only: :create, if: :from_post?
   before_action :set_story, only: :create, if: :from_story?
   before_action :set_user, :upload_user_pic, only: :create, if: :from_user?
@@ -64,13 +64,13 @@ class AttachmentsController < ApplicationController
     @attachments = Attachment.post_attachments(strong_params[:id])
     redirect_to root_url, alert: 'can not update post' if @attachments.nil?
     CloudinaryService.batch_destroy(@attachments)
-    check
+    attachment_check
     @post = Post.find_by(id: strong_params[:id])
     redirect_to root_url, alert: 'can not find post' if @post.nil?
     CloudinaryService.batch_upload(@post, strong_params[:attachment][:attachment])
   end
 
-  def check
+  def attachment_check
     return unless params.key?('attachment')
   end
 end

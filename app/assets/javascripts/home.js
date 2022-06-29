@@ -17,7 +17,7 @@ $('.edit_post_text').on('submit',(function(e) {
 });
 }));
 
-const showPostComments = (num)=>{
+function showPostComments(num){
   let div=[];
   div.push($(".home-page-content-comments-div")[num]);
   div.push($(".home-page-content-post-button")[num]);

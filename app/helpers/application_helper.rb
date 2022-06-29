@@ -10,15 +10,15 @@ module ApplicationHelper
   end
 
   def modify_found_users(users)
-    if users.first==nil
+    if users.first.nil?
       [User.new]
     else
       users
     end
   end
 
-  def get_user_likes(post_id,current_user_id)
-    Like.get_user_likes(post_id,current_user_id)
+  def get_user_likes(post_id, current_user_id)
+    Like.get_user_likes(post_id, current_user_id)
   end
 
   def get_post_attachments(posts_attachments, id)

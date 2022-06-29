@@ -33,7 +33,7 @@ gem 'cloudinary'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 gem 'ransack'
-#gem 'repost'
+# gem 'repost'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 # gem 'remotipart', '~> 1.2'
@@ -42,11 +42,11 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'byebug'
   gem 'rubocop'
   gem 'rubocop-minitest' # or gem 'rubocop-rspec' depending on your test suite
   gem 'rubocop-performance'
   gem 'rubocop-rails'
-  gem 'byebug'
 end
 
 group :development do

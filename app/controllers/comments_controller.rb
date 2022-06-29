@@ -27,6 +27,10 @@ class CommentsController < ApplicationController
     params.permit(:id, :user_id, :authenticity_token, comment: %i[commentable_id text])
   end
 
+  # def strong_params
+  #   params.permit(:id, :user_id, :authenticity_token, comment: %i[commentable_id text])
+  # end Check this for line 8
+
   def set_post
     @post = Post.find_by(id: strong_params[:comment][:commentable_id])
     redirect_to root_url, alert: 'could not create comment, try reloading' if @post.nil?

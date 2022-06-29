@@ -8,7 +8,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="body" onClick="remove_content()">
+  <body class="body" onClick="removeContent()">
     <div class="nav-bar">
       <div class="user-image">
         <a class="user-show-link" href=<%=user_path(current_user.id)%>>
@@ -41,14 +41,14 @@
       </div>
       <div class="insta-search">
         <%= search_form_for @search_query, url:{controller: :home, action: :search}, class: "search-form", remote: true do |f| %>
-        <%= f.search_field :first_name_or_last_name_cont, oninput: "submit_search()", autocomplete: :off, class: "search-field", placeholder: "search user" %>
+        <%= f.search_field :first_name_or_last_name_cont, oninput: "submitSearch()", autocomplete: :off, class: "search-field", placeholder: "search user" %>
         <%= f.submit 'submit', class: "submit_search display-none"%>
         <% end %>
         <div class="found-users">
         </div>
       </div>
       <div class="insta-options">
-        <button class="user-gear-button navbar-button" onClick="show_options()">
+        <button class="user-gear-button navbar-button" onClick="showOptions()">
           <i class="fa fa-gear fa-2x" aria-hidden="true"></i>
         </button>
         <div class="gear-options-container display-none">

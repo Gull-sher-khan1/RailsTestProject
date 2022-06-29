@@ -1,8 +1,7 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 // You can use CoffeeScript in this file: http://coffeescript.org/
-function show_post_comments(num)
-{
+const showPostComments = (num) =>{
   let div=[];
   div.push(document.getElementsByClassName("home-page-content-comments-div")[num]);
   div.push(document.getElementsByClassName("home-page-content-post-button")[num]);
@@ -17,8 +16,7 @@ function show_post_comments(num)
     div[1].classList.add("home-page-content-post-button-border-removed");
   }
 }
-function getFiles()
-{
+const getFiles = ()=>{
   var ele=document.getElementsByClassName("files-button")[0];
   var fileList = ele.files;
   if(fileList.length>10)
@@ -62,22 +60,18 @@ function getFiles()
 
 }
 
-function story_upload()
-{
+const storyUpload = () =>{
   document.getElementsByClassName("story-files-button")[0].click();
 }
 
-function story_form_submit()
-{
+const storyFormSubmit = () =>{
   document.getElementById("story_form_submit").submit();
 }
-function close_window()
-{
+const closeWindow = () =>{
   document.getElementsByClassName("story-show-container")[0].classList.add("display-none");
   document.getElementsByClassName("body")[0].classList.remove("overflow-hidden");
 }
-function remove_content()
-{
+const removeContent= () =>{
  let ele =  document.getElementsByClassName("found-users")[0];
  if (ele.innerHTML)
  {
@@ -94,21 +88,19 @@ function remove_content()
    ele.classList.add("display-none")
  }
 }
-function submit_search(){
+const submitSearch = () =>{
   document.getElementsByClassName("submit_search")[0].click();
 }
-function show_options(){
+const showOptions = () =>{
   document.getElementsByClassName("gear-options-container")[0].classList.remove("display-none");
 }
-function bodyoverflow(){
+const bodyoverflow = () =>{
   document.getElementsByClassName("body")[0].classList.add("overflow-hidden");
 }
-function bodyoverflow_removed()
-{
+const bodyoverflowRemoved =() =>{
   document.getElementsByClassName("body")[0].classList.remove("overflow-hidden");
 }
-function flash_disappear(ele)
-{
+const flashDisappear=(ele)=>{
   ele.classList.remove("flash");
   ele.classList.add("display-none");
 }

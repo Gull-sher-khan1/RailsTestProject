@@ -1,8 +1,7 @@
-function edit_images_upload(num){
+const editImagesUpload = (num) =>{
   document.getElementsByClassName("files-button-edit-"+num)[0].click();
 }
-function getFilesEdit(num)
-{
+const getFilesEdit = (num)=>{
   var ele=document.getElementsByClassName("files-button-edit-"+num)[0];
   var fileList = ele.files;
   if(fileList.length>10)

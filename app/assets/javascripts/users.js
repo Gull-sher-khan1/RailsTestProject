@@ -1,9 +1,7 @@
 
-function file_upload()
-{
+const fileUpload = () =>{
   document.getElementById('files-button').click();
 }
-function submit_user_form()
-{
+const submitUserForm = ()=>{
   document.getElementsByClassName('user-pic-form-submit')[0].click();
 }

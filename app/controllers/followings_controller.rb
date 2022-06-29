@@ -7,7 +7,7 @@ class FollowingsController < ApplicationController
   before_action :set_request, only: %i[destroy update]
 
   def index
-    @user = current_user
+    @user = current_user #remove it
     @following_requests = Following.includes(:user).pending_requests(current_user.id)
     set_followers(@following_requests)
   end

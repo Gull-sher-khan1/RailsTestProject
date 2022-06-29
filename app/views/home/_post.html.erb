@@ -38,7 +38,7 @@
           <div class="post-attachments-button">
             <%= form_for post.attachments.new ,url: {action: :update, controller: :attachments, id: post.id, from: :edit},  html:{class: "post-edit-attachments-#{post.id} edit_post display-none"}, method: :patch, remote: true do |post_form| %>
               <%= post_form.file_field :attachment, class: "files-button-edit-#{post.id} files-button-edit", multiple: true, id:'files-button', accept: "image/*", onchange:"getFilesEdit(#{post.id})"%>
-              <%= button_tag type: :button, onClick:"edit_images_upload(#{post.id})", class: 'attachments-button' do%>
+              <%= button_tag type: :button, onClick:"editImagesUpload(#{post.id})", class: 'attachments-button' do%>
                 <i class="fa fa-paperclip fa-2x"></i>
             <%end%>
             <%= hidden_field_tag :authenticity_token, value: form_authenticity_token %>
@@ -68,7 +68,7 @@
       <%= form_with url: get_comments_home_index_path, id: "comments_ajax_#{post.id}" do |form| %>
         <%= form.hidden_field :commentable_id, value: post.id, autocomplete: 'off' %>
       <% end %>
-      <%= button_tag onclick: "show_post_comments(#{post_iteration.index})", type: 'submit', form: "comments_ajax_#{post.id}", id:"comment_post_#{post.id}", class:'post-comments-button' do%>
+      <%= button_tag onclick: "showPostComments(#{post_iteration.index})", type: 'submit', form: "comments_ajax_#{post.id}", id:"comment_post_#{post.id}", class:'post-comments-button' do%>
         <i class='fa fa-comment fa-lg'></i>
       <%end%>
     </div>

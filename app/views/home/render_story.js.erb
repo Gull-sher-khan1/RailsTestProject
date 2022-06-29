@@ -7,5 +7,5 @@ document.getElementsByClassName("story-show-container")[0].classList.remove("dis
   <%if @story.user_id == current_user.id%>
     ele.innerHTML="<%=escape_javascript render partial: 'home/close_button', locals:{id: @attachment.id}%>";
   <%end%>
-  ele.innerHTML+="<button class='story-close-button' onClick='close_window()'><i class='fa fa-close'></i></button>";
+  ele.innerHTML+="<button class='story-close-button' onClick='closeWindow()'><i class='fa fa-close'></i></button>";
 }

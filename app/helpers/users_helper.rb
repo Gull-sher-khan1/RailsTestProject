@@ -6,7 +6,7 @@ module UsersHelper
   end
 
   def get_user_attachments(id, attachments)
-    attachments.where(attachable_id: id, attachable_type: 'User').first
+    attachments.where(attachable_id: id, attachable_type: :User).first
   end
 
   def get_attachments_by_user_id(user, attachments)
@@ -14,6 +14,6 @@ module UsersHelper
   end
 
   def get_found_user_attachments(found_users)
-    Attachment.where(attachable_type: 'User', attachable_id: found_users.pluck(:id))
+    Attachment.where(attachable_type: :User, attachable_id: found_users.pluck(:id))
   end
 end

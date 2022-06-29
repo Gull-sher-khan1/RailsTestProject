@@ -5,7 +5,8 @@ class StoriesController < ApplicationController
 
   def destroy
     CloudinaryService.destroy(@attachment)
-    redirect_to root_url, alert: 'can not destroy the story' unless @attachment.destroy && @story.destroy
+    redirect_to root_url, alert: 'can not destroy the story' unless @attachment.destroy
+    redirect_to root_url, alert: 'can not destroy the attachment' unless @story.destroy
   end
 
   private

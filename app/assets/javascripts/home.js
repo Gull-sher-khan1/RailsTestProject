@@ -3,8 +3,8 @@
 // You can use CoffeeScript in this file: http://coffeescript.org/
 const showPostComments = (num) =>{
   let div=[];
-  div.push(document.getElementsByClassName("home-page-content-comments-div")[num]);
-  div.push(document.getElementsByClassName("home-page-content-post-button")[num]);
+  div.push($(".home-page-content-comments-div")[num]);
+  div.push($(".home-page-content-post-button")[num]);
   if (div[0].classList.contains("display-none"))
   {
     div[0].classList.remove("display-none");
@@ -17,7 +17,7 @@ const showPostComments = (num) =>{
   }
 }
 const getFiles = ()=>{
-  var ele=document.getElementsByClassName("files-button")[0];
+  var ele=$(".files-button")[0];
   var fileList = ele.files;
   if(fileList.length>10)
   {
@@ -36,7 +36,7 @@ const getFiles = ()=>{
       return;
     }
   }
-  var el = document.getElementsByClassName("index-images")[0];
+  var el = $(".index-images")[0];
   el.innerHTML=''
   function readAndPreview(file) {
       var reader = new FileReader();
@@ -61,7 +61,7 @@ const getFiles = ()=>{
 }
 
 const storyUpload = () =>{
-  document.getElementsByClassName("story-files-button")[0].click();
+  $(".story-files-button")[0].click();
 }
 
 const storyFormSubmit = () =>{

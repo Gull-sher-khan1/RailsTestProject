@@ -18,7 +18,7 @@ class PostsController < ApplicationController
   def edit; end
 
   def update
-    redirect_to root_url, alert: 'can not destroy post' unless @post.update(text: strong_params[:post][:text])
+    redirect_to root_url, alert: 'can not update post' unless @post.update(text: strong_params[:post][:text])
   end
 
   private

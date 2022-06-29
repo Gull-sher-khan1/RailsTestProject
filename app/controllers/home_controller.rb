@@ -19,12 +19,8 @@ class HomeController < ApplicationController
   end
 
   def show_story
-    if @attachment.nil? || @story.nil?
-      redirect_to root_url, alert: 'can not find story, try reloading'
-    else
-      respond_to do |format|
-        format.js { render 'home/render_story.js.erb', layout: false }
-      end
+    respond_to do |format|
+      format.js { render 'home/render_story.js.erb', layout: false }
     end
   end
 
@@ -71,9 +67,11 @@ class HomeController < ApplicationController
 
   def set_attachment
     @attachment = Attachment.find_by(id: strong_params[:id])
+    redirect_to root_url, alert: 'can not find story, try reloading' if @attachment.nil?
   end
 
   def set_story
-    @story = Story.find_by(id: @attachment.nil? ? 0 : @attachment.attachable_id)
+    @story = Story.find_by(id: @attachment.attachable_id)
+    redirect_to root_url, alert: 'can not find story, try reloading' if @story.nil?
   end
 end

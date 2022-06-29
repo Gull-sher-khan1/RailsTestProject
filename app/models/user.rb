@@ -17,11 +17,10 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :email, presence: true
   validates :last_name, presence: true
-  validates :email,
-            format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i }
+  validates_format_of :email,
+  :with => /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
   protected
-
   def confirmation_required?
     false
   end

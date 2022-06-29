@@ -4,7 +4,7 @@ class FollowingsController < ApplicationController
   layout 'navbar'
   include UserConcern
   before_action :set_search, only: :index
-  before_action :set_request, only: %i[destroy update]
+  before_action :set_request, only: [:destroy, :update]
 
   def index
     @user = current_user
@@ -13,8 +13,8 @@ class FollowingsController < ApplicationController
   end
 
   def create
-    @request = Following.create(user_id: strong_params[:user_id], request_accepted: false, follower_id: current_user.id)
-    redirect_to root_url, alert: 'request could not be created' if @request.nil?
+    @request=Following.create(user_id: strong_params[:user_id],request_accepted: false, follower_id: current_user.id)
+    redirect_to root_url, alert: 'request could not be created' if @request == nil
   end
 
   def destroy
@@ -27,13 +27,12 @@ class FollowingsController < ApplicationController
   end
 
   private
-
   def strong_params
     params.permit(:user_id, :id, :from)
   end
 
   def set_request
-    @request = Following.find_by(id: strong_params[:id])
-    redirect_to root_url, alert: 'could not complete action, try reloading' if @request.nil?
+    @request = Following.find_by_id(strong_params[:id])
+    redirect_to root_url, alert:'could not complete action, try reloading' if @request == nil
   end
 end

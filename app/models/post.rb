@@ -8,6 +8,6 @@ class Post < ApplicationRecord
 
   validates :text, presence: true
 
-  scope :get_ids, -> { pluck(:id) }
-  scope :get_posts, ->(user) { where(user_id: user.id) }
+  scope :get_ids, -> {pluck(:id)}
+  scope :get_posts, ->(user) {where(user_id: user.id)}
 end

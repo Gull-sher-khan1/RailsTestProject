@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   layout 'navbar'
   include UserConcern
   before_action :set_search, :set_profile_user, :set_likes, :set_user_attachments, only: :show
-  before_action :set_user, only: %i[edit update]
+  before_action :set_user, only: [:edit, :update]
 
   def show
     condition = @profile_user.id == current_user.id || (@profile_user.id != current_user.id && @profile_user.private_account != true)
@@ -17,33 +17,27 @@ class UsersController < ApplicationController
 
   def update
     if strong_params[:from] == 'private'
-      unless @user.update(private_account: @user.private_account != true)
-        redirect_to root_url,
-                    alert: 'could not perform action'
-      end
-      @from = :private
+      redirect_to root_url, alert: 'could not perform action' unless @user.update(private_account: @user.private_account != true)
+      @from= :private
     else
-      redirect_to root_url, alert: 'could not update user name' unless @user.update(
-        first_name: strong_params[:user][:first_name], last_name: strong_params[:user][:last_name]
-      )
+      redirect_to root_url, alert: 'could not update user name' unless @user.update(first_name: strong_params[:user][:first_name], last_name: strong_params[:user][:last_name])
       @from = :name
     end
   end
 
   private
-
   def strong_params
-    params.permit(:id, :from, user: %i[first_name last_name])
+    params.permit(:id, :from, user:[:first_name, :last_name])
   end
 
   def set_profile_user
-    @profile_user = User.find_by(id: strong_params[:id])
-    redirect_to root_url, alert: 'could not find user' if @profile_user.nil?
+    @profile_user = User.find_by_id(strong_params[:id])
+    redirect_to root_url, alert: 'could not find user' if @profile_user == nil
   end
 
   def set_user
-    @user = User.find_by(id: strong_params[:id])
-    redirect_to root_url, alert: 'could not find user' if @user.nil?
+    @user = User.find_by_id(strong_params[:id])
+    redirect_to root_url, alert: 'could not find user' if @user == nil
   end
 
   def set_likes

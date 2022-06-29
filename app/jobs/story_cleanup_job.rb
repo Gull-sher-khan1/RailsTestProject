@@ -6,6 +6,6 @@ class StoryCleanupJob < ApplicationJob
   def perform(*args)
     uri = args[0].uri.split('/', -1)
     Cloudinary::Uploader.destroy("rails_test_project/#{uri[uri.size - 1].split('.', -1)[0]}")
-    flash[:alert] = 'Could not destroy story' unless args[0].destroy && args[1].destroy
+    flash[:alert]='Could not destroy story' unless args[0].destroy && args[1].destroy
   end
 end

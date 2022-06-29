@@ -4,8 +4,7 @@ class HomeController < ApplicationController
   layout 'navbar'
 
   include UserConcern
-  before_action :set_search, :set_comment, :set_posts, :set_likes, :set_stories, :set_attachments,
-                only: %i[index search]
+  before_action :set_search, :set_comment, :set_posts, :set_likes, :set_stories, :set_attachments, only: [:index, :search]
   before_action :set_post, only: :get_comments
   before_action :set_attachment, :set_story, only: :show_story
   def index; end
@@ -14,13 +13,13 @@ class HomeController < ApplicationController
     @comments = @post.comments
     set_users(@comments)
     respond_to do |format|
-      format.js { render 'render_comments.js.erb', layout: false }
+      format.js { render 'render_comments.js.erb', layout: false}
     end
   end
 
   def show_story
-    if @attachment.nil? || @story.nil?
-      redirect_to root_url, alert: 'could not find story, try reloading'
+    if @attachment == nil || @story == nil
+      redirect_to root_url, alert:'could not find story, try reloading'
     else
       respond_to do |format|
         format.js { render 'home/render_story.js.erb', layout: false }
@@ -36,7 +35,6 @@ class HomeController < ApplicationController
   end
 
   private
-
   def strong_params
     params.permit(:commentable_id, :id, :authenticity_token, q: [:first_name_or_last_name_cont])
   end
@@ -65,15 +63,15 @@ class HomeController < ApplicationController
   end
 
   def set_post
-    @post = Post.find_by(id: strong_params[:commentable_id])
-    redirect_to root_url, alert: 'could not retrieve comments, try reloading' if @post.nil?
+    @post = Post.find_by_id(strong_params[:commentable_id])
+    redirect_to root_url, alert: 'could not retrieve comments, try reloading' if @post==nil
   end
 
   def set_attachment
-    @attachment = Attachment.find_by(id: strong_params[:id])
+    @attachment = Attachment.find_by_id(strong_params[:id])
   end
 
   def set_story
-    @story = Story.find_by(id: @attachment.nil? ? 0 : @attachment.attachable_id)
+    @story = Story.find_by_id(@attachment==nil ? 0 : @attachment.attachable_id)
   end
 end

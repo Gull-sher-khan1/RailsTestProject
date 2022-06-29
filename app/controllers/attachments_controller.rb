@@ -21,7 +21,7 @@ class AttachmentsController < ApplicationController
   end
 
   def update
-    redirect_back(fallback_location: root_path) if strong_params[:from] != 'user'
+    redirect_back(fallback_location: root_path) if from_user?
     redirect_to root_url, alert: 'can not update attahcment' if from_user? && !@attachment.update(uri: @uri)
   end
 

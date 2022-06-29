@@ -1,8 +1,8 @@
 const editImagesUpload = (num) =>{
-  document.getElementsByClassName("files-button-edit-"+num)[0].click();
+  $(".files-button-edit-"+num)[0].click();
 }
 const getFilesEdit = (num)=>{
-  var ele=document.getElementsByClassName("files-button-edit-"+num)[0];
+  var ele=$(".files-button-edit-"+num)[0];
   var fileList = ele.files;
   if(fileList.length>10)
   {
@@ -21,7 +21,7 @@ const getFilesEdit = (num)=>{
       return;
     }
   }
-  var el = document.getElementsByClassName("post-images-"+num)[0];
+  var el = $(".post-images-"+num)[0];
   el.innerHTML=''
   function readAndPreview(file) {
       var reader = new FileReader();

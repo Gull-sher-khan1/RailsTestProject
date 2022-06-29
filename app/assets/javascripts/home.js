@@ -65,19 +65,19 @@ const storyUpload = () =>{
 }
 
 const storyFormSubmit = () =>{
-  document.getElementById("story_form_submit").submit();
+  $("#story_form_submit").submit();
 }
 const closeWindow = () =>{
-  document.getElementsByClassName("story-show-container")[0].classList.add("display-none");
-  document.getElementsByClassName("body")[0].classList.remove("overflow-hidden");
+  $(".story-show-container")[0].classList.add("display-none");
+  $(".body")[0].classList.remove("overflow-hidden");
 }
 const removeContent= () =>{
- let ele =  document.getElementsByClassName("found-users")[0];
+ let ele =  $(".found-users")[0];
  if (ele.innerHTML)
  {
    ele.innerHTML="";
  }
- ele = document.getElementsByClassName("gear-options-container")[0]
+ ele = $(".gear-options-container")[0]
  if (!ele.classList.contains("check"))
  {
    ele.classList.add("check")
@@ -89,16 +89,16 @@ const removeContent= () =>{
  }
 }
 const submitSearch = () =>{
-  document.getElementsByClassName("submit_search")[0].click();
+  $(".submit_search")[0].click();
 }
 const showOptions = () =>{
-  document.getElementsByClassName("gear-options-container")[0].classList.remove("display-none");
+  $(".gear-options-container")[0].classList.remove("display-none");
 }
 const bodyoverflow = () =>{
-  document.getElementsByClassName("body")[0].classList.add("overflow-hidden");
+  $(".body")[0].classList.add("overflow-hidden");
 }
 const bodyoverflowRemoved =() =>{
-  document.getElementsByClassName("body")[0].classList.remove("overflow-hidden");
+  $(".body")[0].classList.remove("overflow-hidden");
 }
 const flashDisappear=(ele)=>{
   ele.classList.remove("flash");

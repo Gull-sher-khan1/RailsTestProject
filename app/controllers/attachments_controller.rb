@@ -10,7 +10,6 @@ class AttachmentsController < ApplicationController
   before_action :update_post_attachments, only: :update, unless: :from_user?
 
   def create
-    redirect_back(fallback_location: root_path) if from_post?
     @user.create_attachment(uri: @uri) if from_user?
     if from_story?
       redirect_to root_url, alert: 'can not create story' unless @story.save
@@ -18,6 +17,7 @@ class AttachmentsController < ApplicationController
       @attachment.uri = CloudinaryService.upload(strong_params[:attachment][:attachment])
       StoryCleanupJob.set(wait: 60 * 60 * 24).perform_later(@attachment, @story) if @attachment.save
     end
+    redirect_back(fallback_location: root_path) unless from_user?
   end
 
   def update

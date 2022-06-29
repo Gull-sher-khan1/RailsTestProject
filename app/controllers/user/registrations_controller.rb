@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-class User::RegistrationsController < Devise::RegistrationsController
+module User
+  class RegistrationsController < Devise::RegistrationsController
     # before_action :configure_sign_up_params, only: [:create]
     # before_action :configure_account_update_params, only: [:update]
 
@@ -10,11 +11,12 @@ class User::RegistrationsController < Devise::RegistrationsController
     # end
 
     # POST /resource
-     def create
-      return if !(params.key?('first_name') && params.key?('last_name'))
-       super
-       UserMailer.welcome_email(sign_up_params).deliver
-     end
+    def create
+      return unless params.key?('first_name') && params.key?('last_name')
+
+      super
+      UserMailer.welcome_email(sign_up_params).deliver
+    end
 
     # GET /resource/edit
     # def edit
@@ -71,4 +73,5 @@ class User::RegistrationsController < Devise::RegistrationsController
       params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation,
                                    :current_password)
     end
+  end
 end

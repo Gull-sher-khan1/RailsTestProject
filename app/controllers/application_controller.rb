@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   rescue_from ActionController::InvalidAuthenticityToken, with: :invalid_token
 
   private
+
   def invalid_token
     render file: 'public/invalid'
   end

@@ -20,7 +20,7 @@ class HomeController < ApplicationController
 
   def show_story
     if @attachment.nil? || @story.nil?
-      redirect_to root_url, alert: 'could not find story, try reloading'
+      redirect_to root_url, alert: 'can not find story, try reloading'
     else
       respond_to do |format|
         format.js { render 'home/render_story.js.erb', layout: false }
@@ -66,7 +66,7 @@ class HomeController < ApplicationController
 
   def set_post
     @post = Post.find_by(id: strong_params[:commentable_id])
-    redirect_to root_url, alert: 'could not retrieve comments, try reloading' if @post.nil?
+    redirect_to root_url, alert: 'can not retrieve comments, try reloading' if @post.nil?
   end
 
   def set_attachment

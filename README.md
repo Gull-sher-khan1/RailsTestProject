@@ -12,7 +12,6 @@ Gems
 * font-awesome-rails
 * ransack
 
-Things you may want to cover:
 * Configuration
   1. get code from git before starting.
   2. system dependency must be installed like ruby, rails and postgres of above mentioned versions.

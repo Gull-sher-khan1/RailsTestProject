@@ -15,4 +15,3 @@ module AttachmentConcern
     strong_params[:from] == 'story'
   end
 end
-

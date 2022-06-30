@@ -1,2 +1,1 @@
-
 document.getElementById("home_post_comments_<%=@post.id%>").innerHTML = "<%= escape_javascript render(partial: 'comment', collection:@comments, locals:{users: @users, user_ids: @user_ids, post: @post}) %>";

@@ -21,15 +21,16 @@ Rails.application.configure do
   # config.require_master_key = true
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = { :host => "sheltered-forest-30867.herokuapp.com" }
+  config.action_mailer.default_url_options = { host: 'sheltered-forest-30867.herokuapp.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              'smtp.gmail.com',
-    port:                 587,
-    user_name:            Rails.application.credentials.dig(:gmail, :username),
-    password:             Rails.application.credentials.dig(:gmail, :password),
-    authentication:       'plain',
-    enable_starttls_auto: true }
+    address: 'smtp.gmail.com',
+    port: 587,
+    user_name: Rails.application.credentials.dig(:gmail, :username),
+    password: Rails.application.credentials.dig(:gmail, :password),
+    authentication: 'plain',
+    enable_starttls_auto: true
+  }
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?

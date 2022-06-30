@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-module User
-  class SessionsController < Devise::SessionsController
+class User::SessionsController < Devise::SessionsController
     # before_action :configure_sign_in_params, only: [:create]
 
     # GET /resource/sign_in
@@ -25,5 +24,4 @@ module User
     # def configure_sign_in_params
     #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
     # end
-  end
 end

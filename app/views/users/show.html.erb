@@ -9,15 +9,15 @@
         <% profile_attachment = @profile_user.attachment%>
         <%if profile_attachment == nil%>
           <%= form_for Attachment.new ,url: {action: :create, controller: :attachments, user_id: current_user.id, from: :user},  html:{class: "change-image"}, method: :post, remote: true do |form| %>
-            <%= form.file_field :attachment, class: 'files-button', id:'files-button', accept: "image/*", onchange:'submit_user_form()'%>
-            <%= button_tag 'Change Picture', type: :button, onClick:"file_upload()", class: 'indirect-submit'%>
+            <%= form.file_field :attachment, class: 'files-button', id:'files-button', accept: "image/*", onchange:'submitUserForm()'%>
+            <%= button_tag 'Change Picture', type: :button, onClick:"picUpload()", class: 'indirect-submit'%>
             <%= form.submit 'done', class: 'display-none user-pic-form-submit'%>
             <%= hidden_field_tag :authenticity_token, value: form_authenticity_token %>
           <% end%>
         <%else%>
           <%= form_for Attachment.new ,url: {action: :update, controller: :attachments, id: profile_attachment.id, from: :user},  html:{class: "change-image"}, method: :patch, remote: true do |form| %>
-            <%= form.file_field :attachment, class: 'files-button', id:'files-button', accept: "image/*", onchange:'submit_user_form()'%>
-            <%= button_tag 'Change Picture', type: :button, onClick:"file_upload()", class: 'indirect-submit'%>
+            <%= form.file_field :attachment, class: 'files-button', id:'files-button', accept: "image/*", onchange:'submitUserForm()'%>
+            <%= button_tag 'Change Picture', type: :button, onClick:"picUpload()", class: 'indirect-submit'%>
             <%= form.submit 'done', class: 'display-none user-pic-form-submit'%>
             <%= hidden_field_tag :authenticity_token, value: form_authenticity_token %>
           <% end%>

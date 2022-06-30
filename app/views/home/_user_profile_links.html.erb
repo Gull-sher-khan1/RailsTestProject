@@ -1,6 +1,6 @@
 <%if user.id!=nil%>
   <%id = user.id%>
-  <%attachment = attachments.where(attachable_id: id, attachable_type: 'User').first%>
+  <%attachment = get_user_attachments(id, attachments)%>
   <%url = attachment != nil ? attachment.uri : 'user.jpg' %>
   <div class="user-links">
     <a class="user-name-link user-find-link" href="<%= user_path(user.id)%>">

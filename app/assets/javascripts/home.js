@@ -1,11 +1,26 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 // You can use CoffeeScript in this file: http://coffeescript.org/
-function show_post_comments(num)
-{
+
+$('.edit_post_text').on('submit',(function(e) {
+  var formData = new FormData(this);
+
+  formData.append('_method', 'patch');
+  $.ajax({
+    type: "POST",
+    data: formData,
+    cache: false,
+    contentType: false,
+    processData: false
+  }).done(function(r) {
+  console.log(r);
+});
+}));
+
+function showPostComments(num){
   let div=[];
-  div.push(document.getElementsByClassName("home-page-content-comments-div")[num]);
-  div.push(document.getElementsByClassName("home-page-content-post-button")[num]);
+  div.push($(".home-page-content-comments-div")[num]);
+  div.push($(".home-page-content-post-button")[num]);
   if (div[0].classList.contains("display-none"))
   {
     div[0].classList.remove("display-none");
@@ -17,9 +32,8 @@ function show_post_comments(num)
     div[1].classList.add("home-page-content-post-button-border-removed");
   }
 }
-function getFiles()
-{
-  var ele=document.getElementsByClassName("files-button")[0];
+function getFiles(){
+  var ele=$(".files-button")[0];
   var fileList = ele.files;
   if(fileList.length>10)
   {
@@ -38,7 +52,7 @@ function getFiles()
       return;
     }
   }
-  var el = document.getElementsByClassName("index-images")[0];
+  var el = $(".index-images")[0];
   el.innerHTML=''
   function readAndPreview(file) {
       var reader = new FileReader();
@@ -62,28 +76,24 @@ function getFiles()
 
 }
 
-function story_upload()
-{
-  document.getElementsByClassName("story-files-button")[0].click();
+function storyUpload(){
+  $(".story-files-button")[0].click();
 }
 
-function story_form_submit()
-{
-  document.getElementById("story_form_submit").submit();
+function storyFormSubmit(){
+  $("#story_form_submit").submit();
 }
-function close_window()
-{
-  document.getElementsByClassName("story-show-container")[0].classList.add("display-none");
-  document.getElementsByClassName("body")[0].classList.remove("overflow-hidden");
+function closeWindow(){
+  $(".story-show-container")[0].classList.add("display-none");
+  $(".body")[0].classList.remove("overflow-hidden");
 }
-function remove_content()
-{
- let ele =  document.getElementsByClassName("found-users")[0];
+function removeContent(){
+ let ele =  $(".found-users")[0];
  if (ele.innerHTML)
  {
    ele.innerHTML="";
  }
- ele = document.getElementsByClassName("gear-options-container")[0]
+ ele = $(".gear-options-container")[0]
  if (!ele.classList.contains("check"))
  {
    ele.classList.add("check")
@@ -94,21 +104,19 @@ function remove_content()
    ele.classList.add("display-none")
  }
 }
-function submit_search(){
-  document.getElementsByClassName("submit_search")[0].click();
+function submitSearch(){
+  $(".submit_search")[0].click();
 }
-function show_options(){
-  document.getElementsByClassName("gear-options-container")[0].classList.remove("display-none");
+function showOptions(){
+  $(".gear-options-container")[0].classList.remove("display-none");
 }
 function bodyoverflow(){
-  document.getElementsByClassName("body")[0].classList.add("overflow-hidden");
+  $(".body")[0].classList.add("overflow-hidden");
 }
-function bodyoverflow_removed()
-{
-  document.getElementsByClassName("body")[0].classList.remove("overflow-hidden");
+function bodyoverflowRemoved(){
+  $(".body")[0].classList.remove("overflow-hidden");
 }
-function flash_disappear(ele)
-{
+function flashDisappear(ele){
   ele.classList.remove("flash");
   ele.classList.add("display-none");
 }

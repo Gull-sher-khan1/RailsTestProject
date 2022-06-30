@@ -14,23 +14,21 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree
-function files_upload()
-{
+//= require jquery
+//= require jquery_ujs
+function filesUpload(){
   document.getElementById('files-button').click();
 }
-function validate_first_and_last_name()
-{
+
+function validateFirstAndLastName(){
   str = '';
-  if (document.getElementsByClassName('first_name_input_tag')[0].value.length == 0)
-  {
+  if ($('.first_name_input_tag').eq(0).val().length === 0) {
     str += 'first name, ';
   }
-  if (document.getElementsByClassName('last_name_input_tag')[0].value.length == 0)
-  {
+  if ($('.last_name_input_tag').eq(0).val().length === 0) {
     str += 'last name cant be empty';
   }
-  if (str.length!=0)
-  {
+  if (str.length!=0) {
     alert(str);
   }
 }

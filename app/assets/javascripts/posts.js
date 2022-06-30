@@ -1,9 +1,8 @@
-function edit_images_upload(num){
-  document.getElementsByClassName("files-button-edit-"+num)[0].click();
+function editImagesUpload(num){
+  $(".files-button-edit-"+num)[0].click();
 }
-function getFilesEdit(num)
-{
-  var ele=document.getElementsByClassName("files-button-edit-"+num)[0];
+function getFilesEdit(num){
+  var ele=$(".files-button-edit-"+num)[0];
   var fileList = ele.files;
   if(fileList.length>10)
   {
@@ -22,7 +21,7 @@ function getFilesEdit(num)
       return;
     }
   }
-  var el = document.getElementsByClassName("post-images-"+num)[0];
+  var el = $(".post-images-"+num)[0];
   el.innerHTML=''
   function readAndPreview(file) {
       var reader = new FileReader();

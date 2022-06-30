@@ -1,5 +1,5 @@
 <% flash.each do |name, msg| -%>
-  <div class="flash" onClick="flash_disappear(this)">
+  <div class="flash" onClick="flashDisappear(this)">
     <div class='<%=name%>-icon-div'>
       <i class="fa fa-exclamation <%=name%>-icon"></i>
     </div>
@@ -24,8 +24,8 @@
     <div class="story-add-div">
       <div class="story-add-button">
         <%= form_for Attachment.new ,url: {action: :create, controller: :attachments, user_id: current_user.id, from: :story}, html:{id: 'story_form_submit', class: 'add-button-form'} ,method: :post, remote: true do |form| %>
-          <%= form.file_field :attachment, class: 'story-files-button', accept: "image/*", onchange: "story_form_submit()"%>
-          <%= button_tag 'Add Story', type: :button, onClick:"story_upload()", class: 'add-story-button'%>
+          <%= form.file_field :attachment, class: 'story-files-button', accept: "image/*", onchange: "storyFormSubmit()"%>
+          <%= button_tag 'Add Story', type: :button, onClick:"storyUpload()", class: 'add-story-button'%>
           <%= hidden_field_tag :authenticity_token, value: form_authenticity_token %>
         <% end%>
       </div>
@@ -60,7 +60,7 @@
         <div class="home-page-content-new-post-button">
           <%= form_for Post.new.attachments.new ,url: {action: :create, controller: :attachments, user_id: current_user.id, from: :post},  html:{class: "post-new-attachments new_post"}, method: :post, remote: true do |post_form| %>
             <%= post_form.file_field :attachment, class: 'files-button', multiple: true, id:'files-button', accept: "image/*", onchange:"getFiles()"%>
-            <%= button_tag nil, type: :button, onClick:"files_upload()", class: 'attachments-button' do%>
+            <%= button_tag nil, type: :button, onClick:"filesUpload()", class: 'attachments-button' do%>
               <i class="fa fa-paperclip fa-2x"></i>
             <%end%>
             <%= hidden_field_tag :authenticity_token, value: form_authenticity_token %>

@@ -1,9 +1,7 @@
-
-function file_upload()
-{
-  document.getElementById('files-button').click();
+function submitUserForm(){
+  $(".user-pic-form-submit")[0].click();
 }
-function submit_user_form()
-{
-  document.getElementsByClassName('user-pic-form-submit')[0].click();
+
+function picUpload(){
+  $("#files-button").click();
 }

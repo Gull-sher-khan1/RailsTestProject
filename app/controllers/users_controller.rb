@@ -19,11 +19,11 @@ class UsersController < ApplicationController
     if strong_params[:from] == 'private'
       unless @user.update(private_account: @user.private_account != true)
         redirect_to root_url,
-                    alert: 'could not perform action'
+                    alert: 'can not perform action'
       end
       @from = :private
     else
-      redirect_to root_url, alert: 'could not update user name' unless @user.update(
+      redirect_to root_url, alert: 'can not update user name' unless @user.update(
         first_name: strong_params[:user][:first_name], last_name: strong_params[:user][:last_name]
       )
       @from = :name
@@ -38,12 +38,12 @@ class UsersController < ApplicationController
 
   def set_profile_user
     @profile_user = User.find_by(id: strong_params[:id])
-    redirect_to root_url, alert: 'could not find user' if @profile_user.nil?
+    redirect_to root_url, alert: 'can not find user' if @profile_user.nil?
   end
 
   def set_user
     @user = User.find_by(id: strong_params[:id])
-    redirect_to root_url, alert: 'could not find user' if @user.nil?
+    redirect_to root_url, alert: 'can not find user' if @user.nil?
   end
 
   def set_likes

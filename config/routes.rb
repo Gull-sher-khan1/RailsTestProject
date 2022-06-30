@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :users, controllers: { registrations: 'user/registrations', confirmations: 'user/confirmations'}
+  devise_for :users, controllers: { registrations: 'user/registrations', confirmations: 'user/confirmations' }
   resources :users, shallow: true, only: %i[edit update show] do
     resources :posts, except: %i[index new show]
     resources :comments, except: %i[index new show]
@@ -17,12 +17,12 @@ Rails.application.routes.draw do
       get :search
     end
   end
-  resources :posts, only:[]do
+  resources :posts, only: [] do
     member do
       post :update
     end
   end
-  resources :attachments, only:[] do
+  resources :attachments, only: [] do
     member do
       post :update
     end

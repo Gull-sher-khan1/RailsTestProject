@@ -1,7 +1,7 @@
-const submitUserForm = ()=>{
+function submitUserForm(){
   $(".user-pic-form-submit")[0].click();
 }
 
-const picUpload = () =>{
+function picUpload(){
   $("#files-button").click();
 }

@@ -1,7 +1,7 @@
-const editImagesUpload = (num) =>{
+function editImagesUpload(num){
   $(".files-button-edit-"+num)[0].click();
 }
-const getFilesEdit = (num)=>{
+function getFilesEdit(num){
   var ele=$(".files-button-edit-"+num)[0];
   var fileList = ele.files;
   if(fileList.length>10)

@@ -32,7 +32,7 @@ function showPostComments(num){
     div[1].classList.add("home-page-content-post-button-border-removed");
   }
 }
-const getFiles = ()=>{
+function getFiles(){
   var ele=$(".files-button")[0];
   var fileList = ele.files;
   if(fileList.length>10)
@@ -76,18 +76,18 @@ const getFiles = ()=>{
 
 }
 
-const storyUpload = () =>{
+function storyUpload(){
   $(".story-files-button")[0].click();
 }
 
-const storyFormSubmit = () =>{
+function storyFormSubmit(){
   $("#story_form_submit").submit();
 }
-const closeWindow = () =>{
+function closeWindow(){
   $(".story-show-container")[0].classList.add("display-none");
   $(".body")[0].classList.remove("overflow-hidden");
 }
-const removeContent = () =>{
+function removeContent(){
  let ele =  $(".found-users")[0];
  if (ele.innerHTML)
  {
@@ -104,19 +104,19 @@ const removeContent = () =>{
    ele.classList.add("display-none")
  }
 }
-const submitSearch = () =>{
+function submitSearch(){
   $(".submit_search")[0].click();
 }
-const showOptions = () =>{
+function showOptions(){
   $(".gear-options-container")[0].classList.remove("display-none");
 }
-const bodyoverflow = () =>{
+function bodyoverflow(){
   $(".body")[0].classList.add("overflow-hidden");
 }
-const bodyoverflowRemoved =() =>{
+function bodyoverflowRemoved(){
   $(".body")[0].classList.remove("overflow-hidden");
 }
-const flashDisappear=(ele)=>{
+function flashDisappear(ele){
   ele.classList.remove("flash");
   ele.classList.add("display-none");
 }

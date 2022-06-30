@@ -16,11 +16,11 @@
 //= require_tree
 //= require jquery
 //= require jquery_ujs
-const filesUpload = ()=>{
+function filesUpload(){
   document.getElementById('files-button').click();
 }
 
-const validateFirstAndLastName = ()=> {
+function validateFirstAndLastName(){
   str = '';
   if ($('.first_name_input_tag').eq(0).val().length === 0) {
     str += 'first name, ';

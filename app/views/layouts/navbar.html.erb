@@ -8,7 +8,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="body" >
+  <body class="body" onClick="removeContent()">
     <div class="nav-bar">
       <div class="user-image">
         <a class="user-show-link" href=<%=user_path(current_user.id)%>>

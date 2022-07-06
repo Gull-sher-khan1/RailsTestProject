@@ -11,48 +11,53 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     @user = User.last
   end
 
-  test "should show edit form" do
+  test "show edit form" do
     get edit_comment_url(Comment.last.id), xhr: true
     assert_response :success
     assert_not_equal 'can not complete action, try reloading', flash[:alert]
   end
 
-  test "should not show edit form" do
+  test "dont show edit form" do
     get edit_comment_url(0), xhr: true
     assert_equal 'can not complete action, try reloading', flash[:alert]
   end
 
-  test "should not create comment" do
+  test "dont create comment" do
     post user_comments_url(0), params:{comment:{commentable_id: 0}}, xhr: true
     assert_equal 'can not create comment, try reloading', flash[:alert]
   end
 
-  test "should create comment" do
+  test "create comment" do
     post user_comments_url(user_id: @user.id), params:{comment:{commentable_id: @post.id, text: 'asd'}}, xhr: true
     assert_response :success
   end
 
-  test "should not create comment with null text" do
+  test "dont create comment with null text" do
     post user_comments_url(user_id: @user.id), params:{comment:{commentable_id: @post.id, text: ''}}, xhr: true
     assert_equal 'can not create comment', flash[:alert]
   end
 
-  test "should not update comment" do
+  test "dont update comment" do
     patch comment_path(0), xhr: true
     assert_equal 'can not complete action, try reloading', flash[:alert]
   end
 
-  test "should update comment" do
+  test "update comment" do
     patch comment_path(Comment.last.id), params:{comment:{text: 'abc'}}, xhr: true
     assert_response :success
   end
 
-  test "should not destroy comment" do
+  test "dont update comment with null text" do
+    patch comment_path(Comment.last.id), params:{comment:{text: ''}}, xhr: true
+    assert_equal 'can not update comment', flash[:alert]
+  end
+
+  test "dont destroy comment" do
     delete comment_path(0), xhr: true
     assert_equal 'can not complete action, try reloading', flash[:alert]
   end
 
-  test "should destroy comment" do
+  test "destroy comment" do
     delete comment_path(Comment.last.id), xhr: true
     assert_response :success
   end

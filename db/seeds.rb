@@ -13,3 +13,6 @@
 # user.email='anonymous@gmail.com'
 # user.confirmed_at=DateTime.now
 # user.save
+user = User.create(first_name: 'test', last_name: 'one', email: 'gsk@gmail.com', password: '123456', password_confirmation: '123456')
+post = Post.create(text: 'first_post', user_id: user.id)
+comment = post.comments.create(text: 'first_comment', user_id: user.id)

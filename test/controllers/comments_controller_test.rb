@@ -36,4 +36,25 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     post user_comments_url(user_id: @user.id), params:{comment:{commentable_id: @post.id, text: ''}}, xhr: true
     assert_equal 'can not create comment', flash[:alert]
   end
+
+  test "should not update comment" do
+    patch comment_path(0), xhr: true
+    assert_equal 'can not complete action, try reloading', flash[:alert]
+  end
+
+  test "should update comment" do
+    patch comment_path(Comment.last.id), params:{comment:{text: 'abc'}}, xhr: true
+    assert_response :success
+  end
+
+  test "should not destroy comment" do
+    delete comment_path(0), xhr: true
+    assert_equal 'can not complete action, try reloading', flash[:alert]
+  end
+
+  test "should destroy comment" do
+    delete comment_path(Comment.last.id), xhr: true
+    assert_response :success
+  end
+
 end

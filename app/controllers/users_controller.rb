@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   include UserConcern
   before_action :set_search, :set_profile_user, :set_likes, :set_user_attachments, only: :show
   before_action :set_user, only: %i[edit update]
+  before_action :current_user_redirect, only: :update
 
   def show
     condition = @profile_user.id == current_user.id || (@profile_user.id != current_user.id && @profile_user.private_account != true)
@@ -44,6 +45,10 @@ class UsersController < ApplicationController
   def set_user
     @user = User.find_by(id: strong_params[:id])
     redirect_to root_url, alert: 'can not find user' if @user.nil?
+  end
+
+  def current_user_redirect
+    redirect_to root_url, alert: 'can not perform action' if current_user.id != @user.id
   end
 
   def set_likes

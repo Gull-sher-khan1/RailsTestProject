@@ -21,4 +21,51 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     get edit_user_url(0), xhr: true
     assert_equal 'can not find user', flash[:alert]
   end
+
+  test "show user" do
+    get user_path(User.last.id)
+    assert_select 'form input[type=submit][value="Public Account"]'
+    assert_response :success
+  end
+
+  test "cant find user" do
+    get user_path(0)
+    assert_equal 'can not find user', flash[:alert]
+  end
+
+  test "dont show user custom settings buttons" do
+    get user_path(User.first.id)
+    assert_select 'form input[type=submit][value="Follow"]'
+    assert_response :success
+  end
+
+  test "dont update user public account" do
+    patch user_path(User.first.id), params: {from: :private}, xhr: true
+    assert_equal 'can not perform action', flash[:alert]
+  end
+
+  test "update user public account" do
+    patch user_path(User.last.id), params: {from: :private}, xhr: true
+    assert_response :success
+  end
+
+  test "dont update different user name " do
+    patch user_path(User.first.id), params: {user:{first_name: 'gull', last_name: 'khan'}}, xhr: true
+    assert_equal 'can not perform action', flash[:alert]
+  end
+
+  test "dont update user name without finding user" do
+    patch user_path(0), params: {user:{first_name: 'gull', last_name: 'khan'}}, xhr: true
+    assert_equal 'can not find user', flash[:alert]
+  end
+
+  test "dont update user name with null parameter key" do
+    patch user_path(User.last.id), params: {user:{first_name: '', last_name: 'khan'}}, xhr: true
+    assert_equal 'can not update user name', flash[:alert]
+  end
+
+  test "update user name" do
+    patch user_path(User.last.id), params: {user:{first_name: 'gull', last_name: 'khan'}}, xhr: true
+    assert_response :success
+  end
 end

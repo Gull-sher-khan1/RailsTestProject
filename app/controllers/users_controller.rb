@@ -58,4 +58,5 @@ class UsersController < ApplicationController
   def set_user_attachments
     @user_pic = @user_attachments = Attachment.users_attachments([@profile_user.id])
   end
+
 end

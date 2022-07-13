@@ -60,4 +60,37 @@ class AttachmentsControllerTest < ActionDispatch::IntegrationTest
     patch attachment_path(id: @post.id), params: {from: 'post', attachment: {attachment: [@dispatch_file]}}
     assert_response :redirect
   end
+
+  test "should not create post attachment without login" do
+    delete destroy_user_session_path
+    post user_attachments_path(@seed_user.id), params: {post_id: @seed_user.posts.first.id, from: 'post', attachment: {attachment: [@dispatch_file]
+      }}
+      assert_not_equal 'Please sign in!', flash[:alert]
+  end
+
+  test "should not create user attachment without login" do
+    delete destroy_user_session_path
+    post user_attachments_path(@seed_user.id), params: {from: 'user', attachment: {attachment: @dispatch_file
+      }}, xhr: true
+    assert_not_equal 'Please sign in!', flash[:alert]
+  end
+
+  test "should not create story attachment without login" do
+    delete destroy_user_session_path
+    post user_attachments_path(@seed_user.id), params: {from: 'story', attachment: {attachment: @dispatch_file
+      }}, xhr: true
+    assert_not_equal 'Please sign in!', flash[:alert]
+  end
+
+  test "should not update user attachment without login" do
+    delete destroy_user_session_path
+    patch attachment_path(id: @seed_user.attachment.id), params: {from: 'user', attachment: {attachment: @dispatch_file}}, xhr: true
+    assert_not_equal 'Please sign in!', flash[:alert]
+  end
+
+  test "should not update post attachments without login" do
+    delete destroy_user_session_path
+    patch attachment_path(id: @post.id), params: {from: 'post', attachment: {attachment: [@dispatch_file]}}
+    assert_not_equal 'Please sign in!', flash[:alert]
+  end
 end

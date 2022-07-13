@@ -11,14 +11,18 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @user = User.last
   end
 
+  teardown do
+    delete destroy_user_session_path
+  end
+
   test "show edit form" do
-    get edit_user_url(User.last.id), xhr: true
+    get edit_user_path(User.last.id), xhr: true
     assert_response :success
     assert_not_equal 'can not find user', flash[:alert]
   end
 
   test "dont show edit form" do
-    get edit_user_url(0), xhr: true
+    get edit_user_path(0), xhr: true
     assert_equal 'can not find user', flash[:alert]
   end
 
@@ -67,5 +71,29 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test "update user name" do
     patch user_path(User.last.id), params: {user:{first_name: 'gull', last_name: 'khan'}}, xhr: true
     assert_response :success
+  end
+
+  test "dont show edit form without login" do
+    delete destroy_user_session_path
+    get edit_user_path(User.last.id), xhr: true
+    assert_not_equal 'Please sign in!', flash[:alert]
+  end
+
+  test "dont show user without login" do
+    delete destroy_user_session_path
+    get user_path(User.last.id)
+    assert_not_equal 'Please sign in!', flash[:alert]
+  end
+
+  test "dont update account without login" do
+    delete destroy_user_session_path
+    patch user_path(User.last.id), params: {from: :private}, xhr: true
+    assert_not_equal 'Please sign in!', flash[:alert]
+  end
+
+  test "dont update name without login" do
+    delete destroy_user_session_path
+    patch user_path(User.last.id), params: {user:{first_name: 'gull', last_name: 'khan'}}, xhr: true
+    assert_not_equal 'Please sign in!', flash[:alert]
   end
 end

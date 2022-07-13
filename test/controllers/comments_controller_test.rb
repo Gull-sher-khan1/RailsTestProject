@@ -62,4 +62,27 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "dont update comment without login" do
+    delete destroy_user_session_path
+    patch comment_path(Comment.last.id), params:{comment:{text: 'abc'}}, xhr: true
+    assert_not_equal 'Please sign in!', flash[:alert]
+  end
+
+  test "dont create comment without login" do
+    delete destroy_user_session_path
+    post user_comments_url(user_id: @user.id), params:{comment:{commentable_id: @post.id, text: 'asd'}}, xhr: true
+    assert_not_equal 'Please sign in!', flash[:alert]
+  end
+
+  test "dont show edit form without login" do
+    delete destroy_user_session_path
+    get edit_comment_url(Comment.last.id), xhr: true
+    assert_not_equal 'Please sign in!', flash[:alert]
+  end
+
+  test "dont destroy comment without login" do
+    delete destroy_user_session_path
+    delete comment_path(Comment.last.id), xhr: true
+    assert_not_equal 'Please sign in!', flash[:alert]
+  end
 end

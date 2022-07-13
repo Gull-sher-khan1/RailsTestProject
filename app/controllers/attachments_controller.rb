@@ -71,4 +71,5 @@ class AttachmentsController < ApplicationController
     @post = Post.find_by(id: strong_params[:id])
     redirect_to root_url, alert: 'can not find post' if @post.nil?
   end
+
 end

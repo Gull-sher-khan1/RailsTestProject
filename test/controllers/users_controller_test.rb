@@ -6,7 +6,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   setup do
     add_dummy_data
-    sign_in User.create(email: 'gullsher.khan@devsinc.com', password: '123456', password_confirmation: '123456', first_name: 'gull sher', last_name: 'khan')
+    sign_in User.create(email: 'gullsher.khan@devsinc.com', password: '123456', password_confirmation: '123456',
+                        first_name: 'gull sher', last_name: 'khan')
     @post = Post.last
     @user = User.last
   end
@@ -15,85 +16,85 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     delete destroy_user_session_path
   end
 
-  test "show edit form" do
+  test 'show edit form' do
     get edit_user_path(User.last.id), xhr: true
     assert_response :success
     assert_not_equal 'can not find user', flash[:alert]
   end
 
-  test "dont show edit form" do
+  test 'dont show edit form' do
     get edit_user_path(0), xhr: true
     assert_equal 'can not find user', flash[:alert]
   end
 
-  test "show user" do
+  test 'show user' do
     get user_path(User.last.id)
     assert_select 'form input[type=submit][value="Public Account"]'
     assert_response :success
   end
 
-  test "cant find user" do
+  test 'cant find user' do
     get user_path(0)
     assert_equal 'can not find user', flash[:alert]
   end
 
-  test "dont show user custom settings buttons" do
+  test 'dont show user custom settings buttons' do
     get user_path(User.first.id)
     assert_select 'form input[type=submit][value="Follow"]'
     assert_response :success
   end
 
-  test "dont update user public account" do
-    patch user_path(User.first.id), params: {from: :private}, xhr: true
+  test 'dont update user public account' do
+    patch user_path(User.first.id), params: { from: :private }, xhr: true
     assert_equal 'can not perform action', flash[:alert]
   end
 
-  test "update user public account" do
-    patch user_path(User.last.id), params: {from: :private}, xhr: true
+  test 'update user public account' do
+    patch user_path(User.last.id), params: { from: :private }, xhr: true
     assert_response :success
   end
 
-  test "dont update different user name " do
-    patch user_path(User.first.id), params: {user:{first_name: 'gull', last_name: 'khan'}}, xhr: true
+  test 'dont update different user name ' do
+    patch user_path(User.first.id), params: { user: { first_name: 'gull', last_name: 'khan' } }, xhr: true
     assert_equal 'can not perform action', flash[:alert]
   end
 
-  test "dont update user name without finding user" do
-    patch user_path(0), params: {user:{first_name: 'gull', last_name: 'khan'}}, xhr: true
+  test 'dont update user name without finding user' do
+    patch user_path(0), params: { user: { first_name: 'gull', last_name: 'khan' } }, xhr: true
     assert_equal 'can not find user', flash[:alert]
   end
 
-  test "dont update user name with null parameter key" do
-    patch user_path(User.last.id), params: {user:{first_name: '', last_name: 'khan'}}, xhr: true
+  test 'dont update user name with null parameter key' do
+    patch user_path(User.last.id), params: { user: { first_name: '', last_name: 'khan' } }, xhr: true
     assert_equal 'can not update user name', flash[:alert]
   end
 
-  test "update user name" do
-    patch user_path(User.last.id), params: {user:{first_name: 'gull', last_name: 'khan'}}, xhr: true
+  test 'update user name' do
+    patch user_path(User.last.id), params: { user: { first_name: 'gull', last_name: 'khan' } }, xhr: true
     assert_response :success
   end
 
-  test "dont show edit form without login" do
+  test 'dont show edit form without login' do
     delete destroy_user_session_path
     get edit_user_path(User.last.id), xhr: true
     assert_equal '/unauthenticated', request.fullpath
   end
 
-  test "dont show user without login" do
+  test 'dont show user without login' do
     delete destroy_user_session_path
     get user_path(User.last.id)
     assert_equal '/unauthenticated', request.fullpath
   end
 
-  test "dont update account without login" do
+  test 'dont update account without login' do
     delete destroy_user_session_path
-    patch user_path(User.last.id), params: {from: :private}, xhr: true
+    patch user_path(User.last.id), params: { from: :private }, xhr: true
     assert_equal '/unauthenticated', request.fullpath
   end
 
-  test "dont update name without login" do
+  test 'dont update name without login' do
     delete destroy_user_session_path
-    patch user_path(User.last.id), params: {user:{first_name: 'gull', last_name: 'khan'}}, xhr: true
+    patch user_path(User.last.id), params: { user: { first_name: 'gull', last_name: 'khan' } }, xhr: true
     assert_equal '/unauthenticated', request.fullpath
   end
 end

@@ -5,35 +5,40 @@ require 'test_helper'
 class CommentsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   setup do
-    Rails.application.load_seed
+    add_dummy_data
     sign_in User.create(email: 'gullsher.khan@devsinc.com', password: '123456', password_confirmation: '123456', first_name: 'gull sher', last_name: 'khan')
     @post = Post.last
     @user = User.last
+    @comment_id = Comment.last.id
+  end
+
+  teardown do
+    delete destroy_user_session_path
   end
 
   test "show edit form" do
-    get edit_comment_url(Comment.last.id), xhr: true
+    get edit_comment_path(@comment_id), xhr: true
     assert_response :success
     assert_not_equal 'can not complete action, try reloading', flash[:alert]
   end
 
   test "dont show edit form" do
-    get edit_comment_url(0), xhr: true
+    get edit_comment_path(0), xhr: true
     assert_equal 'can not complete action, try reloading', flash[:alert]
   end
 
   test "dont create comment" do
-    post user_comments_url(0), params:{comment:{commentable_id: 0}}, xhr: true
+    post user_comments_path(0), params:{comment:{commentable_id: 0}}, xhr: true
     assert_equal 'can not create comment, try reloading', flash[:alert]
   end
 
   test "create comment" do
-    post user_comments_url(user_id: @user.id), params:{comment:{commentable_id: @post.id, text: 'asd'}}, xhr: true
+    post user_comments_path(user_id: @user.id), params:{comment:{commentable_id: @post.id, text: 'asd'}}, xhr: true
     assert_response :success
   end
 
   test "dont create comment with null text" do
-    post user_comments_url(user_id: @user.id), params:{comment:{commentable_id: @post.id, text: ''}}, xhr: true
+    post user_comments_path(user_id: @user.id), params:{comment:{commentable_id: @post.id, text: ''}}, xhr: true
     assert_equal 'can not create comment', flash[:alert]
   end
 
@@ -43,12 +48,12 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "update comment" do
-    patch comment_path(Comment.last.id), params:{comment:{text: 'abc'}}, xhr: true
+    patch comment_path(@comment_id), params:{comment:{text: 'abc'}}, xhr: true
     assert_response :success
   end
 
   test "dont update comment with null text" do
-    patch comment_path(Comment.last.id), params:{comment:{text: ''}}, xhr: true
+    patch comment_path(@comment_id), params:{comment:{text: ''}}, xhr: true
     assert_equal 'can not update comment', flash[:alert]
   end
 
@@ -58,31 +63,33 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "destroy comment" do
-    delete comment_path(Comment.last.id), xhr: true
+    delete comment_path(@comment_id), xhr: true
     assert_response :success
+    delete comment_path(@comment_id), xhr: true
+    assert_equal 'can not complete action, try reloading', flash[:alert]
   end
 
   test "dont update comment without login" do
     delete destroy_user_session_path
-    patch comment_path(Comment.last.id), params:{comment:{text: 'abc'}}, xhr: true
-    assert_not_equal 'Please sign in!', flash[:alert]
+    patch comment_path(@comment_id), params:{comment:{text: 'abc'}}, xhr: true
+    assert_equal '/unauthenticated', request.fullpath
   end
 
   test "dont create comment without login" do
     delete destroy_user_session_path
-    post user_comments_url(user_id: @user.id), params:{comment:{commentable_id: @post.id, text: 'asd'}}, xhr: true
-    assert_not_equal 'Please sign in!', flash[:alert]
+    post user_comments_path(user_id: @user.id), params:{comment:{commentable_id: @post.id, text: 'asd'}}, xhr: true
+    assert_equal '/unauthenticated', request.fullpath
   end
 
   test "dont show edit form without login" do
     delete destroy_user_session_path
-    get edit_comment_url(Comment.last.id), xhr: true
-    assert_not_equal 'Please sign in!', flash[:alert]
+    get edit_comment_path(@comment_id), xhr: true
+    assert_equal '/unauthenticated', request.fullpath
   end
 
   test "dont destroy comment without login" do
     delete destroy_user_session_path
-    delete comment_path(Comment.last.id), xhr: true
-    assert_not_equal 'Please sign in!', flash[:alert]
+    delete comment_path(@comment_id), xhr: true
+    assert_equal '/unauthenticated', request.fullpath
   end
 end

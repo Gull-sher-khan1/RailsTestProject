@@ -18,10 +18,7 @@ class UsersController < ApplicationController
 
   def update
     if strong_params[:from] == 'private'
-      unless @user.update(private_account: @user.private_account != true)
-        redirect_to root_url,
-                    alert: 'can not perform action'
-      end
+      @user.update(private_account: @user.private_account != true)
       @from = :private
     else
       redirect_to root_url, alert: 'can not update user name' unless @user.update(

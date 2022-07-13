@@ -12,6 +12,6 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_if_not_signed_in
-    redirect_to root_url, alert: 'Please sign in!'
+    redirect_to new_user_session_url, alert: 'Please sign in!'
   end
 end

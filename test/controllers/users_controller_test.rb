@@ -5,7 +5,7 @@ require 'test_helper'
 class UsersControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   setup do
-    Rails.application.load_seed
+    add_dummy_data
     sign_in User.create(email: 'gullsher.khan@devsinc.com', password: '123456', password_confirmation: '123456', first_name: 'gull sher', last_name: 'khan')
     @post = Post.last
     @user = User.last
@@ -76,24 +76,24 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test "dont show edit form without login" do
     delete destroy_user_session_path
     get edit_user_path(User.last.id), xhr: true
-    assert_not_equal 'Please sign in!', flash[:alert]
+    assert_equal '/unauthenticated', request.fullpath
   end
 
   test "dont show user without login" do
     delete destroy_user_session_path
     get user_path(User.last.id)
-    assert_not_equal 'Please sign in!', flash[:alert]
+    assert_equal '/unauthenticated', request.fullpath
   end
 
   test "dont update account without login" do
     delete destroy_user_session_path
     patch user_path(User.last.id), params: {from: :private}, xhr: true
-    assert_not_equal 'Please sign in!', flash[:alert]
+    assert_equal '/unauthenticated', request.fullpath
   end
 
   test "dont update name without login" do
     delete destroy_user_session_path
     patch user_path(User.last.id), params: {user:{first_name: 'gull', last_name: 'khan'}}, xhr: true
-    assert_not_equal 'Please sign in!', flash[:alert]
+    assert_equal '/unauthenticated', request.fullpath
   end
 end

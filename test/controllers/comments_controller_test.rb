@@ -23,12 +23,12 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     assert_not_equal 'can not complete action, try reloading', flash[:alert]
   end
 
-  test 'dont show edit form' do
+  test 'do not show edit form' do
     get edit_comment_path(0), xhr: true
     assert_equal 'can not complete action, try reloading', flash[:alert]
   end
 
-  test 'dont create comment' do
+  test 'do not create comment' do
     post user_comments_path(0), params: { comment: { commentable_id: 0 } }, xhr: true
     assert_equal 'can not create comment, try reloading', flash[:alert]
   end
@@ -39,12 +39,12 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'dont create comment with null text' do
+  test 'do not create comment with null text' do
     post user_comments_path(user_id: @user.id), params: { comment: { commentable_id: @post.id, text: '' } }, xhr: true
     assert_equal 'can not create comment', flash[:alert]
   end
 
-  test 'dont update comment' do
+  test 'do not update comment' do
     patch comment_path(0), xhr: true
     assert_equal 'can not complete action, try reloading', flash[:alert]
   end
@@ -54,12 +54,12 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'dont update comment with null text' do
+  test 'do not update comment with null text' do
     patch comment_path(@comment_id), params: { comment: { text: '' } }, xhr: true
     assert_equal 'can not update comment', flash[:alert]
   end
 
-  test 'dont destroy comment' do
+  test 'do not destroy comment' do
     delete comment_path(0), xhr: true
     assert_equal 'can not complete action, try reloading', flash[:alert]
   end
@@ -71,26 +71,26 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 'can not complete action, try reloading', flash[:alert]
   end
 
-  test 'dont update comment without login' do
+  test 'do not update comment without login' do
     delete destroy_user_session_path
     patch comment_path(@comment_id), params: { comment: { text: 'abc' } }, xhr: true
     assert_equal '/unauthenticated', request.fullpath
   end
 
-  test 'dont create comment without login' do
+  test 'do not create comment without login' do
     delete destroy_user_session_path
     post user_comments_path(user_id: @user.id), params: { comment: { commentable_id: @post.id, text: 'asd' } },
                                                 xhr: true
     assert_equal '/unauthenticated', request.fullpath
   end
 
-  test 'dont show edit form without login' do
+  test 'do not show edit form without login' do
     delete destroy_user_session_path
     get edit_comment_path(@comment_id), xhr: true
     assert_equal '/unauthenticated', request.fullpath
   end
 
-  test 'dont destroy comment without login' do
+  test 'do not destroy comment without login' do
     delete destroy_user_session_path
     delete comment_path(@comment_id), xhr: true
     assert_equal '/unauthenticated', request.fullpath

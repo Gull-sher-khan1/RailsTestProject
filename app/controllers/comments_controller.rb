@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @post.comments.create(user_id: strong_params[:user_id], text: strong_params[:comment][:text])
-    redirect_to root_url, alert: 'can not create comment' if @comment.nil?
+    redirect_to root_url, alert: 'can not create comment' if @comment.nil? || @comment.id==nil
     @user_ids = [current_user.id]
     @users = [current_user]
   end
@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
   end
 
   def update
-    redirect_to root_url, alert: 'can not destroy comment' unless @comment.update(text: params[:comment][:text])
+    redirect_to root_url, alert: 'can not update comment' unless @comment.update(text: params[:comment][:text])
   end
 
   def edit; end
@@ -24,12 +24,8 @@ class CommentsController < ApplicationController
   private
 
   def strong_params
-    params.permit(:id, :user_id, :authenticity_token, comment: %i[commentable_id text])
+    params.permit(:id, :user_id, comment: %i[commentable_id text])
   end
-
-  # def strong_params
-  #   params.permit(:id, :user_id, :authenticity_token, comment: %i[commentable_id text])
-  # end Check this for line 8
 
   def set_post
     @post = Post.find_by(id: strong_params[:comment][:commentable_id])

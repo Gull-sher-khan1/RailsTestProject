@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   include UserConcern
   before_action :set_search, :set_profile_user, :set_likes, :set_user_attachments, only: :show
   before_action :set_user, only: %i[edit update]
+  before_action :current_user_redirect, only: :update
 
   def show
     condition = @profile_user.id == current_user.id || (@profile_user.id != current_user.id && @profile_user.private_account != true)
@@ -17,10 +18,7 @@ class UsersController < ApplicationController
 
   def update
     if strong_params[:from] == 'private'
-      unless @user.update(private_account: @user.private_account != true)
-        redirect_to root_url,
-                    alert: 'can not perform action'
-      end
+      @user.update(private_account: @user.private_account != true)
       @from = :private
     else
       redirect_to root_url, alert: 'can not update user name' unless @user.update(
@@ -46,6 +44,10 @@ class UsersController < ApplicationController
     redirect_to root_url, alert: 'can not find user' if @user.nil?
   end
 
+  def current_user_redirect
+    redirect_to root_url, alert: 'can not perform action' if current_user.id != @user.id
+  end
+
   def set_likes
     @likes_posts = Like.includes(:user).posts_like
   end
@@ -53,4 +55,5 @@ class UsersController < ApplicationController
   def set_user_attachments
     @user_pic = @user_attachments = Attachment.users_attachments([@profile_user.id])
   end
+
 end

@@ -52,10 +52,9 @@ class AttachmentsController < ApplicationController
 
   def update_user_pic
     @attachment = Attachment.find_by(id: strong_params[:id])
-    if @attachment.nil? || !CloudinaryService.destroy(@attachment)
-      redirect_to root_url,
-                  alert: 'can not update attachment'
-    end
+    redirect_to root_url, alert: 'can not update attachment' if @attachment.nil?
+    return if @attachment.nil?
+    CloudinaryService.destroy(@attachment)
     @uri = CloudinaryService.upload(strong_params[:attachment][:attachment])
   end
 
@@ -72,4 +71,5 @@ class AttachmentsController < ApplicationController
     @post = Post.find_by(id: strong_params[:id])
     redirect_to root_url, alert: 'can not find post' if @post.nil?
   end
+
 end
